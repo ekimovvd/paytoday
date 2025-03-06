@@ -1,0 +1,18 @@
+.ui-input {
+  background: var(--background-secondary);
+  border-radius: 20px;
+  border: none;
+  width: 100%;
+  padding: 16px 24px;
+  box-sizing: border-box;
+  outline: none;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--secondary);
+}
+
+.ui-input::placeholder {
+  opacity: 1;
+}

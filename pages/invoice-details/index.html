@@ -1,0 +1,150 @@
+<section class="invoice-details-page">
+  <div class="invoice-details-page__header">
+    <shared-back></shared-back>
+
+    <h1 data-id="heading" class="invoice-details-page__header-title"></h1>
+  </div>
+
+  <div class="invoice-details-page__info">
+    <div class="invoice-details-page__item">
+      <p class="invoice-details-page__item-title">ID счета</p>
+
+      <span
+        data-id="order-number"
+        class="invoice-details-page__item-label"
+      ></span>
+    </div>
+
+    <div class="invoice-details-page__item">
+      <p class="invoice-details-page__item-title">№ заказа</p>
+
+      <span
+        data-id="invoice-id"
+        class="invoice-details-page__item-label"
+      ></span>
+    </div>
+
+    <div class="invoice-details-page__item">
+      <p class="invoice-details-page__item-title">Вид платежа</p>
+
+      <span
+        data-id="payment-type"
+        class="invoice-details-page__item-label"
+      ></span>
+    </div>
+
+    <div class="invoice-details-page__item">
+      <p class="invoice-details-page__item-title">ID подписки</p>
+
+      <span
+        data-id="subscription-id"
+        class="invoice-details-page__item-label"
+      ></span>
+    </div>
+
+    <div class="invoice-details-page__item invoice-details-page__item--amount">
+      <p class="invoice-details-page__item-title">Сумма</p>
+
+      <span
+        data-id="amount-rub"
+        class="invoice-details-page__item-label"
+      ></span>
+
+      <span
+        data-id="amount-usd"
+        class="invoice-details-page__item-label"
+      ></span>
+    </div>
+
+    <div class="invoice-details-page__item">
+      <p class="invoice-details-page__item-title">Клиент</p>
+
+      <div class="invoice-details-page__item-list">
+        <span
+          data-id="client-name"
+          class="invoice-details-page__item-label"
+        ></span>
+
+        <span
+          data-id="client-phone"
+          class="invoice-details-page__item-label"
+        ></span>
+
+        <span
+          data-id="client-email"
+          class="invoice-details-page__item-label"
+        ></span>
+      </div>
+    </div>
+
+    <div class="invoice-details-page__item">
+      <p class="invoice-details-page__item-title">Информация о товарах</p>
+
+      <span
+        data-id="product-info"
+        class="invoice-details-page__item-label"
+      ></span>
+    </div>
+
+    <div class="invoice-details-page__item">
+      <p class="invoice-details-page__item-title">Дата создания</p>
+
+      <span
+        data-id="creation-date"
+        class="invoice-details-page__item-label"
+      ></span>
+    </div>
+
+    <div class="invoice-details-page__item">
+      <p class="invoice-details-page__item-title">Дата оплаты</p>
+
+      <span data-id="payment-date" class="invoice-details-page__item-label">
+      </span>
+    </div>
+
+    <div class="invoice-details-page__item">
+      <p class="invoice-details-page__item-title">Статус</p>
+
+      <span data-id="status" class="invoice-details-page__item-status"> </span>
+    </div>
+
+    <div class="invoice-details-page__item">
+      <p class="invoice-details-page__item-title">№ акта</p>
+
+      <span
+        data-id="act-number"
+        class="invoice-details-page__item-label"
+      ></span>
+    </div>
+
+    <div
+      data-id="link"
+      class="invoice-details-page__item invoice-details-page__item--link"
+    >
+      <a
+        data-id="link-link"
+        href="#"
+        class="invoice-details-page__item-link"
+        target="_blank"
+      >
+        Ссылка
+      </a>
+
+      <span class="invoice-details-page__item-label"></span>
+    </div>
+  </div>
+
+  <div data-id="trash" class="invoice-details-page__trash">
+    <shared-trash> Удалить </shared-trash>
+  </div>
+
+  <div data-id="actions" class="invoice-details-page__actions">
+    <button data-id="return" class="invoice-details-page__action">
+      Вернуть деньги
+    </button>
+
+    <button data-id="mail" class="invoice-details-page__action">
+      Отправить инвойс
+    </button>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+.ui-button {
+  padding: 24px 32px;
+  background: var(--accent-primary-default);
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 16px;
+  line-height: 20px;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font);
+  font-weight: 700;
+}
+
+@media (max-width: 743px) {
+  .ui-button--full {
+    width: 100%;
+  }
+}

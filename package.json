@@ -1,0 +1,14 @@
+{
+  "name": "paytoday",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "dev": "live-server"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}
