@@ -101,7 +101,7 @@ Object.entries(elements).forEach(([key, element]) => {
     if (key === "statusElement") {
       if (invoice.status === "pending") {
         element.innerHTML =
-          '<img src="../../assets/icons/pending.svg" alt="pending" /> Ждет оплату';
+          '<img src="assets/icons/pending.svg" alt="pending" /> Ждет оплату';
         element.classList.add("invoice-details-page__item-status--pending");
 
         trash.classList.add("invoice-details-page__trash--visible");
@@ -109,7 +109,7 @@ Object.entries(elements).forEach(([key, element]) => {
         linkLink.href = invoice.link;
       } else if (invoice.status === "paid") {
         element.innerHTML =
-          '<img src="../../assets/icons/paid-for.svg" alt="paid" /> Оплачен';
+          '<img src="assets/icons/paid-for.svg" alt="paid" /> Оплачен';
         element.classList.add("invoice-details-page__item-status--paid");
 
         actions.classList.add("invoice-details-page__actions--visible");
@@ -129,7 +129,7 @@ Object.entries(elements).forEach(([key, element]) => {
 trash.addEventListener("click", () => {
   document.getElementById("modal").open({
     type: "delete",
-    icon: "../../assets/icons/delete.svg",
+    icon: "assets/icons/delete.svg",
     title: "Вы точно хотите удалить этот счет?",
     confirmText: "Удалить",
     cancelText: "Оставить",
@@ -139,7 +139,7 @@ trash.addEventListener("click", () => {
 returnElement.addEventListener("click", () => {
   document.getElementById("modal").open({
     type: "return",
-    icon: "../../assets/icons/return.svg",
+    icon: "assets/icons/return.svg",
     title: "Возврат осуществлен",
     confirmText: "Отлично",
   });
@@ -148,7 +148,7 @@ returnElement.addEventListener("click", () => {
 mailElement.addEventListener("click", () => {
   document.getElementById("modal").open({
     type: "mail",
-    icon: "../../assets/icons/mail.svg",
+    icon: "assets/icons/mail.svg",
     title: "Письмо успешно отправлено",
     confirmText: "Отлично",
   });

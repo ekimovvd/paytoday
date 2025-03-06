@@ -88,8 +88,8 @@ function renderInvoices() {
     .map((invoice) => {
       const type =
         invoice.status === "pending"
-          ? '<img src="../../assets/icons/pending.svg" alt="pending" /> Ждет оплату'
-          : '<img src="../../assets/icons/paid-for.svg" alt="paid" /> Оплачен';
+          ? '<img src="assets/icons/pending.svg" alt="pending" /> Ждет оплату'
+          : '<img src="assets/icons/paid-for.svg" alt="paid" /> Оплачен';
       const typeClass = `invoice-page__table-type--${invoice.status}`;
 
       return `
@@ -108,15 +108,15 @@ function renderInvoices() {
         <td class="invoice-page__table-td">
           <div class="invoice-page__table-actions">
             <button data-id="copy-link" data-link="${invoice.id}" class="invoice-page__table-action">
-              <img src="../../assets/icons/link.svg" alt="link" />
+              <img src="assets/icons/link.svg" alt="link" />
             </button>
 
             <a href="#" class="invoice-page__table-action">
-              <img src="../../assets/icons/arrow-up.svg" alt="arrow-up" />
+              <img src="assets/icons/arrow-up.svg" alt="arrow-up" />
             </a>
 
             <button data-id="remove" class="invoice-page__table-remove">
-              <img src="../../assets/icons/remove.svg" alt="remove" />
+              <img src="assets/icons/remove.svg" alt="remove" />
             </button>
           </div>
         </td>
