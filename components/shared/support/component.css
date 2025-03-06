@@ -1,0 +1,22 @@
+.shared-support {
+  padding: 20px 32px;
+  background: var(--white);
+  border-radius: 24px;
+}
+
+.shared-support__label {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--strong-primary-default);
+  font-weight: 500;
+}
+
+.shared-support__link {
+  font-family: var(--font);
+  color: var(--accent-primary-default);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 18px;
+}

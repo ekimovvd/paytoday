@@ -1,0 +1,13 @@
+.ui-radio {
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--separator);
+  background: var(--white);
+  border-radius: 44px;
+  transition: border var(--transition);
+  cursor: pointer;
+}
+
+.ui-radio--active {
+  border: 5px solid var(--accent-primary-default);
+}
