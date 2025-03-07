@@ -79,6 +79,11 @@
 .payment-link-page__list {
   background: var(--background-secondary);
   border-radius: 20px;
+  display: none;
+}
+
+.payment-link-page__list--visible {
+  display: block;
 }
 
 .payment-link-page__collapse {

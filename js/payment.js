@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   };
 
   let isFormGroupShow = false;
+  let isMobile = false;
 
   function getElement(id) {
     return document.querySelector(`[data-id="${id}"]`);
@@ -38,6 +39,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   const collapse = getElement("collapse");
   const collapseContent = getElement("collapse-content");
   const formGroup = getElement("form-group");
+  const listElement = getElement("list");
 
   const elements = {
     paymentType,
@@ -56,16 +58,31 @@ document.addEventListener("DOMContentLoaded", async function () {
   function handleResize() {
     const width = window.innerWidth;
 
+    if (formData.recurringPayment) {
+      recurringPayment.checked = false;
+      formData.recurringPayment = false;
+    }
+
     if (isCollapse) {
       isCollapse = false;
 
       handleCollapse();
     }
 
+    if (isMobile) {
+      listElement.classList.add("payment-link-page__list--visible");
+    } else {
+      listElement.classList.remove("payment-link-page__list--visible");
+    }
+
     if (width < DESKTOP) {
+      isMobile = true;
+
       collapse.classList.add("payment-link-page__collapse--visible");
       collapseContent.classList.add("payment-link-page__content--hide");
     } else {
+      isMobile = false;
+
       collapse.classList.remove("payment-link-page__collapse--visible");
       collapseContent.classList.remove("payment-link-page__content--hide");
     }
@@ -90,6 +107,14 @@ document.addEventListener("DOMContentLoaded", async function () {
           isFormGroupShow = true;
 
           formGroup.classList.add("payment-link-page__group--visible");
+        }
+
+        if (key === "recurringPayment" && !isMobile) {
+          if (formData.recurringPayment) {
+            listElement.classList.add("payment-link-page__list--visible");
+          } else {
+            listElement.classList.remove("payment-link-page__list--visible");
+          }
         }
 
         console.log("Обновлено:", key, formData);
