@@ -220,6 +220,25 @@ th:last-child {
   margin-left: 43px;
 }
 
+.main-page__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-page__footer-download {
+  background: none;
+  border: none;
+  padding: 0;
+  outline: none;
+  cursor: pointer;
+  font-family: var(--font);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--accent-primary-default);
+}
+
 @media (max-width: 1439px) {
   .main-page {
     margin-left: 0;

@@ -17,7 +17,7 @@ const data = [
     vatUsd: "+$1 000 VAT",
   },
   {
-    id: "",
+    id: "123457",
     accountId: "123457",
     client: {
       name: "ANTON",
@@ -32,7 +32,7 @@ const data = [
     vatUsd: "+$1 000 VAT",
   },
   {
-    id: "",
+    id: "123458",
     accountId: "123458",
     client: {
       name: "ANTON",
@@ -47,7 +47,7 @@ const data = [
     vatUsd: "+$1 000 VAT",
   },
   {
-    id: "",
+    id: "123459",
     accountId: "123459",
     client: {
       name: "ANTON",
@@ -62,7 +62,7 @@ const data = [
     vatUsd: "+$1 000 VAT",
   },
   {
-    id: "",
+    id: "123460",
     accountId: "123460",
     client: {
       name: "ANTON",
@@ -93,6 +93,9 @@ const data = [
   },
 ];
 
+const ITEMS_PER_PAGE = 5;
+let currentPage = 1;
+
 function getElement(id) {
   return document.querySelector(`[data-id="${id}"]`);
 }
@@ -103,6 +106,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchDesktop = getElement("main-search");
   const searchMobile = getElement("main-search-mobile");
   const tableBody = getElement("main-page-table-body");
+  const pagination = getElement("main-pagination");
+  const download = getElement("main-download");
 
   let searchQuery = "";
   let sortConfig = { key: null, order: null };
@@ -112,6 +117,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function handleSearch(event) {
     searchQuery = event.detail.trim().toLowerCase();
+    currentPage = 1;
+
     renderData();
   }
 
@@ -161,13 +168,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (sortConfig.order === "asc") return valueA > valueB ? 1 : -1;
       if (sortConfig.order === "desc") return valueA < valueB ? 1 : -1;
+
       return 0;
     });
   }
 
+  function paginateData(filteredData) {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+
+    return filteredData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
+  }
+
+  function renderPagination(totalItems) {
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+    pagination.setAttribute("total-pages", totalPages);
+    pagination.setAttribute("current-page", currentPage);
+  }
+
+  pagination.addEventListener("page-change", (event) => {
+    currentPage = event.detail.page;
+
+    renderData();
+  });
+
   function renderData() {
     const filteredData = filterData();
-    const sortedData = sortData(filteredData);
+    const paginatedData = paginateData(filteredData);
+    const sortedData = sortData(paginatedData);
+
+    renderPagination(filteredData.length);
 
     tableBody.innerHTML = sortedData
       .map((item) => {
@@ -246,6 +276,10 @@ document.addEventListener("DOMContentLoaded", () => {
       renderData();
     }
   }
+
+  download.addEventListener("click", () => {
+    console.log("download");
+  });
 
   renderData();
 });
