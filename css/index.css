@@ -213,30 +213,10 @@ th:last-child {
 }
 
 .main-page__table-action {
-  background: #edf4fe;
-  border: 1px solid #1876ee14;
-  padding: 8px;
-  outline: none;
-  cursor: pointer;
-  border-radius: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.main-page__table-action:first-child {
   margin-right: 6px;
 }
 
 .main-page__table-remove {
-  background: none;
-  border: none;
-  padding: 0;
-  outline: none;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-left: 43px;
 }
 

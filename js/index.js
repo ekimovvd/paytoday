@@ -111,7 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   search.addEventListener("search", (event) => {
     searchQuery = event.detail.trim().toLowerCase();
-
     renderData();
   });
 
@@ -197,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const typeClass = `main-page__table-type--${item.status}`;
 
         return `
-        <tr class="main-page__table-tr">
+        <tr class="main-page__table-tr" data-id="${item.id}">
           <td class="main-page__table-td"><a class="main-page__table-link" href="#">${item.id}</a></td>
           <td class="main-page__table-td"><a class="main-page__table-link" href="#">${item.accountId}</a></td>
           <td class="main-page__table-td main-page__table-td--nowrap">
@@ -212,23 +211,36 @@ document.addEventListener("DOMContentLoaded", () => {
           <td class="main-page__table-td">${item.amountRub}</td>
           <td class="main-page__table-td">
             <div class="main-page__table-actions">
-              <button data-id="copy-link" data-link="${item.id}" class="main-page__table-action">
-                <img src="assets/icons/link.svg" alt="link" />
-              </button>
+              <shared-copy class="main-page__table-action" copy-text="${item.id}"></shared-copy>
   
-              <a href="#" class="main-page__table-action">
-                <img src="assets/icons/arrow-up.svg" alt="arrow-up" />
-              </a>
-  
-              <button data-id="remove" class="main-page__table-remove">
-                <img src="assets/icons/remove.svg" alt="remove" />
-              </button>
+              <shared-redirect href="${item.id}"></shared-redirect>
+
+              <shared-remove data-id="remove" class="main-page__table-remove" data-remove-id="${item.id}"></shared-remove>
             </div>
           </td>
         </tr>
       `;
       })
       .join("");
+
+    addRemoveListeners();
+  }
+
+  function addRemoveListeners() {
+    document.querySelectorAll("[data-id='remove']").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        const removeId = event.currentTarget.getAttribute("data-remove-id");
+        removeRow(removeId);
+      });
+    });
+  }
+
+  function removeRow(id) {
+    const index = data.findIndex((item) => item.id === id);
+    if (index !== -1) {
+      data.splice(index, 1);
+      renderData();
+    }
   }
 
   renderData();

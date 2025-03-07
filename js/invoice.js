@@ -1,57 +1,91 @@
 import "./components.js";
 
+const mockSubscriptionData = {
+  id: "182227",
+  status: "Не активен",
+  amountRub: "2 345 ₽",
+  amountUsd: "$23",
+  frequency: "Еженедельно",
+  totalRub: "2 345 ₽",
+  totalUsd: "$23",
+  paymentsCount: "1",
+  nextPayment: "02.02.2025",
+};
+
+const mockInvoiceData = [
+  {
+    id: "123456",
+    client: {
+      name: "ANTON",
+      phone: "+7 923 23-23-23",
+      email: "ANTON@MAIL.COM",
+    },
+    createdDate: "29.12.2024 15:45",
+    paymentDate: "29.12.2024",
+    status: "paid",
+    amountUsd: "$1 000.234",
+    vatUsd: "+$1 000 VAT",
+    amountRub: "10 000₽",
+  },
+  {
+    id: "123457",
+    client: {
+      name: "SERGEY",
+      phone: "+7 911 11-11-11",
+      email: "SERGEY@MAIL.COM",
+    },
+    createdDate: "28.12.2024 14:30",
+    paymentDate: "28.12.2024",
+    status: "pending",
+    amountUsd: "$2 500.567",
+    vatUsd: "+$2 000 VAT",
+    amountRub: "15 000₽",
+  },
+];
+
+function getElement(id) {
+  return document.querySelector(`[data-id="${id}"]`);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  const mockSubscriptionData = {
-    id: "182227",
-    status: "Не активен",
-    amountRub: "2 345 ₽",
-    amountUsd: "$23",
-    frequency: "Еженедельно",
-    totalRub: "2 345 ₽",
-    totalUsd: "$23",
-    paymentsCount: "1",
-    nextPayment: "02.02.2025",
-  };
-
-  const mockInvoiceData = [
-    {
-      id: "123456",
-      client: {
-        name: "ANTON",
-        phone: "+7 923 23-23-23",
-        email: "ANTON@MAIL.COM",
-      },
-      createdDate: "29.12.2024 15:45",
-      paymentDate: "29.12.2024",
-      status: "paid",
-      amountUsd: "$1 000.234",
-      vatUsd: "+$1 000 VAT",
-      amountRub: "10 000₽",
-    },
-    {
-      id: "123457",
-      client: {
-        name: "SERGEY",
-        phone: "+7 911 11-11-11",
-        email: "SERGEY@MAIL.COM",
-      },
-      createdDate: "28.12.2024 14:30",
-      paymentDate: "28.12.2024",
-      status: "pending",
-      amountUsd: "$2 500.567",
-      vatUsd: "+$2 000 VAT",
-      amountRub: "15 000₽",
-    },
-  ];
-
-  function getElement(id) {
-    return document.querySelector(`[data-id="${id}"]`);
-  }
-
   let searchQuery = "";
+  let sortConfig = { key: null, order: null };
 
   const handleStop = getElement("stop");
   const handleSearch = getElement("search");
+
+  document.querySelectorAll("shared-sort").forEach((sortElement, index) => {
+    const columns = ["id", "createdDate", "paymentDate"];
+    const key = columns[index];
+
+    sortElement.addEventListener("sort-change", (event) => {
+      sortConfig = { key, order: event.detail.order };
+      renderInvoices();
+    });
+  });
+
+  function sortData(filteredData) {
+    if (!sortConfig.key || !sortConfig.order) return filteredData;
+
+    return [...filteredData].sort((a, b) => {
+      let valueA = a[sortConfig.key];
+      let valueB = b[sortConfig.key];
+
+      if (!valueA || !valueB) return 0;
+
+      if (!isNaN(Date.parse(valueA)) && !isNaN(Date.parse(valueB))) {
+        valueA = new Date(valueA);
+        valueB = new Date(valueB);
+      }
+
+      if (typeof valueA === "string") valueA = valueA.toLowerCase();
+      if (typeof valueB === "string") valueB = valueB.toLowerCase();
+
+      if (sortConfig.order === "asc") return valueA > valueB ? 1 : -1;
+      if (sortConfig.order === "desc") return valueA < valueB ? 1 : -1;
+      return 0;
+    });
+  }
 
   function renderSubscriptionData() {
     getElement("subscription-id").textContent = mockSubscriptionData.id;
@@ -85,7 +119,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderInvoices() {
     const tableBody = getElement("invoice-page-table-invoices");
-    const filteredInvoices = filterInvoices();
+    const filteredInvoices = sortData(filterInvoices());
 
     tableBody.innerHTML = filteredInvoices
       .map((invoice) => {
@@ -110,17 +144,11 @@ document.addEventListener("DOMContentLoaded", () => {
           <td class="invoice-page__table-td">${invoice.amountRub}</td>
           <td class="invoice-page__table-td">
             <div class="invoice-page__table-actions">
-              <button data-id="copy-link" data-link="${invoice.id}" class="invoice-page__table-action">
-                <img src="assets/icons/link.svg" alt="link" />
-              </button>
+              <shared-copy class="invoice-page__table-action" copy-text="${invoice.id}"></shared-copy>
   
-              <a href="#" class="invoice-page__table-action">
-                <img src="assets/icons/arrow-up.svg" alt="arrow-up" />
-              </a>
-  
-              <button data-id="remove" class="invoice-page__table-remove">
-                <img src="assets/icons/remove.svg" alt="remove" />
-              </button>
+              <shared-redirect href="${invoice.id}"></shared-redirect>
+
+              <shared-remove data-id="remove" class="invoice-page__table-remove" data-remove-id="${invoice.id}"></shared-remove>
             </div>
           </td>
         </tr>
