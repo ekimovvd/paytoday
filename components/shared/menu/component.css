@@ -87,6 +87,11 @@
   font-weight: 500;
   color: var(--strong-primary-default);
   margin: 0;
+  transition: color var(--transition);
+}
+
+.shared-menu__collapse-link:hover {
+  color: var(--accent-primary-default);
 }
 
 @media (max-width: 743px) {
