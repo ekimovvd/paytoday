@@ -100,7 +100,8 @@ function getElement(id) {
 document.addEventListener("DOMContentLoaded", () => {
   const balanceRub = getElement("main-balance-rub");
   const balanceUsd = getElement("main-balance-usd");
-  const search = getElement("main-search");
+  const searchDesktop = getElement("main-search");
+  const searchMobile = getElement("main-search-mobile");
   const tableBody = getElement("main-page-table-body");
 
   let searchQuery = "";
@@ -109,10 +110,13 @@ document.addEventListener("DOMContentLoaded", () => {
   balanceRub.textContent = "10 000₽";
   balanceUsd.textContent = "/ $1 000.234";
 
-  search.addEventListener("search", (event) => {
+  function handleSearch(event) {
     searchQuery = event.detail.trim().toLowerCase();
     renderData();
-  });
+  }
+
+  searchDesktop.addEventListener("search", handleSearch);
+  searchMobile.addEventListener("search", handleSearch);
 
   document.querySelectorAll("shared-sort").forEach((sortElement, index) => {
     const columns = ["accountId", "id", "createdDate", "paymentDate"];
@@ -129,8 +133,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const query = searchQuery.toLowerCase();
 
       return (
-        item.id.includes(query) ||
-        item.accountId.includes(query) ||
+        item.id.toLowerCase().includes(query) ||
+        item.accountId.toLowerCase().includes(query) ||
         item.client.name.toLowerCase().includes(query) ||
         item.client.phone.includes(query) ||
         item.client.email.toLowerCase().includes(query)
