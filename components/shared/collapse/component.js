@@ -7,8 +7,8 @@ export class SharedCollapse extends HTMLElement {
 
   async connectedCallback() {
     const [htmlRes, cssRes] = await Promise.all([
-      fetch("/components/shared/collapse/component.html"),
-      fetch("/components/shared/collapse/component.css"),
+      fetch("./components/shared/collapse/component.html"),
+      fetch("./components/shared/collapse/component.css"),
     ]);
 
     const [htmlText, cssText] = await Promise.all([
