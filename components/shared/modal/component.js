@@ -77,6 +77,8 @@ export class SharedModal extends HTMLElement {
 
     if (type) {
       this.type = type;
+      console.log(document.querySelector(".shared-modal"));
+
       this.modal.classList.add(`shared-modal--${type}`);
     }
 
