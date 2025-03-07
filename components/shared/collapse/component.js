@@ -40,14 +40,36 @@ export class SharedCollapse extends HTMLElement {
     }
 
     this.header.addEventListener("click", () => {
-      this.isCollapse = !this.isCollapse;
+      this.toggleCollapse();
+    });
 
-      if (this.isCollapse) {
-        this.collapse.classList.add("shared-collapse--active");
-      } else {
-        this.collapse.classList.remove("shared-collapse--active");
+    document.addEventListener("active-collapse-changed", (event) => {
+      if (event.detail !== this) {
+        this.close();
       }
     });
+  }
+
+  toggleCollapse() {
+    if (!this.isCollapse) {
+      document.dispatchEvent(
+        new CustomEvent("active-collapse-changed", { detail: this })
+      );
+
+      this.open();
+    } else {
+      this.close();
+    }
+  }
+
+  open() {
+    this.collapse.classList.add("shared-collapse--active");
+    this.isCollapse = true;
+  }
+
+  close() {
+    this.collapse.classList.remove("shared-collapse--active");
+    this.isCollapse = false;
   }
 }
 
