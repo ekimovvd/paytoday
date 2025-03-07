@@ -3,20 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Главная</title>
     <link rel="stylesheet" href="styles/main.css" />
-    <title>Paytoday</title>
+    <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-    <shared-header class="header"></shared-header>
+    <main class="main-page">
+      <section class="main-page__section">
+        <a class="main-page__link" href="./payment.html">
+          Форма для создания ссылки на оплату + адаптив
+        </a>
 
-    <shared-sidebar class="sidebar"></shared-sidebar>
+        <a class="main-page__link" href="./invoice.html"> Подписка + адаптив</a>
 
-    <shared-modal id="modal"></shared-modal>
+        <a class="main-page__link" href="./invoice-details.html?id=1">
+          Информация о счете на оплату #1 + адаптив
+        </a>
 
-    <shared-menu id="menu"></shared-menu>
-
-    <main id="app"></main>
-
-    <script type="module" src="main.js"></script>
+        <a class="main-page__link" href="./invoice-details.html?id=2">
+          Информация о счете на оплату #2 + адаптив
+        </a>
+      </section>
+    </main>
   </body>
 </html>

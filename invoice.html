@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Подписка</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="css/invoice.css" />
+  </head>
+  <body>
+    <shared-header class="header"></shared-header>
+
+    <shared-sidebar class="sidebar"></shared-sidebar>
+
+    <shared-menu id="menu"></shared-menu>
+
+    <main class="invoice-page">
+      <section class="invoice-page__section">
+        <div class="invoice-page__header">
+          <div class="invoice-page__header-group">
+            <div class="invoice-page__header-block">
+              <shared-back></shared-back>
+
+              <button
+                data-id="stop"
+                class="invoice-page__header-stop invoice-page__header-stop--mobile"
+              >
+                Остановить подписку
+              </button>
+            </div>
+
+            <h1 class="invoice-page__header-title">
+              Подписка №<span data-id="subscription-id"></span>
+            </h1>
+          </div>
+
+          <button data-id="stop" class="invoice-page__header-stop">
+            Остановить подписку
+          </button>
+        </div>
+
+        <div class="invoice-page__wrapper">
+          <table class="invoice-page__table">
+            <thead class="invoice-page__table-head">
+              <tr>
+                <th class="invoice-page__table-th">Статус</th>
+
+                <th class="invoice-page__table-th">Сумма ₽</th>
+
+                <th class="invoice-page__table-th">Сумма $</th>
+
+                <th class="invoice-page__table-th">Периодичность</th>
+
+                <th class="invoice-page__table-th">Итог ₽ за всё время</th>
+
+                <th class="invoice-page__table-th">Итог $ за всё время</th>
+
+                <th class="invoice-page__table-th">
+                  Кол-во <br />
+                  платежей
+                </th>
+
+                <th class="invoice-page__table-th">Следующий платеж</th>
+              </tr>
+            </thead>
+
+            <tbody data-id="invoice-page-table-subscription"></tbody>
+          </table>
+        </div>
+
+        <div class="invoice-page__search">
+          <shared-search data-id="search"></shared-search>
+        </div>
+
+        <div class="invoice-page__wrapper">
+          <table class="invoice-page__table">
+            <thead
+              class="invoice-page__table-head invoice-page__table-head--small"
+            >
+              <tr>
+                <th
+                  class="invoice-page__table-th invoice-page__table-th--small"
+                >
+                  ID счета
+                </th>
+
+                <th
+                  class="invoice-page__table-th invoice-page__table-th--small"
+                >
+                  Клиент
+                </th>
+
+                <th
+                  class="invoice-page__table-th invoice-page__table-th--small"
+                >
+                  Дата создания
+                </th>
+
+                <th
+                  class="invoice-page__table-th invoice-page__table-th--small"
+                >
+                  Дата оплаты
+                </th>
+
+                <th
+                  class="invoice-page__table-th invoice-page__table-th--small"
+                >
+                  Статус
+                </th>
+
+                <th
+                  class="invoice-page__table-th invoice-page__table-th--small"
+                >
+                  Сумма $
+                </th>
+
+                <th
+                  class="invoice-page__table-th invoice-page__table-th--small"
+                >
+                  Сумма ₽
+                </th>
+
+                <th
+                  class="invoice-page__table-th invoice-page__table-th--small"
+                >
+                  Ссылка
+                </th>
+              </tr>
+            </thead>
+
+            <tbody data-id="invoice-page-table-invoices"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="js/invoice.js"></script>
+  </body>
+</html>
