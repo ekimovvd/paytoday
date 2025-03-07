@@ -1,9 +1,12 @@
 .main-page {
+  padding: 32px;
+}
+
+.main-page__section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   row-gap: 16px;
-  padding: 32px;
 }
 
 .main-page__link {

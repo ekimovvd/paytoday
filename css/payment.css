@@ -4,6 +4,7 @@
   align-items: center;
   padding: 32px 0 40px 0;
   position: relative;
+  margin-left: 88px;
 }
 
 .payment-link-page__container {
@@ -133,8 +134,16 @@
 .payment-link-page__item-label {
   color: var(--strong-primary-default);
   font-size: 18px;
-  line-height: 28px;
+  line-height: 24px;
   font-weight: 500;
+}
+
+.payment-link-page__radio {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .payment-link-page__create-label--small {
@@ -144,6 +153,7 @@
 @media (max-width: 1439px) {
   .payment-link-page {
     padding: 24px 16px 40px 16px;
+    margin-left: 0;
   }
 
   .payment-link-page__container {
