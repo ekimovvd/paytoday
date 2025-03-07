@@ -141,6 +141,12 @@ th:last-child {
   border-radius: 0 30px 30px 0;
 }
 
+.main-page__table-th-group {
+  display: flex;
+  align-items: center;
+  column-gap: 7px;
+}
+
 .main-page__table-tr {
   border-bottom: 1px solid var(--background-400);
 }

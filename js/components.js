@@ -7,6 +7,7 @@ import "../components/shared/search/component.js";
 import "../components/shared/menu/component.js";
 import "../components/shared/support/component.js";
 import "../components/shared/collapse/component.js";
+import "../components/shared/sort/component.js";
 
 import "../components/ui/button/component.js";
 import "../components/ui/input/component.js";
