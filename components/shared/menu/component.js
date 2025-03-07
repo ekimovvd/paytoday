@@ -6,8 +6,8 @@ export class SharedMenu extends HTMLElement {
 
   async connectedCallback() {
     const [htmlRes, cssRes] = await Promise.all([
-      fetch("/components/shared/menu/component.html"),
-      fetch("/components/shared/menu/component.css"),
+      fetch("./components/shared/menu/component.html"),
+      fetch("./components/shared/menu/component.css"),
     ]);
 
     const [htmlText, cssText] = await Promise.all([

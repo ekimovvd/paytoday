@@ -7,8 +7,8 @@ export class SharedModal extends HTMLElement {
   async connectedCallback() {
     try {
       const [htmlRes, cssRes] = await Promise.all([
-        fetch("/components/shared/modal/component.html"),
-        fetch("/components/shared/modal/component.css"),
+        fetch("./components/shared/modal/component.html"),
+        fetch("./components/shared/modal/component.css"),
       ]);
 
       if (!htmlRes.ok || !cssRes.ok) {
