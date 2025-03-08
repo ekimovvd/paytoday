@@ -48,6 +48,7 @@ function getElement(id) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("modal");
   let searchQuery = "";
   let sortConfig = { key: null, order: null };
 
@@ -196,7 +197,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const row = button.closest("tr");
     if (!row) return;
 
-    row.remove();
+    modal.open({
+      type: "delete",
+      icon: "assets/icons/delete.svg",
+      title: "Вы точно хотите удалить этот счет?",
+      confirmText: "Удалить",
+      cancelText: "Оставить",
+    });
+
+    modal.addEventListener("confirm", () => {
+      row.remove();
+    });
   }
 
   document.addEventListener("click", handleRemoveInvoice);
