@@ -1,3 +1,7 @@
+.shared-copy {
+  position: relative;
+}
+
 .shared-copy__toggle {
   background: #edf4fe;
   border: 1px solid #1876ee14;
@@ -8,4 +12,46 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.shared-copy__popup {
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0px 4px 12px 0px #606f9733;
+  border: 1px solid #1876ee14;
+  border-radius: 13px;
+  padding: 6px 16px;
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--strong-primary-default);
+  cursor: pointer;
+  background: var(--white);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), visibility var(--transition);
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  text-transform: none;
+}
+
+.shared-copy__popup--visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.shared-copy__popup-icon {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+
+.shared-copy__popup-icon--visible {
+  display: block;
+  opacity: 1;
+  visibility: visible;
 }
