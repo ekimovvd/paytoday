@@ -8,22 +8,145 @@
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
+    <shared-header class="header"></shared-header>
+
+    <shared-sidebar class="sidebar"></shared-sidebar>
+
+    <shared-menu id="menu"></shared-menu>
+
+    <shared-modal id="modal"></shared-modal>
+
     <main class="main-page">
       <section class="main-page__section">
-        <a class="main-page__link" href="./payment.html">
-          Форма для создания ссылки на оплату + адаптив
-        </a>
+        <div class="main-page__header">
+          <h1 class="main-page__header-title">Оплаты</h1>
 
-        <a class="main-page__link" href="./invoice.html"> Подписка + адаптив</a>
+          <div class="main-page__header-group">
+            <div class="main-page__header-balance">
+              <p class="main-page__header-label">Текущий баланс</p>
 
-        <a class="main-page__link" href="./invoice-details.html?id=1">
-          Информация о счете на оплату #1 + адаптив
-        </a>
+              <div class="main-page__header-amount">
+                <h4
+                  data-id="main-balance-rub"
+                  class="main-page__header-amount-title"
+                ></h4>
 
-        <a class="main-page__link" href="./invoice-details.html?id=2">
-          Информация о счете на оплату #2 + адаптив
-        </a>
+                <h5
+                  data-id="main-balance-usd"
+                  class="main-page__header-amount-title main-page__header-amount-title--secondary"
+                ></h5>
+              </div>
+            </div>
+
+            <a class="main-page__header-link" href="#">
+              <img src="assets/icons/profile.svg" alt="profile" />
+            </a>
+          </div>
+        </div>
+
+        <div class="main-page__search">
+          <shared-search
+            class="main-page__search-input"
+            data-id="main-search"
+          ></shared-search>
+
+          <a class="main-page__search-link" href="#">
+            <span class="main-page__search-link-label">
+              + Создать счет на оплату
+            </span>
+
+            <span
+              class="main-page__search-link-label main-page__search-link-label--small"
+            >
+              Создать счет
+            </span>
+          </a>
+        </div>
+
+        <shared-statistics
+          data-id="main-statistics"
+          paid-amount="10 000₽"
+          unpaid-amount="10 000₽"
+          refund-amount="10 000₽"
+          paid-amount-usd="$1 000.234"
+          unpaid-amount-usd="$1 000.234"
+          refund-amount-usd="$1 000.234"
+          paid-orders="12"
+          unpaid-orders="51"
+          refund-orders="1"
+        >
+        </shared-statistics>
+
+        <div class="main-page__content">
+          <div class="main-page__content-search">
+            <shared-search data-id="main-search-mobile"></shared-search>
+          </div>
+
+          <div class="main-page__wrapper">
+            <table class="main-page__table">
+              <thead class="main-page__table-head">
+                <tr>
+                  <th class="main-page__table-th">
+                    <div class="main-page__table-th-group">
+                      ID подписки
+
+                      <shared-sort></shared-sort>
+                    </div>
+                  </th>
+
+                  <th class="main-page__table-th">
+                    <div class="main-page__table-th-group">
+                      ID счета
+
+                      <shared-sort></shared-sort>
+                    </div>
+                  </th>
+
+                  <th class="main-page__table-th">Клиент</th>
+
+                  <th class="main-page__table-th">
+                    <div class="main-page__table-th-group">
+                      Дата создания
+
+                      <shared-sort></shared-sort>
+                    </div>
+                  </th>
+
+                  <th class="main-page__table-th">
+                    <div class="main-page__table-th-group">
+                      Дата оплаты
+
+                      <shared-sort></shared-sort>
+                    </div>
+                  </th>
+
+                  <th class="main-page__table-th">Статус</th>
+
+                  <th class="main-page__table-th">Сумма $</th>
+
+                  <th class="main-page__table-th">Сумма ₽</th>
+
+                  <th class="main-page__table-th">Ссылка</th>
+                </tr>
+              </thead>
+
+              <tbody data-id="main-page-table-body"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="main-page__footer">
+          <div></div>
+
+          <shared-pagination data-id="main-pagination"></shared-pagination>
+
+          <button data-id="main-download" class="main-page__footer-download">
+            Скачать CSV
+          </button>
+        </div>
       </section>
     </main>
   </body>
+
+  <script type="module" src="js/index.js"></script>
 </html>

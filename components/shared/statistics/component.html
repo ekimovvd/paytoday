@@ -1,0 +1,235 @@
+<template>
+  <div class="shared-statistics">
+    <button class="shared-statistics__toggle">
+      Статистика
+
+      <img
+        class="shared-statistics__toggle-icon"
+        src="assets/icons/chevron-down.svg"
+        alt="chevron-down"
+      />
+    </button>
+
+    <div class="shared-statistics__content">
+      <div class="shared-statistics__wrapper">
+        <div class="shared-statistics__filters">
+          <div class="shared-statistics__block">
+            <span class="shared-statistics__block-title">Оплата клиентов</span>
+
+            <div class="shared-statistics__group">
+              <button
+                data-filter="paymentStatus"
+                data-value="all"
+                class="shared-statistics__group-button shared-statistics__group-button--active"
+              >
+                все
+              </button>
+
+              <button
+                data-filter="paymentStatus"
+                data-value="paid"
+                class="shared-statistics__group-button"
+              >
+                оплачен
+              </button>
+
+              <button
+                data-filter="paymentStatus"
+                data-value="pending"
+                class="shared-statistics__group-button"
+              >
+                не оплачен
+              </button>
+
+              <button
+                data-filter="paymentStatus"
+                data-value="refund"
+                class="shared-statistics__group-button"
+              >
+                возврат
+              </button>
+            </div>
+          </div>
+
+          <div class="shared-statistics__divider"></div>
+
+          <div class="shared-statistics__block">
+            <span class="shared-statistics__block-title">Вывод средств</span>
+
+            <div class="shared-statistics__group">
+              <button
+                data-filter="payoutStatus"
+                data-value="all"
+                class="shared-statistics__group-button shared-statistics__group-button--active"
+              >
+                все
+              </button>
+
+              <button
+                data-filter="payoutStatus"
+                data-value="not_paid"
+                class="shared-statistics__group-button"
+              >
+                не выплачено
+              </button>
+
+              <button
+                data-filter="payoutStatus"
+                data-value="paid"
+                class="shared-statistics__group-button"
+              >
+                выплачено
+              </button>
+            </div>
+          </div>
+
+          <div class="shared-statistics__divider"></div>
+
+          <div class="shared-statistics__block">
+            <span class="shared-statistics__block-title">Вид платежа</span>
+
+            <div class="shared-statistics__group">
+              <button
+                data-filter="paymentType"
+                data-value="all"
+                class="shared-statistics__group-button shared-statistics__group-button--active"
+              >
+                все
+              </button>
+
+              <button
+                data-filter="paymentType"
+                data-value="international"
+                class="shared-statistics__group-button"
+              >
+                международные
+              </button>
+
+              <button
+                data-filter="paymentType"
+                data-value="rubles"
+                class="shared-statistics__group-button"
+              >
+                рублевые
+              </button>
+
+              <button
+                data-filter="paymentType"
+                data-value="subscription"
+                class="shared-statistics__group-button"
+              >
+                подписки
+              </button>
+            </div>
+          </div>
+
+          <div class="shared-statistics__filters-clear">clear</div>
+        </div>
+
+        <div class="shared-statistics__date">
+          <span class="shared-statistics__date-title">Период</span>
+
+          <div class="shared-statistics__date-group">
+            <span data-date>Выбрать дату</span>
+
+            <button class="shared-statistics__date-clear" data-clear>❌</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="shared-statistics__footer">
+        <div class="shared-statistics__summary">
+          <div class="shared-statistics__summary-item">
+            <p class="shared-statistics__summary-item-title">Оплачено</p>
+
+            <p class="shared-statistics__summary-item-amount" data-paid-amount>
+              0₽
+            </p>
+
+            <p
+              class="shared-statistics__summary-item-amount shared-statistics__summary-item-amount--usd"
+              data-paid-amount-usd
+            >
+              $0
+            </p>
+          </div>
+
+          <div class="shared-statistics__summary-item">
+            <p class="shared-statistics__summary-item-title">Не оплачено</p>
+
+            <p
+              class="shared-statistics__summary-item-amount"
+              data-unpaid-amount
+            >
+              0₽
+            </p>
+
+            <p
+              class="shared-statistics__summary-item-amount shared-statistics__summary-item-amount--usd"
+              data-unpaid-amount-usd
+            >
+              $0
+            </p>
+          </div>
+
+          <div class="shared-statistics__summary-item">
+            <p class="shared-statistics__summary-item-title">Возврат</p>
+
+            <p
+              class="shared-statistics__summary-item-amount"
+              data-refund-amount
+            >
+              0₽
+            </p>
+
+            <p
+              class="shared-statistics__summary-item-amount shared-statistics__summary-item-amount--usd"
+              data-refund-amount-usd
+            >
+              $0
+            </p>
+          </div>
+        </div>
+
+        <div class="shared-statistics__orders">
+          <h3 class="shared-statistics__orders-title">Заказы</h3>
+
+          <div class="shared-statistics__orders-block">
+            <div class="shared-statistics__orders-group">
+              <h5
+                class="shared-statistics__orders-group-title"
+                data-paid-orders
+              >
+                0
+              </h5>
+
+              <p class="shared-statistics__orders-group-amount">Оплачено</p>
+            </div>
+
+            <div class="shared-statistics__orders-group">
+              <h5
+                class="shared-statistics__orders-group-title"
+                data-unpaid-orders
+              >
+                0
+              </h5>
+
+              <p class="shared-statistics__orders-group-amount">Не оплачено</p>
+            </div>
+
+            <div class="shared-statistics__orders-group">
+              <h5
+                class="shared-statistics__orders-group-title"
+                data-refund-orders
+              >
+                0
+              </h5>
+
+              <p class="shared-statistics__orders-group-amount">Возврат</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

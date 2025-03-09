@@ -1,40 +1,155 @@
 <template>
   <div class="shared-sidebar">
-    <div class="shared-sidebar__logo">
+    <button class="shared-sidebar__logo">
       <img
-        src="assets/icons/logo.svg"
+        src="assets/icons/logo-text.svg"
         alt="Paytoday"
         class="shared-sidebar__logo-image"
       />
-    </div>
 
-    <button
-      class="shared-sidebar__search shared-sidebar__navigation-item"
-      data-route="search"
-    >
-      <img src="assets/icons/search-normal.svg" alt="Search" />
+      <img src="assets/icons/chevron-left.svg" alt="chevron-left" />
     </button>
 
+    <div class="shared-sidebar__search">
+      <img
+        src="assets/icons/search.svg"
+        alt="search"
+        class="shared-sidebar__search-icon"
+      />
+
+      <input
+        type="text"
+        class="shared-sidebar__search-input"
+        placeholder="Поиск"
+      />
+    </div>
+
     <div class="shared-sidebar__navigation">
-      <button class="shared-sidebar__navigation-item" data-route="payments">
-        <img src="assets/icons/wallet.svg" alt="Payments" />
-      </button>
+      <div class="shared-sidebar__collapse">
+        <button class="shared-sidebar__collapse-header">
+          <div class="shared-sidebar__collapse-header-group">
+            <img
+              class="shared-sidebar__collapse-icon"
+              src="assets/icons/wallet.svg"
+              alt="icon"
+            />
 
-      <button class="shared-sidebar__navigation-item" data-route="stats">
-        <img src="assets/icons/stats.svg" alt="Statistics" />
-      </button>
+            <span class="shared-sidebar__collapse-title">Платежи</span>
+          </div>
 
-      <button class="shared-sidebar__navigation-item" data-route="people">
-        <img src="assets/icons/people.svg" alt="People" />
-      </button>
+          <img
+            class="shared-sidebar__collapse-chevron"
+            src="assets/icons/chevron-down.svg"
+            alt="chevron-down"
+          />
+        </button>
 
-      <button class="shared-sidebar__navigation-item" data-route="profile">
-        <img src="assets/icons/user.svg" alt="Profile" />
-      </button>
+        <div class="shared-sidebar__collapse-content">
+          <a class="shared-sidebar__collapse-content-link" href="#">Оплаты</a>
 
-      <button class="shared-sidebar__navigation-item" data-route="more">
-        <img src="assets/icons/more.svg" alt="More" />
-      </button>
+          <a class="shared-sidebar__collapse-content-link" href="#">
+            Мои подписки $
+          </a>
+
+          <a class="shared-sidebar__collapse-content-link" href="#">Акты</a>
+        </div>
+      </div>
+
+      <div class="shared-sidebar__collapse">
+        <button class="shared-sidebar__collapse-header">
+          <div class="shared-sidebar__collapse-header-group">
+            <img
+              class="shared-sidebar__collapse-icon"
+              src="assets/icons/stats.svg"
+              alt="icon"
+            />
+
+            <span class="shared-sidebar__collapse-title">Маркетплейс</span>
+          </div>
+
+          <img
+            class="shared-sidebar__collapse-chevron"
+            src="assets/icons/chevron-down.svg"
+            alt="chevron-down"
+          />
+        </button>
+
+        <div class="shared-sidebar__collapse-content"></div>
+      </div>
+
+      <div class="shared-sidebar__collapse">
+        <button class="shared-sidebar__collapse-header">
+          <div class="shared-sidebar__collapse-header-group">
+            <img
+              class="shared-sidebar__collapse-icon"
+              src="assets/icons/people.svg"
+              alt="icon"
+            />
+
+            <span class="shared-sidebar__collapse-title">Программы</span>
+          </div>
+
+          <img
+            class="shared-sidebar__collapse-chevron"
+            src="assets/icons/chevron-down.svg"
+            alt="chevron-down"
+          />
+        </button>
+
+        <div class="shared-sidebar__collapse-content"></div>
+      </div>
+
+      <div class="shared-sidebar__collapse">
+        <button class="shared-sidebar__collapse-header">
+          <div class="shared-sidebar__collapse-header-group">
+            <img
+              class="shared-sidebar__collapse-icon"
+              src="assets/icons/user.svg"
+              alt="icon"
+            />
+
+            <span class="shared-sidebar__collapse-title">Профиль</span>
+          </div>
+
+          <img
+            class="shared-sidebar__collapse-chevron"
+            src="assets/icons/chevron-down.svg"
+            alt="chevron-down"
+          />
+        </button>
+
+        <div class="shared-sidebar__collapse-content"></div>
+      </div>
+
+      <div class="shared-sidebar__collapse">
+        <button class="shared-sidebar__collapse-header">
+          <div class="shared-sidebar__collapse-header-group">
+            <img
+              class="shared-sidebar__collapse-icon"
+              src="assets/icons/more.svg"
+              alt="icon"
+            />
+
+            <span class="shared-sidebar__collapse-title">Еще</span>
+          </div>
+
+          <img
+            class="shared-sidebar__collapse-chevron"
+            src="assets/icons/chevron-down.svg"
+            alt="chevron-down"
+          />
+        </button>
+
+        <div class="shared-sidebar__collapse-content"></div>
+      </div>
+    </div>
+
+    <div class="shared-sidebar__support">
+      <p class="shared-sidebar__support-label">Поддержка</p>
+
+      <a class="shared-sidebar__support-link" href="mailto:ask@paytoday.pro">
+        ask@paytoday.pro
+      </a>
     </div>
   </div>
 </template>
