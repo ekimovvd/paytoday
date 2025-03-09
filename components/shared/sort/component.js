@@ -7,8 +7,8 @@ export class SharedSort extends HTMLElement {
 
   async connectedCallback() {
     const [htmlRes, cssRes] = await Promise.all([
-      fetch("/components/shared/sort/component.html"),
-      fetch("/components/shared/sort/component.css"),
+      fetch("./components/shared/sort/component.html"),
+      fetch("./components/shared/sort/component.css"),
     ]);
 
     const [htmlText, cssText] = await Promise.all([

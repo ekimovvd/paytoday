@@ -9,8 +9,8 @@ export class SharedCopy extends HTMLElement {
 
   async connectedCallback() {
     const [htmlRes, cssRes] = await Promise.all([
-      fetch("/components/shared/copy/component.html"),
-      fetch("/components/shared/copy/component.css"),
+      fetch("./components/shared/copy/component.html"),
+      fetch("./components/shared/copy/component.css"),
     ]);
 
     const [htmlText, cssText] = await Promise.all([
