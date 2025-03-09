@@ -2,6 +2,7 @@ export class SharedSidebar extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this.isExpanded = false;
   }
 
   async connectedCallback() {
@@ -32,14 +33,55 @@ export class SharedSidebar extends HTMLElement {
       ".shared-sidebar__navigation-item"
     );
     this.search = this.shadowRoot.querySelector(".shared-sidebar__search");
+    this.collapseHeaders = this.shadowRoot.querySelectorAll(
+      ".shared-sidebar__collapse-header"
+    );
+    this.collapseContents = this.shadowRoot.querySelectorAll(
+      ".shared-sidebar__collapse-content"
+    );
 
     this.toggleButton.addEventListener("click", () => {
-      this.sidebar.classList.toggle("shared-sidebar--expanded");
+      this.isExpanded = !this.isExpanded;
+      this.sidebar.classList.toggle(
+        "shared-sidebar--expanded",
+        this.isExpanded
+      );
 
-      if (this.sidebar.classList.contains("shared-sidebar--expanded")) {
-        this.search.removeAttribute("isSidebar");
+      if (!this.isExpanded) {
+        this.sidebar.classList.add("shared-sidebar--hidden");
       } else {
-        this.search.setAttribute("isSidebar", "");
+        this.sidebar.classList.remove("shared-sidebar--hidden");
+      }
+    });
+
+    this.collapseHeaders.forEach((header) => {
+      header.addEventListener("click", () => {
+        if (!this.isExpanded) {
+          this.isExpanded = true;
+
+          this.sidebar.classList.toggle("shared-sidebar--expanded", true);
+          this.sidebar.classList.remove("shared-sidebar--hidden");
+        }
+
+        this.toggleCollapse(header);
+      });
+    });
+  }
+
+  toggleCollapse(activeHeader) {
+    this.collapseHeaders.forEach((header) => {
+      const content = header.nextElementSibling;
+      const parent = header.parentElement;
+
+      if (header === activeHeader) {
+        const isOpen = parent.classList.contains(
+          "shared-sidebar__collapse--active"
+        );
+        parent.classList.toggle("shared-sidebar__collapse--active", !isOpen);
+        content.style.display = isOpen ? "none" : "flex";
+      } else {
+        parent.classList.remove("shared-sidebar__collapse--active");
+        content.style.display = "none";
       }
     });
   }
