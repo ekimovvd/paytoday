@@ -12,6 +12,7 @@ import "../components/shared/redirect/component.js";
 import "../components/shared/remove/component.js";
 import "../components/shared/copy/component.js";
 import "../components/shared/pagination/component.js";
+import "../components/shared/statistics/component.js";
 
 import "../components/ui/button/component.js";
 import "../components/ui/input/component.js";
