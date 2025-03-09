@@ -6,8 +6,8 @@ export class SharedRemove extends HTMLElement {
 
   async connectedCallback() {
     const [htmlRes, cssRes] = await Promise.all([
-      fetch("/components/shared/remove/component.html"),
-      fetch("/components/shared/remove/component.css"),
+      fetch("./components/shared/remove/component.html"),
+      fetch("./components/shared/remove/component.css"),
     ]);
 
     const [htmlText, cssText] = await Promise.all([
