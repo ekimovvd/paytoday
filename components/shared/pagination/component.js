@@ -8,8 +8,8 @@ export class SharedPagination extends HTMLElement {
 
   async connectedCallback() {
     const [htmlRes, cssRes] = await Promise.all([
-      fetch("/components/shared/pagination/component.html"),
-      fetch("/components/shared/pagination/component.css"),
+      fetch("./components/shared/pagination/component.html"),
+      fetch("./components/shared/pagination/component.css"),
     ]);
 
     const [htmlText, cssText] = await Promise.all([
