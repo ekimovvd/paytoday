@@ -3,6 +3,13 @@ import data from "../static-data/index.js";
 
 const ITEMS_PER_PAGE = 5;
 let currentPage = 1;
+let searchQuery = "";
+let sortConfig = { key: null, order: null };
+let activeFilters = {
+  paymentStatus: "all",
+  payoutStatus: "all",
+  paymentType: "all",
+};
 
 function getElement(id) {
   return document.querySelector(`[data-id="${id}"]`);
@@ -17,9 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const pagination = getElement("main-pagination");
   const download = getElement("main-download");
   const modal = document.getElementById("modal");
-
-  let searchQuery = "";
-  let sortConfig = { key: null, order: null };
+  const statistics = getElement("main-statistics");
 
   balanceRub.textContent = "10 000₽";
   balanceUsd.textContent = "/ $1 000.234";
@@ -27,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   function handleSearch(event) {
     searchQuery = event.detail.trim().toLowerCase();
     currentPage = 1;
-
     renderData();
   }
 
@@ -44,16 +48,41 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  statistics.addEventListener("filter-change", (event) => {
+    activeFilters = event.detail;
+    currentPage = 1;
+    renderData();
+  });
+
   function filterData() {
     return data.filter((item) => {
       const query = searchQuery.toLowerCase();
 
-      return (
+      const matchesSearch =
         item.id.toLowerCase().includes(query) ||
         item.accountId.toLowerCase().includes(query) ||
         item.client.name.toLowerCase().includes(query) ||
         item.client.phone.includes(query) ||
-        item.client.email.toLowerCase().includes(query)
+        item.client.email.toLowerCase().includes(query);
+
+      const matchesPaymentStatus =
+        activeFilters.paymentStatus === "all" ||
+        activeFilters.paymentStatus === item.status;
+
+      const matchesPayoutStatus =
+        activeFilters.payoutStatus === "all" ||
+        (activeFilters.payoutStatus === "not_paid" && item.payout !== "paid") ||
+        (activeFilters.payoutStatus === "paid" && item.payout === "paid");
+
+      const matchesPaymentType =
+        activeFilters.paymentType === "all" ||
+        activeFilters.paymentType === item.paymentType;
+
+      return (
+        matchesSearch &&
+        matchesPaymentStatus &&
+        matchesPayoutStatus &&
+        matchesPaymentType
       );
     });
   }
@@ -84,31 +113,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function paginateData(filteredData) {
     const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-
     return filteredData.slice(startIndex, startIndex + ITEMS_PER_PAGE);
   }
 
   function renderPagination(totalItems) {
     const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
-
     pagination.setAttribute("total-pages", totalPages);
     pagination.setAttribute("current-page", currentPage);
   }
 
   pagination.addEventListener("page-change", (event) => {
     currentPage = event.detail.page;
-
     renderData();
   });
 
   function renderData() {
     const filteredData = filterData();
-    const paginatedData = paginateData(filteredData);
-    const sortedData = sortData(paginatedData);
+    const sortedData = sortData(filteredData);
+    const paginatedData = paginateData(sortedData);
 
     renderPagination(filteredData.length);
 
-    tableBody.innerHTML = sortedData
+    tableBody.innerHTML = paginatedData
       .map((item) => {
         let type = "";
 
@@ -155,14 +181,11 @@ document.addEventListener("DOMContentLoaded", () => {
           <td class="main-page__table-td">
             <div class="main-page__table-actions">
               <shared-copy class="main-page__table-action" copy-text="${item.id}"></shared-copy>
-  
               <shared-redirect href="${item.id}"></shared-redirect>
-
               <shared-remove data-id="remove" class="main-page__table-remove" data-remove-id="${item.id}"></shared-remove>
             </div>
           </td>
-        </tr>
-      `;
+        </tr>`;
       })
       .join("");
 
@@ -181,7 +204,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         const removeId = event.currentTarget.getAttribute("data-remove-id");
-
         removeRowById(removeId);
       });
     });

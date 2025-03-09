@@ -33,6 +33,21 @@ export class SharedStatistics extends HTMLElement {
     this.shadowRoot.appendChild(templateContent);
 
     this.setupListeners();
+    this.updateValues();
+  }
+
+  static get observedAttributes() {
+    return [
+      "paid-amount",
+      "paid-amount-usd",
+      "unpaid-amount",
+      "unpaid-amount-usd",
+      "refund-amount",
+      "refund-amount-usd",
+      "paid-orders",
+      "unpaid-orders",
+      "refund-orders",
+    ];
   }
 
   setupListeners() {
@@ -97,6 +112,30 @@ export class SharedStatistics extends HTMLElement {
 
     this.shadowRoot.querySelector("[data-date]").textContent =
       this.filters.dateRange || "Выбрать дату";
+  }
+
+  updateValues() {
+    this.shadowRoot.querySelector("[data-paid-amount]").textContent =
+      this.getAttribute("paid-amount") || "0₽";
+    this.shadowRoot.querySelector("[data-paid-amount-usd]").textContent =
+      this.getAttribute("paid-amount-usd") || "$0";
+
+    this.shadowRoot.querySelector("[data-unpaid-amount]").textContent =
+      this.getAttribute("unpaid-amount") || "0₽";
+    this.shadowRoot.querySelector("[data-unpaid-amount-usd]").textContent =
+      this.getAttribute("unpaid-amount-usd") || "$0";
+
+    this.shadowRoot.querySelector("[data-refund-amount]").textContent =
+      this.getAttribute("refund-amount") || "0₽";
+    this.shadowRoot.querySelector("[data-refund-amount-usd]").textContent =
+      this.getAttribute("refund-amount-usd") || "$0";
+
+    this.shadowRoot.querySelector("[data-paid-orders]").textContent =
+      this.getAttribute("paid-orders") || "0";
+    this.shadowRoot.querySelector("[data-unpaid-orders]").textContent =
+      this.getAttribute("unpaid-orders") || "0";
+    this.shadowRoot.querySelector("[data-refund-orders]").textContent =
+      this.getAttribute("refund-orders") || "0";
   }
 }
 
