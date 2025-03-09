@@ -8,33 +8,142 @@
       />
     </div>
 
-    <button
-      class="shared-sidebar__search shared-sidebar__navigation-item"
-      data-route="search"
-    >
-      <img src="assets/icons/search-normal.svg" alt="Search" />
-    </button>
+    <div class="shared-sidebar__search">
+      <img
+        src="assets/icons/search.svg"
+        alt="search"
+        class="shared-sidebar__search-icon"
+      />
+
+      <input
+        type="text"
+        class="shared-sidebar__search-input"
+        placeholder="Поиск"
+      />
+    </div>
 
     <div class="shared-sidebar__navigation">
-      <button class="shared-sidebar__navigation-item" data-route="payments">
-        <img src="assets/icons/wallet.svg" alt="Payments" />
-      </button>
+      <div class="shared-sidebar__collapse">
+        <button class="shared-sidebar__collapse-header">
+          <div class="shared-sidebar__collapse-header-group">
+            <img
+              class="shared-sidebar__collapse-icon"
+              src="assets/icons/wallet.svg"
+              alt="icon"
+            />
 
-      <button class="shared-sidebar__navigation-item" data-route="stats">
-        <img src="assets/icons/stats.svg" alt="Statistics" />
-      </button>
+            <span class="shared-sidebar__collapse-title">Платежи</span>
+          </div>
 
-      <button class="shared-sidebar__navigation-item" data-route="people">
-        <img src="assets/icons/people.svg" alt="People" />
-      </button>
+          <img
+            class="shared-sidebar__collapse-chevron"
+            src="assets/icons/chevron-down.svg"
+            alt="chevron-down"
+          />
+        </button>
 
-      <button class="shared-sidebar__navigation-item" data-route="profile">
-        <img src="assets/icons/user.svg" alt="Profile" />
-      </button>
+        <div class="shared-sidebar__collapse-content">
+          <slot></slot>
+        </div>
+      </div>
 
-      <button class="shared-sidebar__navigation-item" data-route="more">
-        <img src="assets/icons/more.svg" alt="More" />
-      </button>
+      <div class="shared-sidebar__collapse">
+        <button class="shared-sidebar__collapse-header">
+          <div class="shared-sidebar__collapse-header-group">
+            <img
+              class="shared-sidebar__collapse-icon"
+              src="assets/icons/stats.svg"
+              alt="icon"
+            />
+
+            <span class="shared-sidebar__collapse-title">Маркетплейс </span>
+          </div>
+
+          <img
+            class="shared-sidebar__collapse-chevron"
+            src="assets/icons/chevron-down.svg"
+            alt="chevron-down"
+          />
+        </button>
+
+        <div class="shared-sidebar__collapse-content">
+          <slot></slot>
+        </div>
+      </div>
+
+      <div class="shared-sidebar__collapse">
+        <button class="shared-sidebar__collapse-header">
+          <div class="shared-sidebar__collapse-header-group">
+            <img
+              class="shared-sidebar__collapse-icon"
+              src="assets/icons/people.svg"
+              alt="icon"
+            />
+
+            <span class="shared-sidebar__collapse-title">Программы</span>
+          </div>
+
+          <img
+            class="shared-sidebar__collapse-chevron"
+            src="assets/icons/chevron-down.svg"
+            alt="chevron-down"
+          />
+        </button>
+
+        <div class="shared-sidebar__collapse-content">
+          <slot></slot>
+        </div>
+      </div>
+
+      <div class="shared-sidebar__collapse">
+        <button class="shared-sidebar__collapse-header">
+          <div class="shared-sidebar__collapse-header-group">
+            <img
+              class="shared-sidebar__collapse-icon"
+              src="assets/icons/user.svg"
+              alt="icon"
+            />
+
+            <span class="shared-sidebar__collapse-title">Профиль</span>
+          </div>
+
+          <img
+            class="shared-sidebar__collapse-chevron"
+            src="assets/icons/chevron-down.svg"
+            alt="chevron-down"
+          />
+        </button>
+
+        <div class="shared-sidebar__collapse-content">
+          <slot></slot>
+        </div>
+      </div>
+
+      <div class="shared-sidebar__collapse">
+        <button class="shared-sidebar__collapse-header">
+          <div class="shared-sidebar__collapse-header-group">
+            <img
+              class="shared-sidebar__collapse-icon"
+              src="assets/icons/more.svg"
+              alt="icon"
+            />
+
+            <span class="shared-sidebar__collapse-title">Еще</span>
+          </div>
+
+          <img
+            class="shared-sidebar__collapse-chevron"
+            src="assets/icons/chevron-down.svg"
+            alt="chevron-down"
+          />
+        </button>
+
+        <div class="shared-sidebar__collapse-content">
+          <slot></slot>
+        </div>
+      </div>
     </div>
+
+    <shared-support class="shared-sidebar__support"></shared-support>
   </div>
 </template>

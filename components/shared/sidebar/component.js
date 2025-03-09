@@ -26,26 +26,21 @@ export class SharedSidebar extends HTMLElement {
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);
 
+    this.sidebar = this.shadowRoot.querySelector(".shared-sidebar");
+    this.toggleButton = this.shadowRoot.querySelector(".shared-sidebar__logo");
     this.navItems = this.shadowRoot.querySelectorAll(
       ".shared-sidebar__navigation-item"
     );
+    this.search = this.shadowRoot.querySelector(".shared-sidebar__search");
 
-    this.navItems.forEach((item) => {
-      item.addEventListener("click", () => {
-        this.navItems.forEach((el) =>
-          el.classList.remove("shared-sidebar__navigation-item--active")
-        );
-        item.classList.add("shared-sidebar__navigation-item--active");
+    this.toggleButton.addEventListener("click", () => {
+      this.sidebar.classList.toggle("shared-sidebar--expanded");
 
-        const route = item.getAttribute("data-route");
-        this.dispatchEvent(
-          new CustomEvent("navigate", {
-            detail: route,
-            bubbles: true,
-            composed: true,
-          })
-        );
-      });
+      if (this.sidebar.classList.contains("shared-sidebar--expanded")) {
+        this.search.removeAttribute("isSidebar");
+      } else {
+        this.search.setAttribute("isSidebar", "");
+      }
     });
   }
 }
