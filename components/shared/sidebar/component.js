@@ -3,6 +3,7 @@ export class SharedSidebar extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.isExpanded = false;
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
   async connectedCallback() {
@@ -29,43 +30,45 @@ export class SharedSidebar extends HTMLElement {
 
     this.sidebar = this.shadowRoot.querySelector(".shared-sidebar");
     this.toggleButton = this.shadowRoot.querySelector(".shared-sidebar__logo");
-    this.navItems = this.shadowRoot.querySelectorAll(
-      ".shared-sidebar__navigation-item"
-    );
-    this.search = this.shadowRoot.querySelector(".shared-sidebar__search");
     this.collapseHeaders = this.shadowRoot.querySelectorAll(
       ".shared-sidebar__collapse-header"
     );
-    this.collapseContents = this.shadowRoot.querySelectorAll(
-      ".shared-sidebar__collapse-content"
-    );
 
-    this.toggleButton.addEventListener("click", () => {
-      this.isExpanded = !this.isExpanded;
-      this.sidebar.classList.toggle(
-        "shared-sidebar--expanded",
-        this.isExpanded
-      );
-
-      if (!this.isExpanded) {
-        this.sidebar.classList.add("shared-sidebar--hidden");
-      } else {
-        this.sidebar.classList.remove("shared-sidebar--hidden");
-      }
-    });
+    this.toggleButton.addEventListener("click", () => this.toggleSidebar());
 
     this.collapseHeaders.forEach((header) => {
       header.addEventListener("click", () => {
         if (!this.isExpanded) {
-          this.isExpanded = true;
-
-          this.sidebar.classList.toggle("shared-sidebar--expanded", true);
-          this.sidebar.classList.remove("shared-sidebar--hidden");
+          this.openSidebar();
         }
-
         this.toggleCollapse(header);
       });
     });
+
+    document.addEventListener("click", this.handleOutsideClick);
+  }
+
+  toggleSidebar() {
+    this.isExpanded = !this.isExpanded;
+    this.sidebar.classList.toggle("shared-sidebar--expanded", this.isExpanded);
+
+    if (!this.isExpanded) {
+      this.sidebar.classList.add("shared-sidebar--hidden");
+    } else {
+      this.sidebar.classList.remove("shared-sidebar--hidden");
+    }
+  }
+
+  openSidebar() {
+    this.isExpanded = true;
+    this.sidebar.classList.add("shared-sidebar--expanded");
+    this.sidebar.classList.remove("shared-sidebar--hidden");
+  }
+
+  closeSidebar() {
+    this.isExpanded = false;
+    this.sidebar.classList.remove("shared-sidebar--expanded");
+    this.sidebar.classList.add("shared-sidebar--hidden");
   }
 
   toggleCollapse(activeHeader) {
@@ -81,9 +84,19 @@ export class SharedSidebar extends HTMLElement {
         content.style.display = isOpen ? "none" : "flex";
       } else {
         parent.classList.remove("shared-sidebar__collapse--active");
-        content.style.display = "none";
+        header.nextElementSibling.style.display = "none";
       }
     });
+  }
+
+  handleOutsideClick(event) {
+    if (!this.contains(event.target) && this.isExpanded) {
+      this.closeSidebar();
+    }
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener("click", this.handleOutsideClick);
   }
 }
 
