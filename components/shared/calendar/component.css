@@ -1,0 +1,88 @@
+.shared-calendar__wrapper {
+  width: fit-content;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0px 4px 12px 0px #606f9733;
+  padding: 48px 48px 64px 48px;
+}
+
+.shared-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 41px;
+}
+
+.shared-calendar__navigation-group {
+  display: flex;
+  align-items: center;
+  gap: 38.5px;
+}
+
+.shared-calendar__navigation-item {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 10px 20px;
+  background: var(--background-400);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shared-calendar__body {
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.shared-calendar__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 10px;
+}
+
+.shared-calendar__month {
+  width: 100%;
+}
+
+.shared-calendar__weeks {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 25px;
+}
+
+.shared-calendar__month-day {
+  text-align: center;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.shared-calendar__day {
+  text-align: center;
+  font-size: 16px;
+  line-height: 100%;
+  color: var(--strong-primary-default);
+  font-weight: 600;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: color var(--transition), background var(--transition);
+}
+
+.shared-calendar__day.prev-month {
+  color: var(--secondary);
+}
+
+.shared-calendar__day.selected {
+  background: var(--accent-primary-default);
+  color: var(--white);
+}

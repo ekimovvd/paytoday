@@ -1,0 +1,65 @@
+<template>
+  <div class="shared-calendar">
+    <div>navbar</div>
+
+    <div class="shared-calendar__wrapper">
+      <div class="shared-calendar__navigation">
+        <div class="shared-calendar__navigation-group">
+          <button
+            class="shared-calendar__navigation-item shared-calendar__navigation-item--prev"
+          >
+            <img src="assets/icons/chevron-left.svg" alt="chevron-left" />
+          </button>
+
+          <shared-month
+            class="shared-calendar__month-select"
+            data-month="left"
+          ></shared-month>
+        </div>
+
+        <div class="shared-calendar__navigation-group">
+          <shared-month
+            class="shared-calendar__month-select"
+            data-month="right"
+          ></shared-month>
+
+          <button
+            class="shared-calendar__navigation-item shared-calendar__navigation-item--next"
+          >
+            <img src="assets/icons/chevron-right.svg" alt="chevron-right" />
+          </button>
+        </div>
+      </div>
+
+      <div class="shared-calendar__body">
+        <div class="shared-calendar__month">
+          <div class="shared-calendar__weeks">
+            <div class="shared-calendar__month-day">пн</div>
+            <div class="shared-calendar__month-day">вт</div>
+            <div class="shared-calendar__month-day">ср</div>
+            <div class="shared-calendar__month-day">чт</div>
+            <div class="shared-calendar__month-day">пт</div>
+            <div class="shared-calendar__month-day">сб</div>
+            <div class="shared-calendar__month-day">вс</div>
+          </div>
+
+          <div class="shared-calendar__month-view" data-month="left"></div>
+        </div>
+
+        <div class="shared-calendar__month">
+          <div class="shared-calendar__weeks">
+            <div class="shared-calendar__month-day">пн</div>
+            <div class="shared-calendar__month-day">вт</div>
+            <div class="shared-calendar__month-day">ср</div>
+            <div class="shared-calendar__month-day">чт</div>
+            <div class="shared-calendar__month-day">пт</div>
+            <div class="shared-calendar__month-day">сб</div>
+            <div class="shared-calendar__month-day">вс</div>
+          </div>
+
+          <div class="shared-calendar__month-view" data-month="right"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

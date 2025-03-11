@@ -1,0 +1,89 @@
+.shared-month {
+  position: relative;
+}
+
+.shared-month__toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+  font-family: var(--font);
+  font-size: 24px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--strong-primary-default);
+}
+
+.shared-month__dropdown {
+  position: absolute;
+  top: -116px;
+  left: -35px;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0px 4px 12px 0px #606f9733;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+
+.shared-month__dropdown.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.shared-month__year {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--secondary);
+  margin-bottom: 16px;
+  display: block;
+}
+
+.shared-month__months {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+}
+
+.shared-month__month {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
+  color: var(--strong-primary-default);
+  transition: color var(--transition);
+  min-width: 120px;
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.shared-month__month:hover {
+  color: var(--accent-primary-default);
+}
+
+.shared-month__month.selected {
+  color: var(--accent-primary-default);
+}
+
+.shared-month__month.selected::after {
+  content: url("assets/icons/check-box-list-circle.svg");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
