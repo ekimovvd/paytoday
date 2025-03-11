@@ -39,6 +39,16 @@ export class SharedCalendar extends HTMLElement {
     this.monthViews = this.shadowRoot.querySelectorAll(
       ".shared-calendar__month-view"
     );
+    this.closeButton = this.shadowRoot.querySelector(".shared-calendar__close");
+
+    this.closeButton.addEventListener("click", () => {
+      this.dispatchEvent(
+        new CustomEvent("close", {
+          bubbles: true,
+          composed: true,
+        })
+      );
+    });
 
     this.prevButton.addEventListener("click", () => this.changeMonth(-1));
     this.nextButton.addEventListener("click", () => this.changeMonth(1));

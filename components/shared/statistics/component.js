@@ -56,6 +56,37 @@ export class SharedStatistics extends HTMLElement {
     this.toggleIcon = this.shadowRoot.querySelector(
       ".shared-statistics__toggle-icon"
     );
+    this.dateButton = this.shadowRoot.querySelector(
+      ".shared-statistics__date-button"
+    );
+    this.dateCalendar = this.shadowRoot.querySelector(
+      ".shared-statistics__date-calendar"
+    );
+    this.dateIcon = this.shadowRoot.querySelector(
+      ".shared-statistics__date-button-icon"
+    );
+
+    this.dateCalendar.addEventListener("close", () => {
+      toggleCalendar();
+    });
+
+    this.dateButton.addEventListener("click", () => {
+      toggleCalendar();
+    });
+
+    const toggleCalendar = () => {
+      this.dateButton.classList.toggle(
+        "shared-statistics__date-button--active"
+      );
+      this.dateCalendar.classList.toggle(
+        "shared-statistics__date-calendar--active"
+      );
+      this.dateIcon.src = this.dateButton.classList.contains(
+        "shared-statistics__date-button--active"
+      )
+        ? "assets/icons/calendar-white.svg"
+        : "assets/icons/calendar.svg";
+    };
 
     this.toggle.addEventListener("click", () => {
       this.content.classList.toggle("shared-statistics__content--hide");
