@@ -104,34 +104,50 @@ export class SharedCalendar extends HTMLElement {
     const month = date.getMonth();
     const firstDayIndex = new Date(year, month, 1).getDay();
     const lastDay = new Date(year, month + 1, 0).getDate();
-    const prevLastDay = new Date(year, month, 0).getDate();
 
     let days = `<div class="shared-calendar__days">`;
 
-    for (let i = firstDayIndex - 1; i > 0; i--) {
-      days += `<span class="shared-calendar__day prev-month">${
-        prevLastDay - i + 1
-      }</span>`;
-    }
-
     for (let i = 1; i <= lastDay; i++) {
-      const isSelected = this.isDateSelected(year, month, i);
-      days += `<span class="shared-calendar__day ${
-        isSelected ? "selected" : ""
-      }" data-day="${i}" data-month="${month}" data-year="${year}">${i}</span>`;
+      const dateObj = new Date(year, month, i);
+      const isSelected = this.isDateSelected(dateObj);
+      const isInRange = this.isDateInRange(dateObj);
+      const isStart =
+        this.selectedStartDate &&
+        this.selectedStartDate.getTime() === dateObj.getTime();
+      const isEnd =
+        this.selectedEndDate &&
+        this.selectedEndDate.getTime() === dateObj.getTime();
+
+      let wrapperClasses = "shared-calendar__day-wrapper";
+
+      let classes = "shared-calendar__day";
+      if (isSelected) classes += " selected";
+      if (isInRange) classes += " in-range";
+      if (isStart) wrapperClasses += " start-date";
+      if (isEnd) wrapperClasses += " end-date";
+
+      days += `<div class="${wrapperClasses}"><span class="${classes}" data-day="${i}" data-month="${month}" data-year="${year}">${i}</span></div>`;
     }
 
     days += `</div>`;
     return days;
   }
 
-  isDateSelected(year, month, day) {
-    const date = new Date(year, month, day);
+  isDateSelected(date) {
     return (
       (this.selectedStartDate &&
         this.selectedStartDate.getTime() === date.getTime()) ||
       (this.selectedEndDate &&
         this.selectedEndDate.getTime() === date.getTime())
+    );
+  }
+
+  isDateInRange(date) {
+    return (
+      this.selectedStartDate &&
+      this.selectedEndDate &&
+      date > this.selectedStartDate &&
+      date < this.selectedEndDate
     );
   }
 
@@ -154,7 +170,23 @@ export class SharedCalendar extends HTMLElement {
       this.selectedStartDate = selectedDate;
     }
 
+    this.emitRangeSelected();
     this.renderCalendar();
+  }
+
+  emitRangeSelected() {
+    if (this.selectedStartDate && this.selectedEndDate) {
+      this.dispatchEvent(
+        new CustomEvent("range-selected", {
+          detail: {
+            start: this.selectedStartDate,
+            end: this.selectedEndDate,
+          },
+          bubbles: true,
+          composed: true,
+        })
+      );
+    }
   }
 }
 

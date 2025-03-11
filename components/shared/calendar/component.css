@@ -88,6 +88,21 @@
   color: var(--white);
 }
 
+.shared-calendar__day.in-range {
+  background: var(--background-400);
+  border-radius: 0;
+}
+
+.shared-calendar__day-wrapper.start-date {
+  background: var(--background-400);
+  border-radius: 50% 0 0 50%;
+}
+
+.shared-calendar__day-wrapper.end-date {
+  background: var(--background-400);
+  border-radius: 0 50% 50% 0;
+}
+
 @media (max-width: 1439px) {
   .shared-calendar {
     position: fixed;
