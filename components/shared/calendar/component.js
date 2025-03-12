@@ -122,20 +122,21 @@ export class SharedCalendar extends HTMLElement {
       const dayOfWeek = dateObj.getDay();
       const isSelected = this.isDateSelected(dateObj);
       const isInRange = this.isDateInRange(dateObj);
-      const isStart =
-        this.selectedStartDate &&
-        this.selectedStartDate.getTime() === dateObj.getTime();
-      const isEnd =
-        this.selectedEndDate &&
-        this.selectedEndDate.getTime() === dateObj.getTime();
 
       let wrapperClasses = "shared-calendar__day-wrapper";
       let classes = "shared-calendar__day";
 
       if (isSelected) classes += " selected";
       if (isInRange) classes += " in-range";
-      if (isStart) wrapperClasses += " start-date";
-      if (isEnd) wrapperClasses += " end-date";
+
+      if (this.selectedStartDate && this.selectedEndDate) {
+        if (this.selectedStartDate.getTime() === dateObj.getTime()) {
+          wrapperClasses += " start-date";
+        }
+        if (this.selectedEndDate.getTime() === dateObj.getTime()) {
+          wrapperClasses += " end-date";
+        }
+      }
 
       if (dayOfWeek === 1) classes += " monday";
       if (dayOfWeek === 0) classes += " sunday";
