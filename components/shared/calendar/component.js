@@ -104,11 +104,22 @@ export class SharedCalendar extends HTMLElement {
     const month = date.getMonth();
     const firstDayIndex = new Date(year, month, 1).getDay();
     const lastDay = new Date(year, month + 1, 0).getDate();
+    const prevMonthLastDay = new Date(year, month, 0).getDate();
 
     let days = `<div class="shared-calendar__days">`;
 
+    let prevMonthDays = firstDayIndex === 0 ? 6 : firstDayIndex - 1;
+    for (
+      let i = prevMonthLastDay - prevMonthDays + 1;
+      i <= prevMonthLastDay;
+      i++
+    ) {
+      days += `<span class="shared-calendar__day prev-month">${i}</span>`;
+    }
+
     for (let i = 1; i <= lastDay; i++) {
       const dateObj = new Date(year, month, i);
+      const dayOfWeek = dateObj.getDay();
       const isSelected = this.isDateSelected(dateObj);
       const isInRange = this.isDateInRange(dateObj);
       const isStart =
@@ -119,12 +130,15 @@ export class SharedCalendar extends HTMLElement {
         this.selectedEndDate.getTime() === dateObj.getTime();
 
       let wrapperClasses = "shared-calendar__day-wrapper";
-
       let classes = "shared-calendar__day";
+
       if (isSelected) classes += " selected";
       if (isInRange) classes += " in-range";
       if (isStart) wrapperClasses += " start-date";
       if (isEnd) wrapperClasses += " end-date";
+
+      if (dayOfWeek === 1) classes += " monday";
+      if (dayOfWeek === 0) classes += " sunday";
 
       days += `<div class="${wrapperClasses}"><span class="${classes}" data-day="${i}" data-month="${month}" data-year="${year}">${i}</span></div>`;
     }

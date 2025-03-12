@@ -103,6 +103,14 @@
   border-radius: 0 50% 50% 0;
 }
 
+.shared-calendar__day.in-range.monday {
+  border-radius: 50% 0 0 50%;
+}
+
+.shared-calendar__day.in-range.sunday {
+  border-radius: 0 50% 50% 0;
+}
+
 @media (max-width: 1439px) {
   .shared-calendar {
     position: fixed;

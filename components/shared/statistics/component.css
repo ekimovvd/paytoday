@@ -245,6 +245,14 @@
   display: none;
 }
 
+.shared-statistics__date-button-clear--active {
+  display: block;
+}
+
+.shared-statistics__date-button-icon--hide {
+  display: none;
+}
+
 @media (max-width: 1439px) {
   .shared-statistics__toggle {
     padding: 37px 24px;
