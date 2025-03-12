@@ -102,6 +102,7 @@ export class SharedCalendar extends HTMLElement {
   generateMonthHTML(date) {
     const year = date.getFullYear();
     const month = date.getMonth();
+    const today = new Date();
     const firstDayIndex = new Date(year, month, 1).getDay();
     const lastDay = new Date(year, month + 1, 0).getDate();
     const prevMonthLastDay = new Date(year, month, 0).getDate();
@@ -128,6 +129,7 @@ export class SharedCalendar extends HTMLElement {
 
       if (isSelected) classes += " selected";
       if (isInRange) classes += " in-range";
+      if (today.toDateString() === dateObj.toDateString()) classes += " today";
 
       if (this.selectedStartDate && this.selectedEndDate) {
         if (this.selectedStartDate.getTime() === dateObj.getTime()) {

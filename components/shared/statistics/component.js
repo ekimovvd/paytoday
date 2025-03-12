@@ -128,6 +128,13 @@ export class SharedStatistics extends HTMLElement {
 
       this.dateCalendar.clearSelection();
     });
+
+    this.shadowRoot.querySelectorAll("[data-filter]").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        this.updateFilter(event);
+        this.emitFilterChange();
+      });
+    });
   }
 
   toggleCalendar() {
@@ -157,8 +164,8 @@ export class SharedStatistics extends HTMLElement {
 
     if (type && value) {
       this.filters[type] = value;
-      this.emitFilterChange();
       this.updateUI();
+      this.emitFilterChange();
     }
   }
 
@@ -177,11 +184,10 @@ export class SharedStatistics extends HTMLElement {
       const type = button.getAttribute("data-filter");
       const value = button.getAttribute("data-value");
 
-      if (this.filters[type] === value) {
-        button.classList.add("shared-statistics__group-button--active");
-      } else {
-        button.classList.remove("shared-statistics__group-button--active");
-      }
+      button.classList.toggle(
+        "shared-statistics__group-button--active",
+        this.filters[type] === value
+      );
     });
 
     if (this.filters.dateRange) {

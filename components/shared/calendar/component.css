@@ -69,14 +69,20 @@
   line-height: 100%;
   color: var(--strong-primary-default);
   font-weight: 600;
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 50%;
   cursor: pointer;
+  border: 1px solid transparent;
   transition: color var(--transition), background var(--transition);
+}
+
+.shared-calendar__day-wrapper {
+  width: 50px;
+  height: 50px;
 }
 
 .shared-calendar__day.prev-month {
@@ -109,6 +115,14 @@
 
 .shared-calendar__day.in-range.sunday {
   border-radius: 0 50% 50% 0;
+}
+
+.shared-calendar__day.today {
+  border-color: var(--accent-primary-default);
+}
+
+.shared-calendar__day.in-range {
+  border-color: transparent;
 }
 
 @media (max-width: 1439px) {
@@ -185,7 +199,12 @@
   }
 
   .shared-calendar__day {
-    width: 44px;
-    height: 44px;
+    width: 48px;
+    height: 48px;
+  }
+
+  .shared-calendar__day-wrapper {
+    width: 50px;
+    height: 50px;
   }
 }
