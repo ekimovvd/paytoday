@@ -125,6 +125,8 @@ export class SharedStatistics extends HTMLElement {
         );
         this.dateIcon.src = "assets/icons/calendar.svg";
       }
+
+      this.dateCalendar.clearSelection();
     });
   }
 

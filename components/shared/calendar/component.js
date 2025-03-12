@@ -203,6 +203,12 @@ export class SharedCalendar extends HTMLElement {
       );
     }
   }
+
+  clearSelection() {
+    this.selectedStartDate = null;
+    this.selectedEndDate = null;
+    this.renderCalendar();
+  }
 }
 
 customElements.define("shared-calendar", SharedCalendar);
