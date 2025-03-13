@@ -9,6 +9,7 @@ export class SharedStatistics extends HTMLElement {
       dateRange: null,
     };
     this.isCalendarOpen = false;
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
   async connectedCallback() {
@@ -35,6 +36,10 @@ export class SharedStatistics extends HTMLElement {
 
     this.setupListeners();
     this.updateValues();
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener("click", this.handleOutsideClick);
   }
 
   static get observedAttributes() {
@@ -108,6 +113,8 @@ export class SharedStatistics extends HTMLElement {
         this.dateIcon.src = "assets/icons/calendar.svg";
       }
     });
+
+    document.addEventListener("click", this.handleOutsideClick);
 
     this.dateCalendar.addEventListener("close", () => {
       this.isCalendarOpen = false;
@@ -199,6 +206,28 @@ export class SharedStatistics extends HTMLElement {
       );
       this.dateButton.classList.add("shared-statistics__date-button--active");
       this.dateIcon.src = "assets/icons/calendar-white.svg";
+    }
+  }
+
+  handleOutsideClick(event) {
+    const path = event.composedPath();
+    if (
+      this.isCalendarOpen &&
+      !path.includes(this.dateCalendar) &&
+      !path.includes(this.dateButton)
+    ) {
+      this.isCalendarOpen = false;
+      this.toggleCalendar();
+
+      if (this.filters.dateRange) {
+        this.dateButton.classList.add("shared-statistics__date-button--active");
+        this.dateButtonClear.classList.add(
+          "shared-statistics__date-button-clear--active"
+        );
+        this.dateIcon.classList.add(
+          "shared-statistics__date-button-icon--hide"
+        );
+      }
     }
   }
 
