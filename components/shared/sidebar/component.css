@@ -154,6 +154,7 @@
   outline: none;
   cursor: pointer;
   transition: padding var(--transition);
+  overflow: hidden;
 }
 
 .shared-sidebar__collapse-header-group {

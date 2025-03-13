@@ -192,6 +192,67 @@
   display: none;
 }
 
+.shared-statistics__date-group {
+  position: relative;
+}
+
+.shared-statistics__date-title {
+  display: none;
+}
+
+.shared-statistics__date-calendar {
+  position: absolute;
+  top: 63px;
+  left: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), visibility var(--transition);
+}
+
+.shared-statistics__date-calendar--active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.shared-statistics__date-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+  outline: none;
+  border-radius: 56px;
+  background: transparent;
+  border: 1px solid var(--accent-primary-default);
+  padding: 8px 14px 8px 20px;
+  font-size: 14px;
+  line-height: 28px;
+  color: var(--accent-primary-default);
+  font-family: var(--font);
+  font-weight: 600;
+  transition: background var(--transition);
+}
+
+.shared-statistics__date-button--active {
+  color: var(--white);
+  background: var(--accent-primary-default);
+}
+
+.shared-statistics__date-button-clear {
+  display: none;
+}
+
+.shared-statistics__date-button-clear--active {
+  display: block;
+}
+
+.shared-statistics__date-button-icon--hide {
+  display: none;
+}
+
 @media (max-width: 1439px) {
   .shared-statistics__toggle {
     padding: 37px 24px;
@@ -254,6 +315,10 @@
   .shared-statistics__orders-group {
     max-width: 134px;
     width: 100%;
+  }
+
+  .shared-statistics__date-title {
+    display: block;
   }
 
   .shared-statistics__date {
@@ -333,5 +398,14 @@
     flex-direction: column;
     align-items: flex-start;
     row-gap: 32px;
+  }
+
+  .shared-statistics__date {
+    grid-template-columns: 1fr;
+  }
+
+  .shared-statistics__date-button {
+    width: 100%;
+    justify-content: space-between;
   }
 }

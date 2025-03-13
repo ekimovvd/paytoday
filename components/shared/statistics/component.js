@@ -8,6 +8,8 @@ export class SharedStatistics extends HTMLElement {
       paymentType: "all",
       dateRange: null,
     };
+    this.isCalendarOpen = false;
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
   async connectedCallback() {
@@ -36,6 +38,10 @@ export class SharedStatistics extends HTMLElement {
     this.updateValues();
   }
 
+  disconnectedCallback() {
+    document.removeEventListener("click", this.handleOutsideClick);
+  }
+
   static get observedAttributes() {
     return [
       "paid-amount",
@@ -51,30 +57,190 @@ export class SharedStatistics extends HTMLElement {
   }
 
   setupListeners() {
-    this.content = this.shadowRoot.querySelector(".shared-statistics__content");
+    this.dateButton = this.shadowRoot.querySelector(
+      ".shared-statistics__date-button"
+    );
+    this.dateCalendar = this.shadowRoot.querySelector(
+      ".shared-statistics__date-calendar"
+    );
+    this.dateIcon = this.shadowRoot.querySelector(
+      ".shared-statistics__date-button-icon"
+    );
+    this.dateButtonClear = this.shadowRoot.querySelector(
+      ".shared-statistics__date-button-clear"
+    );
+    this.dataClear = this.shadowRoot.querySelector(
+      ".shared-statistics__filters-clear-button"
+    );
+    this.dataClearMobile = this.shadowRoot.querySelector(
+      ".shared-statistics__date-clear"
+    );
     this.toggle = this.shadowRoot.querySelector(".shared-statistics__toggle");
     this.toggleIcon = this.shadowRoot.querySelector(
       ".shared-statistics__toggle-icon"
     );
+    this.content = this.shadowRoot.querySelector(".shared-statistics__content");
 
     this.toggle.addEventListener("click", () => {
-      this.content.classList.toggle("shared-statistics__content--hide");
       this.toggleIcon.classList.toggle(
         "shared-statistics__toggle-icon--active"
       );
+      this.content.classList.toggle("shared-statistics__content--hide");
+    });
+
+    this.dataClear.addEventListener("click", () => {
+      this.filters = {
+        paymentStatus: "all",
+        payoutStatus: "all",
+        paymentType: "all",
+        dateRange: null,
+      };
+      this.dateCalendar.clearSelection();
+      this.updateUI();
+      this.emitFilterChange();
+
+      if (!this.isCalendarOpen) {
+        this.dateButton.classList.remove(
+          "shared-statistics__date-button--active"
+        );
+        this.dateIcon.src = "assets/icons/calendar.svg";
+      }
+    });
+
+    this.dataClearMobile.addEventListener("click", () => {
+      this.filters = {
+        paymentStatus: "all",
+        payoutStatus: "all",
+        paymentType: "all",
+        dateRange: null,
+      };
+      this.dateCalendar.clearSelection();
+      this.updateUI();
+      this.emitFilterChange();
+
+      if (!this.isCalendarOpen) {
+        this.dateButton.classList.remove(
+          "shared-statistics__date-button--active"
+        );
+        this.dateIcon.src = "assets/icons/calendar.svg";
+      }
+    });
+
+    document.addEventListener("click", this.handleOutsideClick);
+
+    this.dateCalendar.addEventListener("close", () => {
+      this.isCalendarOpen = false;
+
+      if (this.filters.dateRange) {
+        this.dateButton.classList.add("shared-statistics__date-button--active");
+        this.dateButtonClear.classList.add(
+          "shared-statistics__date-button-clear--active"
+        );
+        this.dateIcon.classList.add(
+          "shared-statistics__date-button-icon--hide"
+        );
+      } else {
+        this.dateButton.classList.remove(
+          "shared-statistics__date-button--active"
+        );
+        this.dateIcon.src = "assets/icons/calendar.svg";
+      }
+
+      this.dateCalendar.classList.remove(
+        "shared-statistics__date-calendar--active"
+      );
+    });
+
+    this.dateCalendar.addEventListener("range-selected", (event) => {
+      if (event.detail && event.detail.start && event.detail.end) {
+        this.filters.dateRange = event.detail;
+        this.updateUI();
+        this.emitFilterChange();
+      }
+    });
+
+    this.dateButton.addEventListener("click", () => {
+      this.isCalendarOpen = !this.isCalendarOpen;
+      this.toggleCalendar();
+
+      if (this.filters.dateRange) {
+        this.dateButton.classList.add("shared-statistics__date-button--active");
+        this.dateButtonClear.classList.add(
+          "shared-statistics__date-button-clear--active"
+        );
+        this.dateIcon.classList.add(
+          "shared-statistics__date-button-icon--hide"
+        );
+      }
+    });
+
+    this.dateButtonClear.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      this.filters.dateRange = null;
+
+      this.updateUI();
+      this.emitFilterChange();
+
+      if (!this.isCalendarOpen) {
+        this.dateButton.classList.remove(
+          "shared-statistics__date-button--active"
+        );
+        this.dateIcon.src = "assets/icons/calendar.svg";
+      }
+
+      this.dateCalendar.clearSelection();
     });
 
     this.shadowRoot.querySelectorAll("[data-filter]").forEach((button) => {
-      button.addEventListener("click", (event) => this.updateFilter(event));
-    });
-
-    this.shadowRoot
-      .querySelector("[data-clear]")
-      .addEventListener("click", () => {
-        this.filters.dateRange = null;
+      button.addEventListener("click", (event) => {
+        this.updateFilter(event);
         this.emitFilterChange();
-        this.updateUI();
       });
+    });
+  }
+
+  toggleCalendar() {
+    const isActive = this.dateCalendar.classList.contains(
+      "shared-statistics__date-calendar--active"
+    );
+    if (isActive) {
+      this.dateCalendar.classList.remove(
+        "shared-statistics__date-calendar--active"
+      );
+      this.dateButton.classList.remove(
+        "shared-statistics__date-button--active"
+      );
+      this.dateIcon.src = "assets/icons/calendar.svg";
+    } else {
+      this.dateCalendar.classList.add(
+        "shared-statistics__date-calendar--active"
+      );
+      this.dateButton.classList.add("shared-statistics__date-button--active");
+      this.dateIcon.src = "assets/icons/calendar-white.svg";
+    }
+  }
+
+  handleOutsideClick(event) {
+    const path = event.composedPath();
+    if (
+      this.isCalendarOpen &&
+      !path.includes(this.dateCalendar) &&
+      !path.includes(this.dateButton)
+    ) {
+      this.isCalendarOpen = false;
+      this.toggleCalendar();
+
+      if (this.filters.dateRange) {
+        this.dateButton.classList.add("shared-statistics__date-button--active");
+        this.dateButtonClear.classList.add(
+          "shared-statistics__date-button-clear--active"
+        );
+        this.dateIcon.classList.add(
+          "shared-statistics__date-button-icon--hide"
+        );
+      }
+    }
   }
 
   updateFilter(event) {
@@ -83,8 +249,8 @@ export class SharedStatistics extends HTMLElement {
 
     if (type && value) {
       this.filters[type] = value;
-      this.emitFilterChange();
       this.updateUI();
+      this.emitFilterChange();
     }
   }
 
@@ -103,15 +269,38 @@ export class SharedStatistics extends HTMLElement {
       const type = button.getAttribute("data-filter");
       const value = button.getAttribute("data-value");
 
-      if (this.filters[type] === value) {
-        button.classList.add("shared-statistics__group-button--active");
-      } else {
-        button.classList.remove("shared-statistics__group-button--active");
-      }
+      button.classList.toggle(
+        "shared-statistics__group-button--active",
+        this.filters[type] === value
+      );
     });
 
-    this.shadowRoot.querySelector("[data-date]").textContent =
-      this.filters.dateRange || "Выбрать дату";
+    if (this.filters.dateRange) {
+      const startDate = new Date(this.filters.dateRange.start);
+      const endDate = new Date(this.filters.dateRange.end);
+      const formattedStartDate = startDate.toLocaleDateString("ru-RU");
+      const formattedEndDate = endDate.toLocaleDateString("ru-RU");
+
+      this.dateButton.classList.add("shared-statistics__date-button--active");
+      this.dateButtonClear.classList.add(
+        "shared-statistics__date-button-clear--active"
+      );
+      this.dateIcon.classList.add("shared-statistics__date-button-icon--hide");
+
+      this.shadowRoot.querySelector(
+        ".shared-statistics__date-button-title"
+      ).textContent = `${formattedStartDate} - ${formattedEndDate}`;
+    } else {
+      this.dateButtonClear.classList.remove(
+        "shared-statistics__date-button-clear--active"
+      );
+      this.dateIcon.classList.remove(
+        "shared-statistics__date-button-icon--hide"
+      );
+      this.shadowRoot.querySelector(
+        ".shared-statistics__date-button-title"
+      ).textContent = "За все время";
+    }
   }
 
   updateValues() {
