@@ -82,10 +82,19 @@ export class SharedCalendar extends HTMLElement {
       1
     );
 
-    this.monthSelectors[0].setAttribute("month", leftMonth.getMonth());
-    this.monthSelectors[0].setAttribute("year", leftMonth.getFullYear());
-    this.monthSelectors[1].setAttribute("month", rightMonth.getMonth());
-    this.monthSelectors[1].setAttribute("year", rightMonth.getFullYear());
+    // this.monthSelectors[0].setAttribute("month", leftMonth.getMonth());
+    // this.monthSelectors[0].setAttribute("year", leftMonth.getFullYear());
+    this.monthSelectors[0].changeMonth(
+      leftMonth.getFullYear(),
+      leftMonth.getMonth()
+    );
+
+    // this.monthSelectors[1].setAttribute("month", rightMonth.getMonth());
+    // this.monthSelectors[1].setAttribute("year", rightMonth.getFullYear());
+    this.monthSelectors[1].changeMonth(
+      rightMonth.getFullYear(),
+      rightMonth.getMonth()
+    );
 
     this.monthViews[0].innerHTML = this.generateMonthHTML(leftMonth);
     this.monthViews[1].innerHTML = this.generateMonthHTML(rightMonth);

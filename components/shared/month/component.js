@@ -4,6 +4,7 @@ export class SharedMonth extends HTMLElement {
     this.attachShadow({ mode: "open" });
     this.currentMonth = new Date().getMonth();
     this.currentYear = new Date().getFullYear();
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
   async connectedCallback() {
@@ -32,35 +33,51 @@ export class SharedMonth extends HTMLElement {
     this.toggleButton = this.shadowRoot.querySelector(".shared-month__toggle");
     this.dropdown = this.shadowRoot.querySelector(".shared-month__dropdown");
 
-    this.toggleButton.addEventListener("click", () => this.toggleDropdown());
+    this.toggleButton.addEventListener("click", (event) =>
+      this.toggleDropdown(event)
+    );
 
     this.shadowRoot.querySelectorAll(".shared-month__month").forEach((btn) => {
       btn.addEventListener("click", () => this.selectMonth(btn));
     });
 
-    document.addEventListener("click", (event) =>
-      this.handleClickOutside(event)
-    );
-
+    document.addEventListener("click", this.handleClickOutside);
     this.updateLabel();
   }
 
-  toggleDropdown() {
+  disconnectedCallback() {
+    document.removeEventListener("click", this.handleClickOutside);
+  }
+
+  toggleDropdown(event) {
+    event?.stopPropagation();
     this.dropdown.classList.toggle("visible");
   }
 
   selectMonth(button) {
-    this.currentMonth = parseInt(button.getAttribute("data-month"), 10);
-    this.currentYear = parseInt(
+    const newMonth = parseInt(button.getAttribute("data-month"), 10);
+    const newYear = parseInt(
       button.closest("[data-year]").getAttribute("data-year"),
       10
     );
+    this.setMonth(newYear, newMonth);
+    this.toggleDropdown(new Event("click"));
+  }
+
+  setMonth(year, month) {
+    this.currentMonth = month;
+    this.currentYear = year;
 
     this.shadowRoot.querySelectorAll(".shared-month__month").forEach((btn) => {
       btn.classList.remove("selected");
     });
 
-    button.classList.add("selected");
+    const selectedButton = this.shadowRoot.querySelector(
+      `[data-year="${year}"] .shared-month__month[data-month="${month}"]`
+    );
+    if (selectedButton) {
+      selectedButton.classList.add("selected");
+    }
 
     this.updateLabel();
     this.toggleDropdown();
@@ -72,6 +89,24 @@ export class SharedMonth extends HTMLElement {
         composed: true,
       })
     );
+  }
+
+  changeMonth(year, month) {
+    this.currentMonth = month;
+    this.currentYear = year;
+
+    this.shadowRoot.querySelectorAll(".shared-month__month").forEach((btn) => {
+      btn.classList.remove("selected");
+    });
+
+    const selectedButton = this.shadowRoot.querySelector(
+      `[data-year="${year}"] .shared-month__month[data-month="${month}"]`
+    );
+    if (selectedButton) {
+      selectedButton.classList.add("selected");
+    }
+
+    this.updateLabel();
   }
 
   updateLabel() {
@@ -89,12 +124,19 @@ export class SharedMonth extends HTMLElement {
       "Ноябрь",
       "Декабрь",
     ];
-    this.label.textContent = `${months[this.currentMonth]} ${this.currentYear}`;
+    if (this.label) {
+      this.label.textContent = `${months[this.currentMonth]} ${
+        this.currentYear
+      }`;
+    }
   }
 
   handleClickOutside(event) {
-    if (!this.contains(event.target)) {
-      // this.dropdown.classList.remove("visible");
+    if (
+      !this.contains(event.target) &&
+      !this.toggleButton.contains(event.target)
+    ) {
+      this.dropdown.classList.remove("visible");
     }
   }
 }
