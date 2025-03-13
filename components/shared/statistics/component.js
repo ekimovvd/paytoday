@@ -299,7 +299,7 @@ export class SharedStatistics extends HTMLElement {
       );
       this.shadowRoot.querySelector(
         ".shared-statistics__date-button-title"
-      ).textContent = "Выбрать дату";
+      ).textContent = "За все время";
     }
   }
 
