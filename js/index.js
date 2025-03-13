@@ -9,6 +9,7 @@ let activeFilters = {
   paymentStatus: "all",
   payoutStatus: "all",
   paymentType: "all",
+  dateRange: null,
 };
 
 function getElement(id) {
@@ -51,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
   statistics.addEventListener("filter-change", (event) => {
     activeFilters = event.detail;
     currentPage = 1;
+
     renderData();
   });
 
@@ -78,11 +80,17 @@ document.addEventListener("DOMContentLoaded", () => {
         activeFilters.paymentType === "all" ||
         activeFilters.paymentType === item.paymentType;
 
+      const matchesDateRange =
+        activeFilters.dateRange === null ||
+        (activeFilters.dateRange.start <= new Date(item.createdDate) &&
+          activeFilters.dateRange.end >= new Date(item.createdDate));
+
       return (
         matchesSearch &&
         matchesPaymentStatus &&
         matchesPayoutStatus &&
-        matchesPaymentType
+        matchesPaymentType &&
+        matchesDateRange
       );
     });
   }
