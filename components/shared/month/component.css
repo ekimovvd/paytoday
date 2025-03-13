@@ -87,3 +87,12 @@
   align-items: center;
   justify-content: center;
 }
+
+@media (max-width: 1439px) {
+  .shared-month__dropdown {
+    overflow-y: auto;
+    max-height: 300px;
+    top: 40px;
+    left: 40%;
+  }
+}

@@ -46,7 +46,6 @@ export class SharedMonth extends HTMLElement {
   }
 
   toggleDropdown() {
-    console.log("CLICK", this.dropdown);
     this.dropdown.classList.toggle("visible");
   }
 

@@ -168,6 +168,7 @@
     padding: 0;
     flex-direction: column;
     row-gap: 67px;
+    padding-bottom: 40px;
   }
 
   .shared-calendar__navigation {
@@ -192,6 +193,7 @@
     padding: 0;
     max-width: 350px;
     row-gap: 40px;
+    padding-bottom: 32px;
   }
 
   .shared-calendar__navigation {

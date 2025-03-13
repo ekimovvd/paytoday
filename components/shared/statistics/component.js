@@ -64,6 +64,50 @@ export class SharedStatistics extends HTMLElement {
     this.dateButtonClear = this.shadowRoot.querySelector(
       ".shared-statistics__date-button-clear"
     );
+    this.dataClear = this.shadowRoot.querySelector(
+      ".shared-statistics__filters-clear-button"
+    );
+    this.dataClearMobile = this.shadowRoot.querySelector(
+      ".shared-statistics__date-clear"
+    );
+
+    this.dataClear.addEventListener("click", () => {
+      this.filters = {
+        paymentStatus: "all",
+        payoutStatus: "all",
+        paymentType: "all",
+        dateRange: null,
+      };
+      this.dateCalendar.clearSelection();
+      this.updateUI();
+      this.emitFilterChange();
+
+      if (!this.isCalendarOpen) {
+        this.dateButton.classList.remove(
+          "shared-statistics__date-button--active"
+        );
+        this.dateIcon.src = "assets/icons/calendar.svg";
+      }
+    });
+
+    this.dataClearMobile.addEventListener("click", () => {
+      this.filters = {
+        paymentStatus: "all",
+        payoutStatus: "all",
+        paymentType: "all",
+        dateRange: null,
+      };
+      this.dateCalendar.clearSelection();
+      this.updateUI();
+      this.emitFilterChange();
+
+      if (!this.isCalendarOpen) {
+        this.dateButton.classList.remove(
+          "shared-statistics__date-button--active"
+        );
+        this.dateIcon.src = "assets/icons/calendar.svg";
+      }
+    });
 
     this.dateCalendar.addEventListener("close", () => {
       this.isCalendarOpen = false;
