@@ -75,6 +75,18 @@ export class SharedStatistics extends HTMLElement {
     this.dataClearMobile = this.shadowRoot.querySelector(
       ".shared-statistics__date-clear"
     );
+    this.toggle = this.shadowRoot.querySelector(".shared-statistics__toggle");
+    this.toggleIcon = this.shadowRoot.querySelector(
+      ".shared-statistics__toggle-icon"
+    );
+    this.content = this.shadowRoot.querySelector(".shared-statistics__content");
+
+    this.toggle.addEventListener("click", () => {
+      this.toggleIcon.classList.toggle(
+        "shared-statistics__toggle-icon--active"
+      );
+      this.content.classList.toggle("shared-statistics__content--hide");
+    });
 
     this.dataClear.addEventListener("click", () => {
       this.filters = {

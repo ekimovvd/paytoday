@@ -9,8 +9,8 @@ export class SharedCalendar extends HTMLElement {
 
   async connectedCallback() {
     const [htmlRes, cssRes] = await Promise.all([
-      fetch("/components/shared/calendar/component.html"),
-      fetch("/components/shared/calendar/component.css"),
+      fetch("./components/shared/calendar/component.html"),
+      fetch("./components/shared/calendar/component.css"),
     ]);
 
     const [htmlText, cssText] = await Promise.all([

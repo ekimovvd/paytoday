@@ -9,8 +9,8 @@ export class SharedMonth extends HTMLElement {
 
   async connectedCallback() {
     const [htmlRes, cssRes] = await Promise.all([
-      fetch("/components/shared/month/component.html"),
-      fetch("/components/shared/month/component.css"),
+      fetch("./components/shared/month/component.html"),
+      fetch("./components/shared/month/component.css"),
     ]);
 
     const [htmlText, cssText] = await Promise.all([
