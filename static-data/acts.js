@@ -1,7 +1,7 @@
 export default [
   {
     actId: "123001",
-    createdAt: new Date("2025-01-15T12:00:00"),
+    createdAt: new Date(2025, 0, 15, 12, 0, 0),
     amountRub: 38430,
     amountUsd: 384,
     commission: 3843,
@@ -11,7 +11,7 @@ export default [
   },
   {
     actId: "123002",
-    createdAt: new Date("2025-01-16T14:30:00"),
+    createdAt: new Date(2025, 0, 16, 14, 30, 0),
     amountRub: 25100,
     amountUsd: 251,
     commission: 2510,
@@ -21,7 +21,7 @@ export default [
   },
   {
     actId: "123003",
-    createdAt: new Date("2025-01-17T09:45:00"),
+    createdAt: new Date(2025, 0, 17, 9, 45, 0),
     amountRub: 47200,
     amountUsd: 472,
     commission: 4720,
@@ -31,7 +31,7 @@ export default [
   },
   {
     actId: "123004",
-    createdAt: new Date("2025-01-18T18:15:00"),
+    createdAt: new Date(2025, 0, 18, 18, 15, 0),
     amountRub: 31400,
     amountUsd: 314,
     commission: 3140,
@@ -41,7 +41,7 @@ export default [
   },
   {
     actId: "123005",
-    createdAt: new Date("2025-01-19T21:00:00"),
+    createdAt: new Date(2025, 0, 19, 21, 0, 0),
     amountRub: 12850,
     amountUsd: 129,
     commission: 1290,
@@ -51,7 +51,7 @@ export default [
   },
   {
     actId: "123006",
-    createdAt: new Date("2025-01-20T07:30:00"),
+    createdAt: new Date(2025, 0, 20, 7, 30, 0),
     amountRub: 59000,
     amountUsd: 590,
     commission: 5900,
@@ -61,7 +61,7 @@ export default [
   },
   {
     actId: "123007",
-    createdAt: new Date("2025-01-21T13:45:00"),
+    createdAt: new Date(2025, 0, 21, 13, 45, 0),
     amountRub: 21100,
     amountUsd: 211,
     commission: 2110,
@@ -71,7 +71,7 @@ export default [
   },
   {
     actId: "123008",
-    createdAt: new Date("2025-01-22T16:20:00"),
+    createdAt: new Date(2025, 0, 22, 16, 20, 0),
     amountRub: 38000,
     amountUsd: 380,
     commission: 3800,
@@ -81,7 +81,7 @@ export default [
   },
   {
     actId: "123009",
-    createdAt: new Date("2025-01-23T10:05:00"),
+    createdAt: new Date(2025, 0, 23, 10, 5, 0),
     amountRub: 45000,
     amountUsd: 450,
     commission: 4500,
@@ -91,7 +91,7 @@ export default [
   },
   {
     actId: "123010",
-    createdAt: new Date("2025-01-24T08:10:00"),
+    createdAt: new Date(2025, 0, 24, 8, 10, 0),
     amountRub: 27500,
     amountUsd: 275,
     commission: 2750,

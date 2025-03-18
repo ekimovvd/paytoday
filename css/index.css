@@ -174,39 +174,6 @@ th:last-child {
   color: var(--accent-primary-default);
 }
 
-.main-page__table-type {
-  display: flex;
-  align-items: center;
-  column-gap: 4px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  border-radius: 20px;
-  padding: 2px 12px 3px 9px;
-  margin-right: auto;
-  width: fit-content;
-  text-transform: none;
-  white-space: nowrap;
-}
-
-.main-page__table-type--pending,
-.main-page__table-type--not-active,
-.main-page__table-type--refund {
-  background: var(--background-400);
-  color: var(--secondary);
-}
-
-.main-page__table-type--paid,
-.main-page__table-type--active {
-  background: var(--green-light);
-  color: var(--green);
-}
-
-.main-page__table-type--error {
-  background: #c8054b14;
-  color: #c8054b;
-}
-
 .main-page__table-actions {
   display: flex;
   align-items: center;

@@ -144,34 +144,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tableBody.innerHTML = paginatedData
       .map((item) => {
-        let type = "";
-
-        switch (item.status) {
-          case "pending":
-            type =
-              '<img src="assets/icons/pending.svg" alt="pending" /> Ждет оплату';
-            break;
-          case "paid":
-            type = '<img src="assets/icons/paid-for.svg" alt="paid" /> Оплачен';
-            break;
-          case "not-active":
-            type = "Не активен";
-            break;
-          case "error":
-            type = `<img src="assets/icons/error.svg" alt="error" /> Ошибка`;
-            break;
-          case "refund":
-            type = `<img src="assets/icons/refund.svg" alt="refund" /> Возврат`;
-            break;
-          case "active":
-            type = "Активен";
-            break;
-          default:
-            break;
-        }
-
-        const typeClass = `main-page__table-type--${item.status}`;
-
         return `
         <tr class="main-page__table-tr" data-id="${item.id}">
           <td class="main-page__table-td"><a class="main-page__table-link" href="#">${item.id}</a></td>
@@ -183,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </td>
           <td class="main-page__table-td main-page__table-td--nowrap">${item.createdDate}</td>
           <td class="main-page__table-td main-page__table-td--nowrap">${item.paymentDate}</td>
-          <td class="main-page__table-td"><span class="main-page__table-type ${typeClass}">${type}</span></td>
+          <td class="main-page__table-td"><shared-status status="${item.status}"></shared-status></td>
           <td class="main-page__table-td">${item.amountUsd} <br> ${item.vatUsd}</td>
           <td class="main-page__table-td">${item.amountRub}</td>
           <td class="main-page__table-td">

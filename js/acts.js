@@ -29,6 +29,7 @@ const formatTime = (date) => {
   return date.toLocaleString("ru-RU", {
     hour: "2-digit",
     minute: "2-digit",
+    second: "2-digit",
   });
 };
 

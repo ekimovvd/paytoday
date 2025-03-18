@@ -124,12 +124,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     tableBody.innerHTML = filteredInvoices
       .map((invoice) => {
-        const type =
-          invoice.status === "pending"
-            ? '<img src="assets/icons/pending.svg" alt="pending" /> Ждет оплату'
-            : '<img src="assets/icons/paid-for.svg" alt="paid" /> Оплачен';
-        const typeClass = `invoice-page__table-type--${invoice.status}`;
-
         return `
         <tr class="invoice-page__table-tr">
           <td class="invoice-page__table-td"><a class="invoice-page__table-link" href="#">${invoice.id}</a></td>
@@ -140,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
           </td>
           <td class="invoice-page__table-td">${invoice.createdDate}</td>
           <td class="invoice-page__table-td">${invoice.paymentDate}</td>
-          <td class="invoice-page__table-td"><span class="invoice-page__table-type ${typeClass}">${type}</span></td>
+          <td class="invoice-page__table-td"><shared-status status="${invoice.status}"></shared-status></td>
           <td class="invoice-page__table-td">${invoice.amountUsd} <br> ${invoice.vatUsd}</td>
           <td class="invoice-page__table-td">${invoice.amountRub}</td>
           <td class="invoice-page__table-td">

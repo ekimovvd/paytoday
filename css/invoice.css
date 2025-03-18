@@ -104,31 +104,6 @@ th:last-child {
   color: var(--accent-primary-default);
 }
 
-.invoice-page__table-type {
-  display: flex;
-  align-items: center;
-  column-gap: 4px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  border-radius: 20px;
-  padding: 2px 12px 3px 9px;
-  margin-right: auto;
-  width: fit-content;
-  text-transform: none;
-  white-space: nowrap;
-}
-
-.invoice-page__table-type--pending {
-  background: var(--background-400);
-  color: var(--secondary);
-}
-
-.invoice-page__table-type--paid {
-  background: var(--green-light);
-  color: var(--green);
-}
-
 .invoice-page__table-actions {
   display: flex;
   align-items: center;
