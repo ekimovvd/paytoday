@@ -64,7 +64,7 @@
 }
 
 .act-page__table-th {
-  padding: 16px;
+  padding: 16px 8px;
   text-align: left;
   background: var(--background-400);
   font-family: var(--font);
@@ -100,14 +100,25 @@ th:last-child {
 }
 
 .act-page__table-td {
-  padding: 16px 24px;
+  padding: 24px 8px;
   font-family: var(--font);
   font-weight: 500;
   font-size: 14px;
   line-height: 24px;
   color: var(--strong-primary-default);
-  text-transform: uppercase;
-  vertical-align: top;
+  vertical-align: middle;
+}
+
+.act-page__table-td:first-child {
+  padding-left: 24px;
+}
+
+.act-page__table-td:last-child {
+  padding-right: 24px;
+}
+
+.act-page__table-td--id {
+  color: var(--accent-primary-default);
 }
 
 .act-page__table-tr {
