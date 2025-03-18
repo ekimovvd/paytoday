@@ -16,31 +16,47 @@
 
     <main class="acts-page">
       <section class="acts-page__section">
-        <div>header</div>
+        <shared-profile class="acts-page__profile"> Акты </shared-profile>
 
-        <div class="acts-page__result">
-          <h4 class="acts-page__result-title">Итог</h4>
+        <div class="acts-page__tabs">
+          <button class="acts-page__tab acts-page__tab--active">
+            Междунородные
+          </button>
 
-          <div class="acts-page__result-blocks">
-            <div class="acts-page__result-block">
-              <p class="acts-page__result-label">Комиссия за эквайринг</p>
+          <button class="acts-page__tab">Рублевые</button>
+        </div>
 
-              <h4 class="acts-page__result-amount">10 000₽</h4>
-            </div>
+        <div class="acts-page__group">
+          <div class="acts-page__filters">
+            <shared-search class="acts-page__filters-search"></shared-search>
 
-            <div class="acts-page__result-block">
-              <p class="acts-page__result-label">Сумма к выплате</p>
+            <div>date</div>
+          </div>
 
-              <div class="acts-page__result-group">
-                <h4 class="acts-page__result-amount">100 000₽</h4>
+          <div class="acts-page__result">
+            <h4 class="acts-page__result-title">Итог</h4>
 
-                <p class="acts-page__result-divider">/</p>
+            <div class="acts-page__result-blocks">
+              <div class="acts-page__result-block">
+                <p class="acts-page__result-label">Комиссия за эквайринг</p>
 
-                <h4
-                  class="acts-page__result-amount acts-page__result-amount--small"
-                >
-                  $1 000
-                </h4>
+                <h4 class="acts-page__result-amount">10 000₽</h4>
+              </div>
+
+              <div class="acts-page__result-block">
+                <p class="acts-page__result-label">Сумма к выплате</p>
+
+                <div class="acts-page__result-group">
+                  <h4 class="acts-page__result-amount">100 000₽</h4>
+
+                  <p class="acts-page__result-divider">/</p>
+
+                  <h4
+                    class="acts-page__result-amount acts-page__result-amount--small"
+                  >
+                    $1 000
+                  </h4>
+                </div>
               </div>
             </div>
           </div>
