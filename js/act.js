@@ -1,5 +1,6 @@
 import "./components.js";
 import data from "../static-data/act.js";
+import { getQueryParams } from "./utils.js";
 
 const itemsPerPage = 5;
 let currentPage = 1;
@@ -8,6 +9,8 @@ let sortOrder = null;
 const paginationComponent = document.querySelector(
   "[data-id='act-page-pagination']"
 );
+
+let selectedAct = null;
 
 const formatDate = (date) => {
   return date
@@ -26,10 +29,16 @@ const formatTime = (date) => {
   });
 };
 
-const sortData = () => {
-  if (!sortedColumn || !sortOrder) return;
+const getActFromQuery = () => {
+  const params = getQueryParams();
+  const { id } = params;
+  return data[id] || null;
+};
 
-  data.sort((a, b) => {
+const sortData = (act) => {
+  if (!sortedColumn || !sortOrder) return act;
+
+  return act.slice().sort((a, b) => {
     let valueA = a[sortedColumn];
     let valueB = b[sortedColumn];
 
@@ -41,22 +50,26 @@ const sortData = () => {
       valueB = valueB.toLowerCase();
     }
 
-    if (sortOrder === "asc") {
-      return valueA > valueB ? 1 : -1;
-    } else {
-      return valueA < valueB ? 1 : -1;
-    }
+    return sortOrder === "asc"
+      ? valueA > valueB
+        ? 1
+        : -1
+      : valueA < valueB
+      ? 1
+      : -1;
   });
 };
 
-const renderTable = (page) => {
+const renderTable = (act, page) => {
+  if (!act) return;
+
   const tableBody = document.querySelector("[data-id='act-page-table']");
   tableBody.innerHTML = "";
 
-  sortData();
+  const sortedData = sortData(act);
 
   const startIndex = (page - 1) * itemsPerPage;
-  const paginatedData = data.slice(startIndex, startIndex + itemsPerPage);
+  const paginatedData = sortedData.slice(startIndex, startIndex + itemsPerPage);
 
   paginatedData.forEach((item) => {
     const row = document.createElement("tr");
@@ -96,16 +109,18 @@ const renderTable = (page) => {
   });
 };
 
-const updatePagination = () => {
-  const totalPages = Math.ceil(data.length / itemsPerPage);
+const updatePagination = (act) => {
+  if (!act) return;
+
+  const totalPages = Math.ceil(act.length / itemsPerPage);
   paginationComponent.setAttribute("total-pages", totalPages);
   paginationComponent.setAttribute("current-page", currentPage);
 };
 
 paginationComponent.addEventListener("page-change", (event) => {
   currentPage = event.detail.page;
-  renderTable(currentPage);
-  updatePagination();
+  renderTable(selectedAct, currentPage);
+  updatePagination(selectedAct);
 });
 
 document.querySelectorAll("shared-sort").forEach((sortElement, index) => {
@@ -123,11 +138,18 @@ document.querySelectorAll("shared-sort").forEach((sortElement, index) => {
   sortElement.addEventListener("sort-change", (event) => {
     sortedColumn = columnMap[index];
     sortOrder = event.detail.order;
-    renderTable(currentPage);
+    renderTable(selectedAct, currentPage);
   });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderTable(currentPage);
-  updatePagination();
+  selectedAct = getActFromQuery();
+
+  if (!selectedAct) {
+    console.error("Акт не найден");
+  } else {
+    console.log("Данные акта:", selectedAct);
+    renderTable(selectedAct, currentPage);
+    updatePagination(selectedAct);
+  }
 });
