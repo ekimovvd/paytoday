@@ -61,6 +61,12 @@
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
+  min-width: 1440px;
+}
+
+.act-page__wrapper {
+  overflow-x: auto;
+  margin-bottom: 40px;
 }
 
 .act-page__table-th {
@@ -123,10 +129,6 @@ th:last-child {
 
 .act-page__table-tr {
   border-bottom: 1px solid var(--background-400);
-}
-
-.act-page__wrapper {
-  margin-bottom: 40px;
 }
 
 .act-page__footer {
