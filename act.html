@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Акт</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="css/act.css" />
+  </head>
+  <body>
+    <shared-header class="header"></shared-header>
+
+    <shared-sidebar class="sidebar"></shared-sidebar>
+
+    <shared-menu id="menu"></shared-menu>
+
+    <main class="act-page">
+      <section class="act-page__section">
+        <div class="act-page__header">
+          <shared-back></shared-back>
+
+          <div class="act-page__header-info">
+            <h1 class="act-page__header-title">Акт № 123456</h1>
+
+            <div class="act-page__header-blocks">
+              <div class="act-page__header-block">
+                <div class="act-page__header-group">
+                  <h4 class="act-page__header-amount">3 843₽</h4>
+
+                  <p class="act-page__header-divider">/</p>
+
+                  <h4 class="act-page__header-amount">$38</h4>
+                </div>
+
+                <p class="act-page__header-label">Комиссия за эквайринг</p>
+              </div>
+
+              <div class="act-page__header-block">
+                <div class="act-page__header-group">
+                  <h4 class="act-page__header-amount">38 430₽</h4>
+
+                  <p class="act-page__header-divider">/</p>
+
+                  <h4 class="act-page__header-amount">$3 843</h4>
+                </div>
+
+                <p class="act-page__header-label">Cумма к выплате</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="act-page__wrapper">
+          <table class="act-page__table">
+            <thead class="act-page__table-head">
+              <tr>
+                <th class="act-page__table-th">
+                  <div class="act-page__table-th-group">
+                    № заказа
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="act-page__table-th">
+                  <div class="act-page__table-th-group">
+                    Сумма
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="act-page__table-th">
+                  <div class="act-page__table-th-group">
+                    Клиент
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="act-page__table-th">
+                  <div class="act-page__table-th-group">
+                    Дата создания
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="act-page__table-th">
+                  <div class="act-page__table-th-group">
+                    Дата оплаты
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="act-page__table-th">
+                  <div class="act-page__table-th-group">
+                    Статус
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="act-page__table-th">
+                  <div class="act-page__table-th-group">
+                    Комиссия за эквайринг
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="act-page__table-th">Сумма к выплате</th>
+              </tr>
+            </thead>
+
+            <tbody data-id="act-page-table"></tbody>
+          </table>
+        </div>
+
+        <div class="act-page__footer">pagination</div>
+      </section>
+    </main>
+  </body>
+
+  <script type="module" src="js/act.js"></script>
+</html>
