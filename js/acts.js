@@ -5,9 +5,15 @@ const itemsPerPage = 5;
 let currentPage = 1;
 let sortedColumn = null;
 let sortOrder = null;
+let filteredData = [...data];
+let activeTab = "international";
+let searchQuery = "";
+
 const paginationComponent = document.querySelector(
   "[data-id='acts-page-pagination']"
 );
+const searchInput = document.querySelector("shared-search");
+const tabs = document.querySelectorAll(".acts-page__tab");
 
 const formatDate = (date) => {
   return date
@@ -25,6 +31,37 @@ const formatTime = (date) => {
     minute: "2-digit",
   });
 };
+
+tabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    tabs.forEach((t) => t.classList.remove("acts-page__tab--active"));
+    tab.classList.add("acts-page__tab--active");
+
+    activeTab =
+      tab.textContent.trim() === "Междунородные" ? "international" : "ruble";
+  });
+});
+
+const filterData = () => {
+  filteredData = data.filter((item) => {
+    return (
+      item.actId.toString().includes(searchQuery) ||
+      item.amountRub.toString().includes(searchQuery) ||
+      item.amountUsd.toString().includes(searchQuery) ||
+      formatDate(item.createdAt).includes(searchQuery)
+    );
+  });
+
+  currentPage = 1;
+  renderTable(filteredData, currentPage);
+  updatePagination(filteredData);
+};
+
+searchInput.addEventListener("search", (event) => {
+  searchQuery = event.detail.trim().toLowerCase();
+
+  filterData();
+});
 
 const sortData = (acts) => {
   if (!sortedColumn || !sortOrder) return acts;
@@ -56,7 +93,6 @@ const renderTable = (acts, page) => {
   tableBody.innerHTML = "";
 
   const sortedData = sortData(acts);
-
   const startIndex = (page - 1) * itemsPerPage;
   const paginatedData = sortedData.slice(startIndex, startIndex + itemsPerPage);
 
@@ -103,8 +139,8 @@ const updatePagination = (acts) => {
 
 paginationComponent.addEventListener("page-change", (event) => {
   currentPage = event.detail.page;
-  renderTable(data, currentPage);
-  updatePagination(data);
+  renderTable(filteredData, currentPage);
+  updatePagination(filteredData);
 });
 
 document.querySelectorAll("shared-sort").forEach((sortElement, index) => {
@@ -122,11 +158,10 @@ document.querySelectorAll("shared-sort").forEach((sortElement, index) => {
   sortElement.addEventListener("sort-change", (event) => {
     sortedColumn = columnMap[index];
     sortOrder = event.detail.order;
-    renderTable(data, currentPage);
+    renderTable(filteredData, currentPage);
   });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderTable(data, currentPage);
-  updatePagination(data);
+  filterData();
 });
