@@ -18,31 +18,9 @@
 
     <main class="main-page">
       <section class="main-page__section">
-        <div class="main-page__header">
-          <h1 class="main-page__header-title">Оплаты</h1>
-
-          <div class="main-page__header-group">
-            <div class="main-page__header-balance">
-              <p class="main-page__header-label">Текущий баланс</p>
-
-              <div class="main-page__header-amount">
-                <h4
-                  data-id="main-balance-rub"
-                  class="main-page__header-amount-title"
-                ></h4>
-
-                <h5
-                  data-id="main-balance-usd"
-                  class="main-page__header-amount-title main-page__header-amount-title--secondary"
-                ></h5>
-              </div>
-            </div>
-
-            <a class="main-page__header-link" href="#">
-              <img src="assets/icons/profile.svg" alt="profile" />
-            </a>
-          </div>
-        </div>
+        <shared-profile class="main-page__header" modifier="main">
+          Оплаты
+        </shared-profile>
 
         <div class="main-page__search">
           <shared-search

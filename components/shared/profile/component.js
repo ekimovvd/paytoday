@@ -25,6 +25,31 @@ export class SharedProfile extends HTMLElement {
 
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);
+
+    this.container = this.shadowRoot.querySelector(".shared-profile");
+
+    this.applyModifier();
+  }
+
+  static get observedAttributes() {
+    return ["modifier"];
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === "modifier") {
+      this.applyModifier();
+    }
+  }
+
+  applyModifier() {
+    if (this.container) {
+      const modifier = this.getAttribute("modifier");
+      this.container.className = "shared-profile";
+
+      if (modifier) {
+        this.container.classList.add(`shared-profile--${modifier}`);
+      }
+    }
   }
 }
 

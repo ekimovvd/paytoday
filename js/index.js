@@ -17,8 +17,6 @@ function getElement(id) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  const balanceRub = getElement("main-balance-rub");
-  const balanceUsd = getElement("main-balance-usd");
   const searchDesktop = getElement("main-search");
   const searchMobile = getElement("main-search-mobile");
   const tableBody = getElement("main-page-table-body");
@@ -26,9 +24,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const download = getElement("main-download");
   const modal = document.getElementById("modal");
   const statistics = getElement("main-statistics");
-
-  balanceRub.textContent = "10 000₽";
-  balanceUsd.textContent = "/ $1 000.234";
 
   function handleSearch(event) {
     searchQuery = event.detail.trim().toLowerCase();
