@@ -1,6 +1,12 @@
 import "./components.js";
 import data from "../static-data/act.js";
 
+const itemsPerPage = 5;
+let currentPage = 1;
+const paginationComponent = document.querySelector(
+  "[data-id='act-page-pagination']"
+);
+
 const formatDate = (date) => {
   const formattedDate = date
     .toLocaleString("ru-RU", {
@@ -20,11 +26,14 @@ const formatTime = (date) => {
   });
 };
 
-const renderTable = () => {
+const renderTable = (page) => {
   const tableBody = document.querySelector("[data-id='act-page-table']");
   tableBody.innerHTML = "";
 
-  data.forEach((item) => {
+  const startIndex = (page - 1) * itemsPerPage;
+  const paginatedData = data.slice(startIndex, startIndex + itemsPerPage);
+
+  paginatedData.forEach((item) => {
     const row = document.createElement("tr");
 
     row.innerHTML = `
@@ -62,4 +71,21 @@ const renderTable = () => {
   });
 };
 
-document.addEventListener("DOMContentLoaded", renderTable);
+const updatePagination = () => {
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+
+  paginationComponent.setAttribute("total-pages", totalPages);
+  paginationComponent.setAttribute("current-page", currentPage);
+};
+
+paginationComponent.addEventListener("page-change", (event) => {
+  currentPage = event.detail.page;
+
+  renderTable(currentPage);
+  updatePagination();
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderTable(currentPage);
+  updatePagination();
+});

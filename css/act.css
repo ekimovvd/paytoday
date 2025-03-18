@@ -129,6 +129,12 @@ th:last-child {
   margin-bottom: 40px;
 }
 
+.act-page__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @media (max-width: 1439px) {
   .act-page {
     padding: 24px 16px;
