@@ -3,20 +3,20 @@ import data from "../static-data/act.js";
 
 const itemsPerPage = 5;
 let currentPage = 1;
+let sortedColumn = null;
+let sortOrder = null;
 const paginationComponent = document.querySelector(
   "[data-id='act-page-pagination']"
 );
 
 const formatDate = (date) => {
-  const formattedDate = date
+  return date
     .toLocaleString("ru-RU", {
       day: "2-digit",
       month: "long",
       year: "numeric",
     })
     .replace(" г.", "");
-
-  return formattedDate;
 };
 
 const formatTime = (date) => {
@@ -26,9 +26,34 @@ const formatTime = (date) => {
   });
 };
 
+const sortData = () => {
+  if (!sortedColumn || !sortOrder) return;
+
+  data.sort((a, b) => {
+    let valueA = a[sortedColumn];
+    let valueB = b[sortedColumn];
+
+    if (sortedColumn === "createdAt" || sortedColumn === "paidAt") {
+      valueA = new Date(valueA).getTime();
+      valueB = new Date(valueB).getTime();
+    } else if (typeof valueA === "string") {
+      valueA = valueA.toLowerCase();
+      valueB = valueB.toLowerCase();
+    }
+
+    if (sortOrder === "asc") {
+      return valueA > valueB ? 1 : -1;
+    } else {
+      return valueA < valueB ? 1 : -1;
+    }
+  });
+};
+
 const renderTable = (page) => {
   const tableBody = document.querySelector("[data-id='act-page-table']");
   tableBody.innerHTML = "";
+
+  sortData();
 
   const startIndex = (page - 1) * itemsPerPage;
   const paginatedData = data.slice(startIndex, startIndex + itemsPerPage);
@@ -73,16 +98,33 @@ const renderTable = (page) => {
 
 const updatePagination = () => {
   const totalPages = Math.ceil(data.length / itemsPerPage);
-
   paginationComponent.setAttribute("total-pages", totalPages);
   paginationComponent.setAttribute("current-page", currentPage);
 };
 
 paginationComponent.addEventListener("page-change", (event) => {
   currentPage = event.detail.page;
-
   renderTable(currentPage);
   updatePagination();
+});
+
+document.querySelectorAll("shared-sort").forEach((sortElement, index) => {
+  const columnMap = [
+    "orderId",
+    "amountRub",
+    "client.name",
+    "createdAt",
+    "paidAt",
+    "status",
+    "commission",
+    "payout",
+  ];
+
+  sortElement.addEventListener("sort-change", (event) => {
+    sortedColumn = columnMap[index];
+    sortOrder = event.detail.order;
+    renderTable(currentPage);
+  });
 });
 
 document.addEventListener("DOMContentLoaded", () => {
