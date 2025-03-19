@@ -5,11 +5,11 @@ export class UIButton extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ["isfull"];
+    return ["isfull", "view"];
   }
 
   attributeChangedCallback(name) {
-    if (name === "isfull") {
+    if (name === "isfull" || name === "view") {
       this.updateButtonStyles();
     }
   }
@@ -47,6 +47,12 @@ export class UIButton extends HTMLElement {
         button.classList.add("ui-button--full");
       } else {
         button.classList.remove("ui-button--full");
+      }
+
+      if (this.hasAttribute("view")) {
+        button.classList.add(`ui-button--view-${this.getAttribute("view")}`);
+      } else {
+        button.classList.remove(`ui-button--view-${this.getAttribute("view")}`);
       }
     }
   }

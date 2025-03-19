@@ -29,6 +29,31 @@
   cursor: default;
 }
 
+.ui-button--view-full {
+  width: 100%;
+}
+
+.ui-button--view-text {
+  background: none;
+  color: var(--accent-primary-default);
+}
+
+.ui-button--view-text:hover {
+  background: none;
+  color: var(--accent-primary-hover);
+}
+
+.ui-button--view-text:active {
+  background: none;
+  color: var(--accent-primary-pressed);
+}
+
+.ui-button--view-text:disabled {
+  background: none;
+  color: var(--secondary);
+  cursor: default;
+}
+
 @media (max-width: 743px) {
   .ui-button--full {
     width: 100%;
