@@ -50,9 +50,13 @@ export class SharedDate extends HTMLElement {
 
   updateStyles() {
     const button = this.shadowRoot.querySelector(".shared-date__button");
+    const calendar = this.shadowRoot.querySelector(".shared-date__calendar");
     if (button) {
       button.classList.add(
         `shared-date__button--view-${this.getAttribute("view")}`
+      );
+      calendar.classList.add(
+        `shared-date__calendar--view-${this.getAttribute("view")}`
       );
     }
   }
@@ -166,6 +170,7 @@ export class SharedDate extends HTMLElement {
   clearSelection() {
     this.isCalendarOpen = false;
     this.selectedDateRange = null;
+    this.toggleCalendar();
     this.updateUI();
     this.dateCalendar.clearSelection();
   }
