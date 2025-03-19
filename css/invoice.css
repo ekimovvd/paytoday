@@ -83,15 +83,6 @@ th:last-child {
   vertical-align: top;
 }
 
-.invoice-page__table-status {
-  color: var(--strong-primary-default);
-  text-transform: none;
-  background: var(--background-400);
-  border-radius: 20px;
-  padding: 2px 12px 3px 12px;
-  color: var(--secondary);
-}
-
 .invoice-page__search {
   margin: 32px 0 24px 0;
 }

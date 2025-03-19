@@ -1,5 +1,5 @@
 import "./components.js";
-import { getQueryParams } from "./utils.js";
+import { formatDate, formatTime, getQueryParams } from "./utils.js";
 import data from "../static-data/invoice-details.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -61,14 +61,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const element = getElement(id);
     const value = invoice[key];
 
-    if (key === "paymentDate") {
-      if (value === "") {
-        element.innerHTML = `<span class="invoice-details-page__item-empty">-</span>`;
-      } else {
+    switch (key) {
+      case "paymentDate":
+        if (key === "paymentDate") {
+          if (value === "") {
+            element.innerHTML = `<span class="invoice-details-page__item-empty">-</span>`;
+          } else {
+            element.textContent = `${formatDate(value)} ${formatTime(value)}`;
+          }
+        }
+
+        break;
+      case "creationDate":
+        element.textContent = `${formatDate(value)} ${formatTime(value)}`;
+
+        break;
+      default:
         element.textContent = value;
-      }
-    } else {
-      element.textContent = value;
+        break;
     }
   });
 
