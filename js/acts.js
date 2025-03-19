@@ -9,31 +9,41 @@ let sortOrder = null;
 let filteredData = [...data];
 let activeTab = "international";
 let searchQuery = "";
+let dateRange = null;
 
-const paginationComponent = document.querySelector(
-  "[data-id='acts-page-pagination']"
-);
-const searchInput = document.querySelector("shared-search");
-const tabs = document.querySelectorAll(".acts-page__tab");
+const refs = {
+  pagination: document.querySelector("[data-id='acts-page-pagination']"),
+  searchInput: document.querySelector("shared-search"),
+  tabs: document.querySelectorAll(".acts-page__tab"),
+  dateFilter: document.querySelector("shared-date"),
+  tableBody: document.querySelector("[data-id='acts-page-table']"),
+};
 
-tabs.forEach((tab) => {
+refs.tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
-    tabs.forEach((t) => t.classList.remove("acts-page__tab--active"));
+    refs.tabs.forEach((t) => t.classList.remove("acts-page__tab--active"));
     tab.classList.add("acts-page__tab--active");
 
     activeTab =
       tab.textContent.trim() === "Междунородные" ? "international" : "ruble";
+    filterData();
   });
 });
 
 const filterData = () => {
   filteredData = data.filter((item) => {
-    return (
+    const matchesSearch =
       item.actId.toString().includes(searchQuery) ||
       item.amountRub.toString().includes(searchQuery) ||
       item.amountUsd.toString().includes(searchQuery) ||
-      formatDate(item.createdAt).includes(searchQuery)
-    );
+      formatDate(item.createdAt).includes(searchQuery);
+
+    const matchesDate =
+      !dateRange ||
+      (new Date(item.createdAt) >= new Date(dateRange.start) &&
+        new Date(item.createdAt) <= new Date(dateRange.end));
+
+    return matchesSearch && matchesDate;
   });
 
   currentPage = 1;
@@ -41,9 +51,13 @@ const filterData = () => {
   updatePagination(filteredData);
 };
 
-searchInput.addEventListener("search", (event) => {
+refs.searchInput.addEventListener("search", (event) => {
   searchQuery = event.detail.trim().toLowerCase();
+  filterData();
+});
 
+refs.dateFilter.addEventListener("date-change", (event) => {
+  dateRange = event.detail;
   filterData();
 });
 
@@ -73,8 +87,7 @@ const sortData = (acts) => {
 };
 
 const renderTable = (acts, page) => {
-  const tableBody = document.querySelector("[data-id='acts-page-table']");
-  tableBody.innerHTML = "";
+  refs.tableBody.innerHTML = "";
 
   const sortedData = sortData(acts);
   const startIndex = (page - 1) * itemsPerPage;
@@ -111,17 +124,17 @@ const renderTable = (acts, page) => {
       </td>
     `;
 
-    tableBody.appendChild(row);
+    refs.tableBody.appendChild(row);
   });
 };
 
 const updatePagination = (acts) => {
   const totalPages = Math.ceil(acts.length / itemsPerPage);
-  paginationComponent.setAttribute("total-pages", totalPages);
-  paginationComponent.setAttribute("current-page", currentPage);
+  refs.pagination.setAttribute("total-pages", totalPages);
+  refs.pagination.setAttribute("current-page", currentPage);
 };
 
-paginationComponent.addEventListener("page-change", (event) => {
+refs.pagination.addEventListener("page-change", (event) => {
   currentPage = event.detail.page;
   renderTable(filteredData, currentPage);
   updatePagination(filteredData);

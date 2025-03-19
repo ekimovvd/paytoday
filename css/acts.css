@@ -225,6 +225,7 @@ tr {
 
   .acts-page__filters {
     flex-direction: column;
+    align-items: normal;
     row-gap: 24px;
   }
 
