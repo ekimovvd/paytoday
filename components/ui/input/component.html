@@ -1,10 +1,12 @@
 <template>
   <div class="ui-input">
-    <input type="text" class="ui-input__field" />
+    <div class="ui-input__group">
+      <input type="text" class="ui-input__field" />
 
-    <button class="ui-input__clear ui-input__clear--hidden">
-      <img src="assets/icons/cross-fill.svg" alt="clear" />
-    </button>
+      <button class="ui-input__clear ui-input__clear--hidden">
+        <img src="assets/icons/cross-fill.svg" alt="clear" />
+      </button>
+    </div>
 
     <p class="ui-input__error ui-input__error--hidden">
       <slot></slot>

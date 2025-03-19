@@ -14,6 +14,15 @@ document.addEventListener("DOMContentLoaded", () => {
     recurringFrequency: "",
   };
 
+  const requiredFields = [
+    "orderNumber",
+    "amountRub",
+    "amountUsd",
+    "clientName",
+    "clientPhone",
+    "clientEmail",
+  ];
+
   const elements = {
     paymentType: "payment-type",
     orderNumber: "order-number",
@@ -53,10 +62,40 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  function validateForm() {
+    let isValid = true;
+
+    requiredFields.forEach((field) => {
+      const input = refs[field];
+
+      if (input) {
+        const value = formData[field]?.trim();
+        const isEmpty = !value;
+
+        if (isEmpty) {
+          input.setAttribute("error", "Поле обязательно");
+          isValid = false;
+        } else {
+          input.removeAttribute("error");
+        }
+      }
+    });
+
+    if (!isValid) {
+      console.log("Форма содержит ошибки, исправьте их перед отправкой.");
+    }
+
+    return isValid;
+  }
+
   Object.entries(refs).forEach(([key, element]) => {
-    element?.addEventListener("update", (event) =>
-      updateFormData(key, event.detail)
-    );
+    element?.addEventListener("update", (event) => {
+      updateFormData(key, event.detail);
+
+      if (requiredFields.includes(key)) {
+        element.removeAttribute("error");
+      }
+    });
   });
 
   radios.forEach((radio) => {
@@ -73,6 +112,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   handleCreate?.addEventListener("click", (event) => {
     event.preventDefault();
-    console.log("Форма отправлена с данными:", formData);
+
+    if (validateForm()) {
+      console.log("Форма успешно отправлена с данными:", formData);
+    }
   });
 });

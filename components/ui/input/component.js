@@ -38,9 +38,7 @@ export class UIInput extends HTMLElement {
       this.field.value = this.getAttribute("value");
     }
 
-    if (this.innerHTML.trim()) {
-      this.errorMessage.classList.remove("ui-input__error--hidden");
-    }
+    this.updateErrorState();
 
     this.field.addEventListener("input", () => {
       this.dispatchEvent(
@@ -51,17 +49,15 @@ export class UIInput extends HTMLElement {
         })
       );
 
-      if (this.field.value) {
-        this.clearButton.classList.remove("ui-input__clear--hidden");
-      } else {
-        this.clearButton.classList.add("ui-input__clear--hidden");
-      }
+      this.clearButton.classList.toggle(
+        "ui-input__clear--hidden",
+        !this.field.value
+      );
     });
 
     this.clearButton.addEventListener("click", () => {
       this.field.value = "";
       this.clearButton.classList.add("ui-input__clear--hidden");
-
       this.dispatchEvent(
         new CustomEvent("update", {
           detail: "",
@@ -70,6 +66,28 @@ export class UIInput extends HTMLElement {
         })
       );
     });
+  }
+
+  updateErrorState() {
+    const errorText = this.getAttribute("error");
+
+    if (errorText) {
+      this.errorMessage.classList.remove("ui-input__error--hidden");
+      this.field.classList.add("ui-input__field--error");
+    } else {
+      this.errorMessage.classList.add("ui-input__error--hidden");
+      this.field.classList.remove("ui-input__field--error");
+    }
+  }
+
+  static get observedAttributes() {
+    return ["error"];
+  }
+
+  attributeChangedCallback(name) {
+    if (name === "error") {
+      this.updateErrorState();
+    }
   }
 
   get value() {
