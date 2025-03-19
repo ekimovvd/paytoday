@@ -1,5 +1,6 @@
 import "./components.js";
 import data from "../static-data/acts.js";
+import { formatAmount, formatDate, formatTimeSeconds } from "./utils.js";
 
 const itemsPerPage = 5;
 let currentPage = 1;
@@ -14,24 +15,6 @@ const paginationComponent = document.querySelector(
 );
 const searchInput = document.querySelector("shared-search");
 const tabs = document.querySelectorAll(".acts-page__tab");
-
-const formatDate = (date) => {
-  return date
-    .toLocaleString("ru-RU", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    })
-    .replace(" г.", "");
-};
-
-const formatTime = (date) => {
-  return date.toLocaleString("ru-RU", {
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  });
-};
 
 tabs.forEach((tab) => {
   tab.addEventListener("click", () => {
@@ -106,22 +89,22 @@ const renderTable = (acts, page) => {
       </td>
       <td class="acts-page__table-td">
         ${formatDate(item.createdAt)} <br />
-        ${formatTime(item.createdAt)}
+        ${formatTimeSeconds(item.createdAt)}
       </td>
       <td class="acts-page__table-td">
-        ${item.amountRub.toLocaleString("ru-RU")}₽
+        ${formatAmount(item.amountRub)}₽
       </td>
       <td class="acts-page__table-td">
-        $${item.amountUsd.toLocaleString("ru-RU")}
+        $${formatAmount(item.amountUsd)}
       </td>
       <td class="acts-page__table-td">
-        ${item.commission.toLocaleString("ru-RU")}₽
+        ${formatAmount(item.commission)}₽
       </td>
       <td class="acts-page__table-td">
-        ${item.payoutRub.toLocaleString("ru-RU")}₽
+        ${formatAmount(item.payoutRub)}₽
       </td>
       <td class="acts-page__table-td">
-        $${item.payoutUsd.toLocaleString("ru-RU")}
+        $${formatAmount(item.payoutUsd)}
       </td>
       <td class="acts-page__table-td">
         <shared-status status="${item.status}"></shared-status>

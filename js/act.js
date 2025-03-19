@@ -1,6 +1,11 @@
 import "./components.js";
 import data from "../static-data/act.js";
-import { getQueryParams } from "./utils.js";
+import {
+  formatAmount,
+  formatDate,
+  formatTime,
+  getQueryParams,
+} from "./utils.js";
 
 const itemsPerPage = 5;
 let currentPage = 1;
@@ -11,23 +16,6 @@ const paginationComponent = document.querySelector(
 );
 
 let selectedAct = null;
-
-const formatDate = (date) => {
-  return date
-    .toLocaleString("ru-RU", {
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-    })
-    .replace(" г.", "");
-};
-
-const formatTime = (date) => {
-  return date.toLocaleString("ru-RU", {
-    hour: "2-digit",
-    minute: "2-digit",
-  });
-};
 
 const getActFromQuery = () => {
   const params = getQueryParams();
@@ -79,7 +67,7 @@ const renderTable = (act, page) => {
         ${item.orderId}
       </td>
       <td class="act-page__table-td">
-        ${item.amountRub.toLocaleString("ru-RU")}₽
+        ${formatAmount(item.amountRub)}₽
       </td>
       <td class="act-page__table-td">
         ${item.client.name} <br />
@@ -98,10 +86,10 @@ const renderTable = (act, page) => {
         <shared-status status="${item.status}"></shared-status>
       </td>
       <td class="act-page__table-td">
-        ${item.commission.toLocaleString("ru-RU")}₽
+        ${formatAmount(item.commission)}₽
       </td>
       <td class="act-page__table-td">
-        ${item.payout.toLocaleString("ru-RU")}₽
+        ${formatAmount(item.payout)}₽
       </td>
     `;
 
