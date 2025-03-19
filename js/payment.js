@@ -1,8 +1,6 @@
 import "./components.js";
 
 document.addEventListener("DOMContentLoaded", async function () {
-  const DESKTOP = 1440;
-
   const formData = {
     paymentType: "",
     orderNumber: "",
@@ -15,9 +13,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     recurringPayment: false,
     recurringFrequency: "",
   };
-
-  let isFormGroupShow = false;
-  let isMobile = false;
 
   function getElement(id) {
     return document.querySelector(`[data-id="${id}"]`);
@@ -36,8 +31,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   const radios = document.querySelectorAll(
     'ui-radio[data-id="recurring-frequency"]'
   );
-  const collapse = getElement("collapse");
-  const collapseContent = getElement("collapse-content");
   const formGroup = getElement("form-group");
   const listElement = getElement("list");
 
@@ -53,63 +46,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     recurringPayment,
   };
 
-  let isCollapse = false;
-
-  function handleResize() {
-    const width = window.innerWidth;
-
-    if (formData.recurringPayment) {
-      recurringPayment.checked = false;
-      formData.recurringPayment = false;
-    }
-
-    if (isCollapse) {
-      isCollapse = false;
-
-      handleCollapse();
-    }
-
-    if (isMobile) {
-      listElement.classList.add("payment-link-page__list--visible");
-    } else {
-      listElement.classList.remove("payment-link-page__list--visible");
-    }
-
-    if (width < DESKTOP) {
-      isMobile = true;
-
-      collapse.classList.add("payment-link-page__collapse--visible");
-      collapseContent.classList.add("payment-link-page__content--hide");
-    } else {
-      isMobile = false;
-
-      collapse.classList.remove("payment-link-page__collapse--visible");
-      collapseContent.classList.remove("payment-link-page__content--hide");
-    }
-  }
-
-  function handleCollapse() {
-    if (isCollapse) {
-      collapse.classList.add("payment-link-page__collapse--active");
-      collapseContent.classList.remove("payment-link-page__content--hide");
-    } else {
-      collapse.classList.remove("payment-link-page__collapse--active");
-      collapseContent.classList.add("payment-link-page__content--hide");
-    }
-  }
-
   Object.entries(elements).forEach(([key, element]) => {
     if (element) {
       element.addEventListener("update", (event) => {
         formData[key] = event.detail;
 
-        if (key === "paymentType" && !isFormGroupShow) {
-          isFormGroupShow = true;
-
+        if (key === "paymentType") {
           formGroup.classList.add("payment-link-page__group--visible");
         }
 
-        if (key === "recurringPayment" && !isMobile) {
+        if (key === "recurringPayment") {
           if (formData.recurringPayment) {
             listElement.classList.add("payment-link-page__list--visible");
           } else {
@@ -139,14 +85,4 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     console.log("Форма отправлена с данными:", formData);
   });
-
-  collapse?.addEventListener("click", () => {
-    isCollapse = !isCollapse;
-
-    handleCollapse();
-  });
-
-  handleResize();
-
-  window.addEventListener("resize", handleResize);
 });

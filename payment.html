@@ -90,52 +90,32 @@
                 <ui-switch data-id="recurring-payment"></ui-switch>
               </div>
 
-              <div class="payment-link-page__list" data-id="list">
-                <button data-id="collapse" class="payment-link-page__collapse">
-                  <p class="payment-link-page__collapse-label">
-                    Частота повторения
-                  </p>
+              <div data-id="list" class="payment-link-page__list">
+                <div class="payment-link-page__item">
+                  <ui-radio data-id="recurring-frequency" option="weekly">
+                    Еженедельно
+                  </ui-radio>
+                </div>
 
-                  <img
-                    src="assets/icons/chevron-down.svg"
-                    alt="chevron-down"
-                    class="payment-link-page__collapse-icon"
-                  />
-                </button>
+                <div class="payment-link-page__item">
+                  <ui-radio data-id="recurring-frequency" option="monthly">
+                    Ежемесячно
+                  </ui-radio>
+                </div>
 
-                <div
-                  data-id="collapse-content"
-                  class="payment-link-page__content"
-                >
-                  <div class="payment-link-page__item">
-                    <ui-radio data-id="recurring-frequency" option="weekly">
-                      Еженедельно
-                    </ui-radio>
-                  </div>
+                <div class="payment-link-page__item">
+                  <ui-radio
+                    data-id="recurring-frequency"
+                    option="every-six-months"
+                  >
+                    Раз в пол года
+                  </ui-radio>
+                </div>
 
-                  <div class="payment-link-page__item">
-                    <ui-radio data-id="recurring-frequency" option="monthly">
-                      Ежемесячно
-                    </ui-radio>
-                  </div>
-
-                  <div class="payment-link-page__item">
-                    <ui-radio
-                      data-id="recurring-frequency"
-                      option="every-six-months"
-                    >
-                      Раз в пол года
-                    </ui-radio>
-                  </div>
-
-                  <div class="payment-link-page__item">
-                    <ui-radio
-                      data-id="recurring-frequency"
-                      option="once-a-year"
-                    >
-                      Раз в год
-                    </ui-radio>
-                  </div>
+                <div class="payment-link-page__item">
+                  <ui-radio data-id="recurring-frequency" option="once-a-year">
+                    Раз в год
+                  </ui-radio>
                 </div>
               </div>
 
