@@ -24,10 +24,6 @@
   overflow-x: auto;
 }
 
-.main-page__table {
-  min-width: 1440px;
-}
-
 .main-page__content {
   margin-bottom: 40px;
   display: flex;
@@ -41,9 +37,9 @@
 
 .main-page__table {
   width: 100%;
-  table-layout: fixed;
   border-collapse: collapse;
   border-spacing: 0;
+  min-width: 1440px;
 }
 
 .main-page__table-th {

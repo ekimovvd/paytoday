@@ -33,8 +33,10 @@ export class SharedSidebar extends HTMLElement {
     this.collapseHeaders = this.shadowRoot.querySelectorAll(
       ".shared-sidebar__collapse-header"
     );
+    this.openButton = this.shadowRoot.querySelector(".shared-sidebar__open");
 
     this.toggleButton.addEventListener("click", () => this.toggleSidebar());
+    this.openButton.addEventListener("click", () => this.toggleSidebar());
 
     this.collapseHeaders.forEach((header) => {
       header.addEventListener("click", () => {
