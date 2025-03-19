@@ -8,6 +8,10 @@
   cursor: pointer;
 }
 
+.ui-radio:hover .ui-radio__input {
+  border-color: var(--accent-primary-default);
+}
+
 .ui-radio__input {
   width: 24px;
   height: 24px;

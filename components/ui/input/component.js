@@ -26,20 +26,45 @@ export class UIInput extends HTMLElement {
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);
 
-    this.input = this.shadowRoot.querySelector(".ui-input");
+    this.field = this.shadowRoot.querySelector(".ui-input__field");
+    this.clearButton = this.shadowRoot.querySelector(".ui-input__clear");
+    this.errorMessage = this.shadowRoot.querySelector(".ui-input__error");
 
     if (this.hasAttribute("placeholder")) {
-      this.input.placeholder = this.getAttribute("placeholder");
+      this.field.placeholder = this.getAttribute("placeholder");
     }
 
     if (this.hasAttribute("value")) {
-      this.input.value = this.getAttribute("value");
+      this.field.value = this.getAttribute("value");
     }
 
-    this.input.addEventListener("input", () => {
+    if (this.innerHTML.trim()) {
+      this.errorMessage.classList.remove("ui-input__error--hidden");
+    }
+
+    this.field.addEventListener("input", () => {
       this.dispatchEvent(
         new CustomEvent("update", {
-          detail: this.input.value,
+          detail: this.field.value,
+          bubbles: true,
+          composed: true,
+        })
+      );
+
+      if (this.field.value) {
+        this.clearButton.classList.remove("ui-input__clear--hidden");
+      } else {
+        this.clearButton.classList.add("ui-input__clear--hidden");
+      }
+    });
+
+    this.clearButton.addEventListener("click", () => {
+      this.field.value = "";
+      this.clearButton.classList.add("ui-input__clear--hidden");
+
+      this.dispatchEvent(
+        new CustomEvent("update", {
+          detail: "",
           bubbles: true,
           composed: true,
         })
@@ -48,12 +73,13 @@ export class UIInput extends HTMLElement {
   }
 
   get value() {
-    return this.input?.value || "";
+    return this.field?.value || "";
   }
 
   set value(val) {
-    if (this.input) {
-      this.input.value = val;
+    if (this.field) {
+      this.field.value = val;
+      this.clearButton.classList.toggle("ui-input__clear--hidden", !val);
     }
   }
 }

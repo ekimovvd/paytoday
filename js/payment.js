@@ -1,6 +1,6 @@
 import "./components.js";
 
-document.addEventListener("DOMContentLoaded", async function () {
+document.addEventListener("DOMContentLoaded", () => {
   const formData = {
     paymentType: "",
     orderNumber: "",
@@ -14,58 +14,49 @@ document.addEventListener("DOMContentLoaded", async function () {
     recurringFrequency: "",
   };
 
-  function getElement(id) {
-    return document.querySelector(`[data-id="${id}"]`);
-  }
+  const elements = {
+    paymentType: "payment-type",
+    orderNumber: "order-number",
+    amountRub: "amount-rub",
+    amountUsd: "amount-usd",
+    clientName: "client-name",
+    clientPhone: "client-phone",
+    clientEmail: "client-email",
+    productInfo: "product-info",
+    recurringPayment: "recurring-payment",
+  };
 
-  const paymentType = getElement("payment-type");
-  const orderNumber = getElement("order-number");
-  const amountRub = getElement("amount-rub");
-  const amountUsd = getElement("amount-usd");
-  const clientName = getElement("client-name");
-  const clientPhone = getElement("client-phone");
-  const clientEmail = getElement("client-email");
-  const productInfo = getElement("product-info");
-  const recurringPayment = getElement("recurring-payment");
-  const handleCreate = getElement("create");
+  const refs = Object.fromEntries(
+    Object.entries(elements).map(([key, id]) => [
+      key,
+      document.querySelector(`[data-id="${id}"]`),
+    ])
+  );
+
+  const formGroup = document.querySelector('[data-id="form-group"]');
+  const listElement = document.querySelector('[data-id="list"]');
   const radios = document.querySelectorAll(
     'ui-radio[data-id="recurring-frequency"]'
   );
-  const formGroup = getElement("form-group");
-  const listElement = getElement("list");
+  const handleCreate = document.querySelector('[data-id="create"]');
 
-  const elements = {
-    paymentType,
-    orderNumber,
-    amountRub,
-    amountUsd,
-    clientName,
-    clientPhone,
-    clientEmail,
-    productInfo,
-    recurringPayment,
-  };
+  function updateFormData(key, value) {
+    formData[key] = value;
+    console.log("Обновлено:", key, formData);
 
-  Object.entries(elements).forEach(([key, element]) => {
-    if (element) {
-      element.addEventListener("update", (event) => {
-        formData[key] = event.detail;
-
-        if (key === "paymentType") {
-          formGroup.classList.add("payment-link-page__group--visible");
-        }
-
-        if (key === "recurringPayment") {
-          if (formData.recurringPayment) {
-            listElement.classList.add("payment-link-page__list--visible");
-          } else {
-            listElement.classList.remove("payment-link-page__list--visible");
-          }
-        }
-
-        console.log("Обновлено:", key, formData);
-      });
+    if (key === "paymentType") {
+      formGroup.classList.add("payment-link-page__group--visible");
     }
+
+    if (key === "recurringPayment") {
+      listElement.classList.toggle("payment-link-page__list--visible", value);
+    }
+  }
+
+  Object.entries(refs).forEach(([key, element]) => {
+    element?.addEventListener("update", (event) =>
+      updateFormData(key, event.detail)
+    );
   });
 
   radios.forEach((radio) => {
@@ -82,7 +73,6 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   handleCreate?.addEventListener("click", (event) => {
     event.preventDefault();
-
     console.log("Форма отправлена с данными:", formData);
   });
 });

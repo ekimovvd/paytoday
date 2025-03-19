@@ -8,7 +8,7 @@ export class UIButton extends HTMLElement {
     return ["isfull"];
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
+  attributeChangedCallback(name) {
     if (name === "isfull") {
       this.updateButtonStyles();
     }
@@ -38,13 +38,6 @@ export class UIButton extends HTMLElement {
     this.shadowRoot.appendChild(templateContent);
 
     this.updateButtonStyles();
-
-    const button = this.shadowRoot.querySelector(".ui-button");
-    if (button) {
-      button.addEventListener("click", () => {
-        window.history.back();
-      });
-    }
   }
 
   updateButtonStyles() {
