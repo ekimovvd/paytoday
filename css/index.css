@@ -16,29 +16,6 @@
   margin-bottom: 24px;
 }
 
-.main-page__search-link {
-  background: none;
-  border: none;
-  padding: 17px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border: 1px solid var(--accent-primary-default);
-  border-radius: 40px;
-  font-family: var(--font);
-  font-size: 16px;
-  line-height: 24px;
-  color: var(--accent-primary-default);
-  text-transform: uppercase;
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.main-page__search-link-label--small {
-  display: none;
-}
-
 .main-page__content {
   margin-top: 24px;
 }
@@ -167,14 +144,6 @@ th:last-child {
 
   .main-page__search {
     column-gap: 32px;
-  }
-
-  .main-page__search-link-label {
-    display: none;
-  }
-
-  .main-page__search-link-label--small {
-    display: block;
   }
 }
 

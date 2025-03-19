@@ -26,3 +26,4 @@ import "../components/ui/radio/component.js";
 import "../components/ui/switch/component.js";
 import "../components/ui/select/component.js";
 import "../components/ui/option/component.js";
+import "../components/ui/button-plus/component.js";

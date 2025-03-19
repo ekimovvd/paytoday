@@ -1,5 +1,6 @@
 import "./components.js";
 import data from "../static-data/index.js";
+import { formatDateShort, formatTime, formatAmount } from "./utils.js";
 
 const ITEMS_PER_PAGE = 5;
 let currentPage = 1;
@@ -135,23 +136,40 @@ function renderData() {
     .map(
       (item) => `
     <tr class="main-page__table-tr" data-id="${item.id}">
-      <td class="main-page__table-td"><a class="main-page__table-link" href="#">${item.id}</a></td>
-      <td class="main-page__table-td"><a class="main-page__table-link" href="#">${item.accountId}</a></td>
+      <td class="main-page__table-td"><a class="main-page__table-link" href="#">${
+        item.id
+      }</a></td>
+      <td class="main-page__table-td"><a class="main-page__table-link" href="#">${
+        item.accountId
+      }</a></td>
       <td class="main-page__table-td main-page__table-td--nowrap">
         ${item.client.name} <br>
         ${item.client.phone} <br>
         ${item.client.email}
       </td>
-      <td class="main-page__table-td main-page__table-td--nowrap">${item.createdDate}</td>
-      <td class="main-page__table-td main-page__table-td--nowrap">${item.paymentDate}</td>
-      <td class="main-page__table-td"><shared-status status="${item.status}"></shared-status></td>
-      <td class="main-page__table-td">${item.amountUsd} <br> ${item.vatUsd}</td>
-      <td class="main-page__table-td">${item.amountRub}</td>
+      <td class="main-page__table-td main-page__table-td--nowrap">
+        ${formatDateShort(item.createdDate)} ${formatTime(item.createdDate)}
+      </td>
+      <td class="main-page__table-td main-page__table-td--nowrap">
+        ${formatDateShort(item.paymentDate)}
+      </td>
+      <td class="main-page__table-td"><shared-status status="${
+        item.status
+      }"></shared-status></td>
+      <td class="main-page__table-td">
+        $${formatAmount(item.amountUsd, "en-US")} <br />
+        +$${formatAmount(item.vatUsd, "en-US")} VAT
+      </td>
+      <td class="main-page__table-td">${formatAmount(item.amountRub)}₽</td>
       <td class="main-page__table-td">
         <div class="main-page__table-actions">
-          <shared-copy class="main-page__table-action" copy-text="${item.id}"></shared-copy>
+          <shared-copy class="main-page__table-action" copy-text="${
+            item.id
+          }"></shared-copy>
           <shared-redirect href="${item.id}"></shared-redirect>
-          <shared-remove class="main-page__table-remove" data-remove-id="${item.id}"></shared-remove>
+          <shared-remove class="main-page__table-remove" data-remove-id="${
+            item.id
+          }"></shared-remove>
         </div>
       </td>
     </tr>`
