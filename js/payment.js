@@ -1,8 +1,6 @@
 import "./components.js";
 
-document.addEventListener("DOMContentLoaded", async function () {
-  const DESKTOP = 1440;
-
+document.addEventListener("DOMContentLoaded", () => {
   const formData = {
     paymentType: "",
     orderNumber: "",
@@ -16,110 +14,88 @@ document.addEventListener("DOMContentLoaded", async function () {
     recurringFrequency: "",
   };
 
-  let isFormGroupShow = false;
-  let isMobile = false;
+  const requiredFields = [
+    "orderNumber",
+    "amountRub",
+    "amountUsd",
+    "clientName",
+    "clientPhone",
+    "clientEmail",
+  ];
 
-  function getElement(id) {
-    return document.querySelector(`[data-id="${id}"]`);
-  }
+  const elements = {
+    paymentType: "payment-type",
+    orderNumber: "order-number",
+    amountRub: "amount-rub",
+    amountUsd: "amount-usd",
+    clientName: "client-name",
+    clientPhone: "client-phone",
+    clientEmail: "client-email",
+    productInfo: "product-info",
+    recurringPayment: "recurring-payment",
+  };
 
-  const paymentType = getElement("payment-type");
-  const orderNumber = getElement("order-number");
-  const amountRub = getElement("amount-rub");
-  const amountUsd = getElement("amount-usd");
-  const clientName = getElement("client-name");
-  const clientPhone = getElement("client-phone");
-  const clientEmail = getElement("client-email");
-  const productInfo = getElement("product-info");
-  const recurringPayment = getElement("recurring-payment");
-  const handleCreate = getElement("create");
+  const refs = Object.fromEntries(
+    Object.entries(elements).map(([key, id]) => [
+      key,
+      document.querySelector(`[data-id="${id}"]`),
+    ])
+  );
+
+  const formGroup = document.querySelector('[data-id="form-group"]');
+  const listElement = document.querySelector('[data-id="list"]');
   const radios = document.querySelectorAll(
     'ui-radio[data-id="recurring-frequency"]'
   );
-  const collapse = getElement("collapse");
-  const collapseContent = getElement("collapse-content");
-  const formGroup = getElement("form-group");
-  const listElement = getElement("list");
+  const handleCreate = document.querySelector('[data-id="create"]');
 
-  const elements = {
-    paymentType,
-    orderNumber,
-    amountRub,
-    amountUsd,
-    clientName,
-    clientPhone,
-    clientEmail,
-    productInfo,
-    recurringPayment,
-  };
+  function updateFormData(key, value) {
+    formData[key] = value;
+    console.log("Обновлено:", key, formData);
 
-  let isCollapse = false;
-
-  function handleResize() {
-    const width = window.innerWidth;
-
-    if (formData.recurringPayment) {
-      recurringPayment.checked = false;
-      formData.recurringPayment = false;
+    if (key === "paymentType") {
+      formGroup.classList.add("payment-link-page__group--visible");
     }
 
-    if (isCollapse) {
-      isCollapse = false;
-
-      handleCollapse();
-    }
-
-    if (isMobile) {
-      listElement.classList.add("payment-link-page__list--visible");
-    } else {
-      listElement.classList.remove("payment-link-page__list--visible");
-    }
-
-    if (width < DESKTOP) {
-      isMobile = true;
-
-      collapse.classList.add("payment-link-page__collapse--visible");
-      collapseContent.classList.add("payment-link-page__content--hide");
-    } else {
-      isMobile = false;
-
-      collapse.classList.remove("payment-link-page__collapse--visible");
-      collapseContent.classList.remove("payment-link-page__content--hide");
+    if (key === "recurringPayment") {
+      listElement.classList.toggle("payment-link-page__list--visible", value);
     }
   }
 
-  function handleCollapse() {
-    if (isCollapse) {
-      collapse.classList.add("payment-link-page__collapse--active");
-      collapseContent.classList.remove("payment-link-page__content--hide");
-    } else {
-      collapse.classList.remove("payment-link-page__collapse--active");
-      collapseContent.classList.add("payment-link-page__content--hide");
+  function validateForm() {
+    let isValid = true;
+
+    requiredFields.forEach((field) => {
+      const input = refs[field];
+
+      if (input) {
+        const value = formData[field]?.trim();
+        const isEmpty = !value;
+
+        if (isEmpty) {
+          input.setAttribute("error", "Поле обязательно");
+          isValid = false;
+        } else {
+          input.removeAttribute("error");
+        }
+      }
+    });
+
+    if (!isValid) {
+      console.log("Форма содержит ошибки, исправьте их перед отправкой.");
     }
+
+    return isValid;
   }
 
-  Object.entries(elements).forEach(([key, element]) => {
-    if (element) {
-      element.addEventListener("update", (event) => {
-        formData[key] = event.detail;
+  Object.entries(refs).forEach(([key, element]) => {
+    element?.addEventListener("update", (event) => {
+      updateFormData(key, event.detail);
 
-        if (key === "paymentType" && !isFormGroupShow) {
-          isFormGroupShow = true;
-
-          formGroup.classList.add("payment-link-page__group--visible");
-        }
-
-        if (key === "recurringPayment" && !isMobile) {
-          if (formData.recurringPayment) {
-            listElement.classList.add("payment-link-page__list--visible");
-          } else {
-            listElement.classList.remove("payment-link-page__list--visible");
-          }
-        }
-
-        console.log("Обновлено:", key, formData);
-      });
-    }
+      if (requiredFields.includes(key)) {
+        element.removeAttribute("error");
+      }
+    });
   });
 
   radios.forEach((radio) => {
@@ -137,16 +113,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   handleCreate?.addEventListener("click", (event) => {
     event.preventDefault();
 
-    console.log("Форма отправлена с данными:", formData);
+    if (validateForm()) {
+      console.log("Форма успешно отправлена с данными:", formData);
+    }
   });
-
-  collapse?.addEventListener("click", () => {
-    isCollapse = !isCollapse;
-
-    handleCollapse();
-  });
-
-  handleResize();
-
-  window.addEventListener("resize", handleResize);
 });

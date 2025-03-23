@@ -42,16 +42,3 @@
   opacity: 1;
   visibility: visible;
 }
-
-.shared-copy__popup-icon {
-  display: none;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity var(--transition), visibility var(--transition);
-}
-
-.shared-copy__popup-icon--visible {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-}

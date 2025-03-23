@@ -15,6 +15,9 @@ import "../components/shared/pagination/component.js";
 import "../components/shared/statistics/component.js";
 import "../components/shared/calendar/component.js";
 import "../components/shared/month/component.js";
+import "../components/shared/status/component.js";
+import "../components/shared/profile/component.js";
+import "../components/shared/date/component.js";
 
 import "../components/ui/button/component.js";
 import "../components/ui/input/component.js";
@@ -23,3 +26,4 @@ import "../components/ui/radio/component.js";
 import "../components/ui/switch/component.js";
 import "../components/ui/select/component.js";
 import "../components/ui/option/component.js";
+import "../components/ui/button-plus/component.js";

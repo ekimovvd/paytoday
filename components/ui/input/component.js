@@ -26,20 +26,41 @@ export class UIInput extends HTMLElement {
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);
 
-    this.input = this.shadowRoot.querySelector(".ui-input");
+    this.field = this.shadowRoot.querySelector(".ui-input__field");
+    this.clearButton = this.shadowRoot.querySelector(".ui-input__clear");
+    this.errorMessage = this.shadowRoot.querySelector(".ui-input__error");
 
     if (this.hasAttribute("placeholder")) {
-      this.input.placeholder = this.getAttribute("placeholder");
+      this.field.placeholder = this.getAttribute("placeholder");
     }
 
     if (this.hasAttribute("value")) {
-      this.input.value = this.getAttribute("value");
+      this.field.value = this.getAttribute("value");
     }
 
-    this.input.addEventListener("input", () => {
+    this.updateErrorState();
+
+    this.field.addEventListener("input", () => {
       this.dispatchEvent(
         new CustomEvent("update", {
-          detail: this.input.value,
+          detail: this.field.value,
+          bubbles: true,
+          composed: true,
+        })
+      );
+
+      this.clearButton.classList.toggle(
+        "ui-input__clear--hidden",
+        !this.field.value
+      );
+    });
+
+    this.clearButton.addEventListener("click", () => {
+      this.field.value = "";
+      this.clearButton.classList.add("ui-input__clear--hidden");
+      this.dispatchEvent(
+        new CustomEvent("update", {
+          detail: "",
           bubbles: true,
           composed: true,
         })
@@ -47,13 +68,36 @@ export class UIInput extends HTMLElement {
     });
   }
 
+  updateErrorState() {
+    const errorText = this.getAttribute("error");
+
+    if (errorText) {
+      this.errorMessage.classList.remove("ui-input__error--hidden");
+      this.field.classList.add("ui-input__field--error");
+    } else {
+      this.errorMessage.classList.add("ui-input__error--hidden");
+      this.field.classList.remove("ui-input__field--error");
+    }
+  }
+
+  static get observedAttributes() {
+    return ["error"];
+  }
+
+  attributeChangedCallback(name) {
+    if (name === "error") {
+      this.updateErrorState();
+    }
+  }
+
   get value() {
-    return this.input?.value || "";
+    return this.field?.value || "";
   }
 
   set value(val) {
-    if (this.input) {
-      this.input.value = val;
+    if (this.field) {
+      this.field.value = val;
+      this.clearButton.classList.toggle("ui-input__clear--hidden", !val);
     }
   }
 }

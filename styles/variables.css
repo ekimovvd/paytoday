@@ -2,6 +2,7 @@
   --font: "Montserrat", sans-serif;
 
   --white: #ffffff;
+  --white-600: #ffffff99;
   --error: #eb5757;
   --green: #2a9604;
   --green-light: #c1ef0929;
@@ -13,6 +14,7 @@
   --background-400: #f3f5fb;
   --background-secondary: #edf0f8;
   --accent-primary-default: #1876ee;
+  --accent-primary-hover: #1876eecc;
   --accent-primary-pressed: #0564dd;
   --strong-primary-hover: #6c7ca8;
 

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Акты</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="css/acts.css" />
+  </head>
+  <body>
+    <shared-header class="header"></shared-header>
+
+    <shared-sidebar class="sidebar"></shared-sidebar>
+
+    <shared-menu id="menu"></shared-menu>
+
+    <main class="acts-page">
+      <section class="acts-page__section">
+        <shared-profile class="acts-page__profile"> Акты </shared-profile>
+
+        <div class="acts-page__tabs">
+          <button class="acts-page__tab acts-page__tab--active">
+            Междунородные
+          </button>
+
+          <button class="acts-page__tab">Рублевые</button>
+        </div>
+
+        <div class="acts-page__group">
+          <div class="acts-page__filters">
+            <shared-search class="acts-page__filters-search"></shared-search>
+
+            <shared-date
+              class="acts-page__filters-date"
+              view="acts"
+            ></shared-date>
+          </div>
+
+          <div class="acts-page__result">
+            <h4 class="acts-page__result-title">Итог</h4>
+
+            <div class="acts-page__result-blocks">
+              <div class="acts-page__result-block">
+                <p class="acts-page__result-label">Комиссия за эквайринг</p>
+
+                <h4 class="acts-page__result-amount">10 000₽</h4>
+              </div>
+
+              <div class="acts-page__result-block">
+                <p class="acts-page__result-label">Сумма к выплате</p>
+
+                <div class="acts-page__result-group">
+                  <h4 class="acts-page__result-amount">100 000₽</h4>
+
+                  <p class="acts-page__result-divider">/</p>
+
+                  <h4
+                    class="acts-page__result-amount acts-page__result-amount--small"
+                  >
+                    $1 000
+                  </h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="acts-page__wrapper">
+          <table class="acts-page__table">
+            <thead class="acts-page__table-head">
+              <tr>
+                <th class="acts-page__table-th">
+                  <div class="acts-page__table-th-group">
+                    № акта
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="acts-page__table-th">
+                  <div class="acts-page__table-th-group">
+                    Дата создания
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="acts-page__table-th">
+                  <div class="acts-page__table-th-group">
+                    Сумма ₽
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="acts-page__table-th">
+                  <div class="acts-page__table-th-group">
+                    Сумма $
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="acts-page__table-th">
+                  <div class="acts-page__table-th-group">
+                    Комиссия за эквайринг
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="acts-page__table-th">Сумма к выплате ₽</th>
+
+                <th class="acts-page__table-th">Сумма к выплате $</th>
+
+                <th class="acts-page__table-th">Статус</th>
+              </tr>
+            </thead>
+
+            <tbody data-id="acts-page-table"></tbody>
+          </table>
+        </div>
+
+        <div class="acts-page__footer">
+          <shared-pagination data-id="acts-page-pagination"></shared-pagination>
+        </div>
+      </section>
+    </main>
+  </body>
+
+  <script type="module" src="js/acts.js"></script>
+</html>

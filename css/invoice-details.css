@@ -71,28 +71,6 @@
   font-weight: 500;
 }
 
-.invoice-details-page__item-status {
-  display: flex;
-  align-items: center;
-  column-gap: 4px;
-  font-weight: 500;
-  font-size: 14px;
-  line-height: 24px;
-  border-radius: 20px;
-  padding: 2px 12px 3px 9px;
-  margin-right: auto;
-}
-
-.invoice-details-page__item-status--pending {
-  background: var(--background-400);
-  color: var(--secondary);
-}
-
-.invoice-details-page__item-status--paid {
-  background: var(--green-light);
-  color: var(--green);
-}
-
 .invoice-details-page__actions {
   display: none;
   column-gap: 60px;
