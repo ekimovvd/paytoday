@@ -21,14 +21,12 @@ export class SharedStatus extends HTMLElement {
 
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;
-    const template = templateDiv.querySelector("template");
 
-    if (!template) {
-      console.error("Template not found in component.html");
-
+    if (!templateDiv) {
       return;
     }
 
+    const template = templateDiv.querySelector("template");
     const templateContent = template.content.cloneNode(true);
 
     const style = document.createElement("style");
