@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Акт</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="css/partner-program.css" />
+  </head>
+  <body>
+    <shared-header class="header"></shared-header>
+
+    <shared-sidebar class="sidebar"></shared-sidebar>
+
+    <shared-menu id="menu"></shared-menu>
+
+    <main class="partner-program-page">
+      <section class="partner-program-page__section">
+        <shared-profile class="partner-program-page__profile">
+          Партнерская программа
+        </shared-profile>
+
+        <div class="partner-program-page__cards">
+          <div class="partner-program-page__card">
+            <div class="partner-program-page__card-header">
+              <p class="partner-program-page__card-label">Баланс партнера</p>
+
+              <button class="partner-program-page__card-button">Вывести</button>
+            </div>
+
+            <h2 class="partner-program-page__card-amount">10 000₽</h2>
+          </div>
+
+          <div
+            class="partner-program-page__card partner-program-page__card--secondary"
+          >
+            <div class="partner-program-page__card-group">
+              <h4 class="partner-program-page__card-title">
+                Как работает Партнерская программа
+              </h4>
+
+              <button class="partner-program-page__card-button">
+                Подробнее
+              </button>
+            </div>
+
+            <img src="assets/icons/partner-program.svg" alt="partner-program" />
+          </div>
+        </div>
+
+        <div class="partner-program-page__tabs">
+          <button class="partner-program-page__tab">Промокоды</button>
+
+          <button
+            class="partner-program-page__tab partner-program-page__tab--active"
+          >
+            Акты
+          </button>
+        </div>
+
+        <div class="partner-program-page__codes">
+          <div class="partner-program-page__codes-block">
+            <h5 class="partner-program-page__codes-title">Ваши промокоды</h5>
+
+            <span class="partner-program-page__codes-label">
+              Создайте уникальные промокоды для привлечения клиентов в наш
+              сервис. <strong>Вы будете зарабатывать 5%</strong> от размера
+              комиссии Paytoday со всех оплат привлеченных клиентов.
+            </span>
+
+            <span class="partner-program-page__codes-description">
+              Создавая промокод, вы принимаете условия
+              <a href="#" target="_blank">Оферты для Партнеров</a>.
+            </span>
+
+            <button class="partner-program-page__codes-button">
+              + Создать промокод
+            </button>
+          </div>
+
+          <div class="partner-program-page__codes-wrapper">
+            <table class="partner-program-page__table">
+              <thead class="partner-program-page__table-head">
+                <tr>
+                  <th class="partner-program-page__table-th">Промокод</th>
+
+                  <th class="partner-program-page__table-th">
+                    Кол-во активаций
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody data-id="partner-program-page-codes-table"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+
+  <script type="module" src="js/partner-program.js"></script>
+</html>
