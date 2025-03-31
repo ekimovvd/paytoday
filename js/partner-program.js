@@ -4,6 +4,7 @@ import { formatAmount, formatDateShort, formatTimeSeconds } from "./utils.js";
 
 let sortedColumn = "createdAt";
 let sortOrder = "asc";
+let promoCode = "";
 
 const sortActs = (acts) => {
   return acts.slice().sort((a, b) => {
@@ -43,6 +44,14 @@ document.addEventListener("DOMContentLoaded", () => {
   );
   const modal = document.querySelector("[data-id='partner-program-modal']");
 
+  const modalCreate = document.querySelector(".partner-program-page__create");
+  const modalCreateButton = document.querySelector(
+    ".partner-program-page__create-button"
+  );
+  const modalCreateInput = document.querySelector(
+    ".partner-program-page__create-input"
+  );
+
   withdrawButton.addEventListener("click", () => {
     alert("Вывод средств временно недоступен");
   });
@@ -52,7 +61,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   createPromoButton.addEventListener("click", () => {
-    alert("Создание промокода");
+    modalCreate.open();
+  });
+
+  modalCreateButton.addEventListener("click", () => {
+    modalCreate.close();
+  });
+
+  modalCreateInput.addEventListener("update", (event) => {
+    promoCode = event.detail;
   });
 
   tabs.forEach((tab) => {
