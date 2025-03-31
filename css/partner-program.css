@@ -93,6 +93,7 @@
   color: var(--secondary);
   border-bottom: 4px solid transparent;
   padding-bottom: 16px;
+  transition: color var(--transition), border-color var(--transition);
 }
 
 .partner-program-page__tab--active {
