@@ -10,8 +10,8 @@ export class SharedStatus extends HTMLElement {
 
   async connectedCallback() {
     const [htmlRes, cssRes] = await Promise.all([
-      fetch("/components/shared/status/component.html"),
-      fetch("/components/shared/status/component.css"),
+      fetch("./components/shared/status/component.html"),
+      fetch("./components/shared/status/component.css"),
     ]);
 
     const [htmlText, cssText] = await Promise.all([
