@@ -219,6 +219,6 @@ th:last-child {
   color: var(--accent-primary-default);
 }
 
-tr {
+.partner-program-page__table-tr {
   border-bottom: 1px solid var(--background-400);
 }

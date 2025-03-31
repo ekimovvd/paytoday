@@ -182,7 +182,7 @@ th:last-child {
   color: var(--accent-primary-default);
 }
 
-tr {
+.acts-page__table-tr {
   border-bottom: 1px solid var(--background-400);
 }
 
