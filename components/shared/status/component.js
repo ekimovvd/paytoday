@@ -10,8 +10,8 @@ export class SharedStatus extends HTMLElement {
 
   async connectedCallback() {
     const [htmlRes, cssRes] = await Promise.all([
-      fetch("/components/shared/status/component.html"),
-      fetch("/components/shared/status/component.css"),
+      fetch("./components/shared/status/component.html"),
+      fetch("./components/shared/status/component.css"),
     ]);
 
     const [htmlText, cssText] = await Promise.all([
@@ -20,19 +20,10 @@ export class SharedStatus extends HTMLElement {
     ]);
 
     const templateDiv = document.createElement("div");
-    console.log(templateDiv);
-
     templateDiv.innerHTML = htmlText;
-
-    console.log(templateDiv, htmlText);
-
-    // if (!templateDiv) {
-    //   return;
-    // }
-
-    const template = templateDiv.querySelector("template");
-    const templateContent = template.content.cloneNode(true);
-    console.log(templateDiv, template, templateContent, htmlText);
+    const templateContent = templateDiv
+      .querySelector("template")
+      .content.cloneNode(true);
 
     const style = document.createElement("style");
     style.textContent = cssText;
@@ -44,7 +35,7 @@ export class SharedStatus extends HTMLElement {
     this.textElement = this.shadowRoot.querySelector(".shared-status__text");
     this.container = this.shadowRoot.querySelector(".shared-status");
 
-    // this.updateStatus();
+    this.updateStatus();
   }
 
   updateStatus() {
