@@ -20,7 +20,11 @@ export class SharedStatus extends HTMLElement {
     ]);
 
     const templateDiv = document.createElement("div");
+    console.log(templateDiv);
+
     templateDiv.innerHTML = htmlText;
+
+    console.log(templateDiv, htmlText);
 
     // if (!templateDiv) {
     //   return;
