@@ -22,12 +22,13 @@ export class SharedStatus extends HTMLElement {
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;
 
-    if (!templateDiv) {
-      return;
-    }
+    // if (!templateDiv) {
+    //   return;
+    // }
 
     const template = templateDiv.querySelector("template");
     const templateContent = template.content.cloneNode(true);
+    console.log(templateDiv, template, templateContent, htmlText);
 
     const style = document.createElement("style");
     style.textContent = cssText;
@@ -39,7 +40,7 @@ export class SharedStatus extends HTMLElement {
     this.textElement = this.shadowRoot.querySelector(".shared-status__text");
     this.container = this.shadowRoot.querySelector(".shared-status");
 
-    this.updateStatus();
+    // this.updateStatus();
   }
 
   updateStatus() {
