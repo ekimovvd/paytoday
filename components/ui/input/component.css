@@ -68,7 +68,12 @@
   color: var(--error);
 }
 
-.ui-input__clear {
+.ui-input__field--description {
+  padding-right: 54px;
+}
+
+.ui-input__clear,
+.ui-input__description {
   position: absolute;
   top: 50%;
   right: 17px;
@@ -98,4 +103,19 @@
 
 .ui-input__error--hidden {
   display: none;
+}
+
+.ui-input__description {
+  display: none;
+  margin: 0;
+  right: 24px;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--secondary);
+}
+
+.ui-input__description--visible {
+  display: block;
 }

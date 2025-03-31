@@ -224,10 +224,15 @@ th:last-child {
   border-bottom: 1px solid var(--background-400);
 }
 
-.partner-program-page__create-form {
+.partner-program-page__create-form,
+.partner-program-page__output-form {
   padding-top: 16px;
   display: flex;
   flex-direction: column;
+}
+
+.partner-program-page__output-form {
+  padding-top: 24px;
 }
 
 .partner-program-page__create-label {
@@ -238,7 +243,8 @@ th:last-child {
   color: var(--strong-primary-default);
 }
 
-.partner-program-page__create-button {
+.partner-program-page__create-button,
+.partner-program-page__output-button {
   margin-left: auto;
   margin-top: 40px;
 }

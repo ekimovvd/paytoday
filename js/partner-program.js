@@ -5,6 +5,7 @@ import { formatAmount, formatDateShort, formatTimeSeconds } from "./utils.js";
 let sortedColumn = "createdAt";
 let sortOrder = "asc";
 let promoCode = "";
+let outputAmount = "";
 
 const sortActs = (acts) => {
   return acts.slice().sort((a, b) => {
@@ -52,8 +53,16 @@ document.addEventListener("DOMContentLoaded", () => {
     ".partner-program-page__create-input"
   );
 
+  const modalOutput = document.querySelector(".partner-program-page__output");
+  const modalOutputButton = document.querySelector(
+    ".partner-program-page__output-button"
+  );
+  const modalOutputInput = document.querySelector(
+    ".partner-program-page__output-input"
+  );
+
   withdrawButton.addEventListener("click", () => {
-    alert("Вывод средств временно недоступен");
+    modalOutput.open();
   });
 
   detailsButton.addEventListener("click", () => {
@@ -70,6 +79,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
   modalCreateInput.addEventListener("update", (event) => {
     promoCode = event.detail;
+  });
+
+  modalOutputButton.addEventListener("click", () => {
+    modalOutput.close();
+  });
+
+  modalOutputInput.addEventListener("update", (event) => {
+    outputAmount = event.detail;
   });
 
   tabs.forEach((tab) => {
