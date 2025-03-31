@@ -41,13 +41,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const actsTableBody = document.querySelector(
     "[data-id='partner-program-page-table']"
   );
+  const modal = document.querySelector("[data-id='partner-program-modal']");
 
   withdrawButton.addEventListener("click", () => {
     alert("Вывод средств временно недоступен");
   });
 
   detailsButton.addEventListener("click", () => {
-    alert("Подробности о программе");
+    modal.open();
   });
 
   createPromoButton.addEventListener("click", () => {

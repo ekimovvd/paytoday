@@ -18,6 +18,7 @@ import "../components/shared/month/component.js";
 import "../components/shared/status/component.js";
 import "../components/shared/profile/component.js";
 import "../components/shared/date/component.js";
+import "../components/shared/partner-program/component.js";
 
 import "../components/ui/button/component.js";
 import "../components/ui/input/component.js";
