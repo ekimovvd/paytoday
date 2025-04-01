@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Онлайн курсы</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="stylesheet" href="css/courses.css" />
+  </head>
+  <body>
+    <shared-header class="header"></shared-header>
+
+    <shared-sidebar class="sidebar"></shared-sidebar>
+
+    <shared-menu id="menu"></shared-menu>
+
+    <main class="courses-page">
+      <section class="courses-page__section">
+        <shared-profile class="courses-page__profile">
+          Онлайн курсы
+        </shared-profile>
+
+        <div class="courses-page__block">
+          <shared-search
+            placeholder="Поиск по названию, ссылке, дате создания"
+          ></shared-search>
+
+          <ui-button-plus></ui-button-plus>
+        </div>
+
+        <div class="courses-page__wrapper">
+          <table class="courses-page__table">
+            <thead class="courses-page__table-head">
+              <tr>
+                <th class="courses-page__table-th">Изображение</th>
+
+                <th class="courses-page__table-th">
+                  <div class="courses-page__table-th-group">
+                    Название
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="courses-page__table-th">
+                  <div class="courses-page__table-th-group">
+                    Цена
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="courses-page__table-th">
+                  <div class="courses-page__table-th-group">
+                    Подробная информация
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="courses-page__table-th">
+                  <div class="courses-page__table-th-group">
+                    Статус
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="courses-page__table-th">Ссылка</th>
+
+                <th class="courses-page__table-th">
+                  <div class="courses-page__table-th-group">
+                    Дата создания
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+
+            <tbody data-id="courses-page-table"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+
+  <script type="module" src="js/courses.js"></script>
+</html>
