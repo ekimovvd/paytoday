@@ -43,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   heading.innerHTML = `Информация о счете на оплату №${invoice.invoiceId}`;
 
+  const invoiceAmount = invoice.amountRub;
+  amountLabel.textContent = `максимум ${invoiceAmount}₽`;
+
   if (statusElement) {
     statusElement.setAttribute("status", invoice.status);
   }
@@ -88,6 +91,10 @@ document.addEventListener("DOMContentLoaded", () => {
         break;
       case "creationDate":
         element.textContent = `${formatDate(value)} ${formatTime(value)}`;
+
+        break;
+      case "amountRub":
+        element.textContent = `${value}₽`;
 
         break;
       default:
@@ -151,10 +158,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   amountReturn.addEventListener("click", () => {
-    console.log("CLICK");
+    amountInput.value = invoiceAmount;
+    amount = invoiceAmount;
   });
 
   amountInput.addEventListener("input", () => {
+    if (parseFloat(amountInput.value) > invoiceAmount) {
+      amountInput.value = invoiceAmount;
+    }
+
     amount = amountInput.value;
   });
 
