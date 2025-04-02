@@ -20,6 +20,7 @@ import "../components/shared/profile/component.js";
 import "../components/shared/date/component.js";
 import "../components/shared/partner-program/component.js";
 import "../components/shared/alert/component.js";
+import "../components/shared/replicate/component.js";
 
 import "../components/ui/button/component.js";
 import "../components/ui/input/component.js";

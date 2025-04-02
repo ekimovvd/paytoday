@@ -18,6 +18,7 @@
   padding: 32px;
   background: var(--background-400);
   border-radius: 20px;
+  position: relative;
 }
 
 .partner-program-page__card--secondary {
@@ -26,19 +27,13 @@
   justify-content: space-between;
 }
 
-.partner-program-page__card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-
 .partner-program-page__card-label {
   font-size: 14px;
   line-height: 24px;
   font-weight: 500;
   color: var(--secondary);
   text-transform: uppercase;
+  margin-bottom: 16px;
 }
 
 .partner-program-page__card-button {
@@ -52,6 +47,12 @@
   font-size: 16px;
   line-height: 100%;
   color: var(--accent-primary-default);
+}
+
+.partner-program-page__card-button--output {
+  position: absolute;
+  top: 32px;
+  right: 32px;
 }
 
 .partner-program-page__card-amount {
@@ -156,10 +157,18 @@
   text-transform: uppercase;
 }
 
+.partner-program-page__acts {
+  overflow: auto;
+}
+
 .partner-program-page__table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+.partner-program-page__table--acts {
+  min-width: 1440px;
 }
 
 .partner-program-page__table-th {
@@ -224,6 +233,19 @@ th:last-child {
   border-bottom: 1px solid var(--background-400);
 }
 
+.partner-program-page__table-group {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+}
+
+.partner-program-page__table-code {
+  max-width: 292px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .partner-program-page__create-form,
 .partner-program-page__output-form {
   padding-top: 16px;
@@ -247,4 +269,101 @@ th:last-child {
 .partner-program-page__output-button {
   margin-left: auto;
   margin-top: 40px;
+}
+
+@media (max-width: 1439px) {
+  .partner-program-page {
+    padding: 24px;
+  }
+
+  .partner-program-page__profile {
+    margin-bottom: 14px;
+  }
+
+  .partner-program-page__cards {
+    column-gap: 26px;
+  }
+
+  .partner-program-page__card {
+    padding: 24px;
+  }
+
+  .partner-program-page__card-label {
+    text-transform: none;
+    margin-bottom: 12px;
+  }
+
+  .partner-program-page__card-amount {
+    font-size: 32px;
+    margin-bottom: 24px;
+  }
+
+  .partner-program-page__card-button--output {
+    position: relative;
+    top: 0;
+    right: 0;
+  }
+
+  .partner-program-page__card-icon {
+    display: none;
+  }
+
+  .partner-program-page__card-title {
+    font-size: 24px;
+    line-height: 100%;
+    margin-bottom: 12px;
+  }
+
+  .partner-program-page__codes {
+    grid-template-columns: 100%;
+    row-gap: 40px;
+  }
+}
+
+@media (max-width: 743px) {
+  .partner-program-page {
+    padding: 13px 16px 32px 16px;
+  }
+
+  .partner-program-page__profile {
+    margin-bottom: 24px;
+  }
+
+  .partner-program-page__cards {
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+  }
+
+  .partner-program-page__card {
+    padding: 16px 24px;
+  }
+
+  .partner-program-page__card-amount {
+    font-size: 24px;
+  }
+
+  .partner-program-page__table-code {
+    max-width: 100px;
+  }
+
+  .partner-program-page__table-th--space {
+    white-space: normal;
+  }
+
+  .partner-program-page__codes-description {
+    margin-bottom: 16px;
+  }
+
+  .partner-program-page__output-form {
+    padding-top: 54px;
+  }
+
+  .partner-program-page__output-button,
+  .partner-program-page__create-button {
+    margin: 24px 0 0 0;
+  }
+
+  .partner-program-page__create-form {
+    padding-top: 10px;
+  }
 }

@@ -97,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
       tab.classList.add("partner-program-page__tab--active");
 
       if (tab.textContent.trim() === "Промокоды") {
-        codesSection.style.display = "flex";
+        codesSection.style.display = "grid";
         actsSection.style.display = "none";
       } else {
         codesSection.style.display = "none";
@@ -110,7 +110,12 @@ document.addEventListener("DOMContentLoaded", () => {
     .map(
       (promo) => `
       <tr class="partner-program-page__table-tr">
-        <td class="partner-program-page__table-td">${promo.code}</td>
+        <td class="partner-program-page__table-td">
+          <div class="partner-program-page__table-group">
+            <span class="partner-program-page__table-code">${promo.code}</span>
+            <shared-replicate copy-text="${promo.code}"></shared-replicate>
+          </div>
+        </td>
         <td class="partner-program-page__table-td">${promo.activations}</td>
       </tr>
     `
@@ -158,6 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderActs();
 
-  codesSection.style.display = "flex";
+  codesSection.style.display = "grid";
   actsSection.style.display = "none";
 });
