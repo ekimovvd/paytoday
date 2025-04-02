@@ -18,7 +18,7 @@
 
     <shared-alert
       class="invoice-details-page__email"
-      heading="Ведите email"
+      heading="Введите email"
       data-id="email-alert"
     >
       <div class="invoice-details-page__email-form">
@@ -34,6 +34,44 @@
         >
           Отправить
         </ui-button>
+      </div>
+    </shared-alert>
+
+    <shared-alert
+      class="invoice-details-page__amount"
+      heading="Введите сумму"
+      data-id="amount-alert"
+    >
+      <div class="invoice-details-page__amount-form">
+        <div class="invoice-details-page__amount-field" data-id="amount-field">
+          <input
+            class="invoice-details-page__amount-input"
+            type="text"
+            data-id="amount-input"
+          />
+
+          <p
+            class="invoice-details-page__amount-label"
+            data-id="amount-label"
+          ></p>
+        </div>
+
+        <div class="invoice-details-page__amount-group">
+          <button
+            class="invoice-details-page__amount-all"
+            data-id="amount-return"
+          >
+            Вернуть всю сумму
+          </button>
+
+          <ui-button
+            data-id="amount-button"
+            class="invoice-details-page__amount-button"
+            isfull
+          >
+            ВЕРНУТЬ
+          </ui-button>
+        </div>
       </div>
     </shared-alert>
 

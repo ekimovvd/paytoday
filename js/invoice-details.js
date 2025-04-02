@@ -3,6 +3,7 @@ import { formatDate, formatTime, getQueryParams } from "./utils.js";
 import data from "../static-data/invoice-details.js";
 
 let email = "";
+let amount = "";
 
 document.addEventListener("DOMContentLoaded", () => {
   function getInvoiceIdFromHash() {
@@ -28,9 +29,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const actions = getElement("actions");
   const returnElement = getElement("return");
   const mailElement = getElement("mail");
+
   const emailAlert = getElement("email-alert");
   const emailInput = getElement("email-input");
   const emailButton = getElement("email-button");
+
+  const amountAlert = getElement("amount-alert");
+  const amountField = getElement("amount-field");
+  const amountInput = getElement("amount-input");
+  const amountButton = getElement("amount-button");
+  const amountReturn = getElement("amount-return");
+  const amountLabel = getElement("amount-label");
 
   heading.innerHTML = `Информация о счете на оплату №${invoice.invoiceId}`;
 
@@ -98,12 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   returnElement?.addEventListener("click", () => {
-    openModal(
-      "return",
-      "assets/icons/return.svg",
-      "Возврат осуществлен",
-      "Отлично"
-    );
+    amountAlert.open();
   });
 
   mailElement?.addEventListener("click", () => {
@@ -133,5 +137,40 @@ document.addEventListener("DOMContentLoaded", () => {
 
   emailInput.addEventListener("update", (event) => {
     email = event.detail;
+  });
+
+  amountButton.addEventListener("click", () => {
+    amountAlert.close();
+
+    openModal(
+      "return",
+      "assets/icons/return.svg",
+      "Возврат осуществлен",
+      "Отлично"
+    );
+  });
+
+  amountReturn.addEventListener("click", () => {
+    console.log("CLICK");
+  });
+
+  amountInput.addEventListener("input", () => {
+    amount = amountInput.value;
+  });
+
+  amountInput.addEventListener("focus", () => {
+    amountField.classList.add("invoice-details-page__amount-field--focus");
+  });
+
+  amountInput.addEventListener("blur", () => {
+    amountField.classList.remove("invoice-details-page__amount-field--focus");
+  });
+
+  amountInput.addEventListener("mouseenter", () => {
+    amountField.classList.add("invoice-details-page__amount-field--hover");
+  });
+
+  amountInput.addEventListener("mouseleave", () => {
+    amountField.classList.remove("invoice-details-page__amount-field--hover");
   });
 });
