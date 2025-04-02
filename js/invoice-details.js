@@ -2,6 +2,8 @@ import "./components.js";
 import { formatDate, formatTime, getQueryParams } from "./utils.js";
 import data from "../static-data/invoice-details.js";
 
+let email = "";
+
 document.addEventListener("DOMContentLoaded", () => {
   function getInvoiceIdFromHash() {
     return getQueryParams().id;
@@ -26,6 +28,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const actions = getElement("actions");
   const returnElement = getElement("return");
   const mailElement = getElement("mail");
+  const emailAlert = getElement("email-alert");
+  const emailInput = getElement("email-input");
+  const emailButton = getElement("email-button");
 
   heading.innerHTML = `Информация о счете на оплату №${invoice.invoiceId}`;
 
@@ -102,12 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   mailElement?.addEventListener("click", () => {
-    openModal(
-      "mail",
-      "assets/icons/mail.svg",
-      "Письмо успешно отправлено",
-      "Отлично"
-    );
+    emailAlert.open();
   });
 
   function openModal(type, icon, title, confirmText, cancelText = "") {
@@ -119,4 +119,19 @@ document.addEventListener("DOMContentLoaded", () => {
       cancelText,
     });
   }
+
+  emailButton.addEventListener("click", () => {
+    emailAlert.close();
+
+    openModal(
+      "mail",
+      "assets/icons/mail.svg",
+      "Письмо успешно отправлено",
+      "Отлично"
+    );
+  });
+
+  emailInput.addEventListener("update", (event) => {
+    email = event.detail;
+  });
 });

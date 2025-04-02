@@ -112,6 +112,17 @@
   display: grid;
 }
 
+.invoice-details-page__email-form {
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+
+.invoice-details-page__email-button {
+  margin-left: auto;
+}
+
 @media (max-width: 1439px) {
   .invoice-details-page {
     padding: 24px 58px 60px 16px;
@@ -192,5 +203,9 @@
 
   .invoice-details-page__item--visible {
     display: grid;
+  }
+
+  .invoice-details-page__email-button {
+    margin-left: 0;
   }
 }
