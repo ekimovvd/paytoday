@@ -132,18 +132,32 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   emailButton.addEventListener("click", () => {
-    emailAlert.close();
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
-    openModal(
-      "mail",
-      "assets/icons/mail.svg",
-      "Письмо успешно отправлено",
-      "Отлично"
-    );
+    if (!email) {
+      emailInput.setAttribute("error", "Поле обязательно");
+    } else if (!emailPattern.test(email)) {
+      emailInput.setAttribute("error", "Неверный формат email");
+    } else {
+      emailInput.removeAttribute("error");
+
+      emailAlert.close();
+
+      openModal(
+        "mail",
+        "assets/icons/mail.svg",
+        "Письмо успешно отправлено",
+        "Отлично"
+      );
+    }
   });
 
   emailInput.addEventListener("update", (event) => {
     email = event.detail;
+
+    if (emailInput.hasAttribute("error")) {
+      emailInput.removeAttribute("error");
+    }
   });
 
   amountButton.addEventListener("click", () => {
