@@ -24,23 +24,40 @@
 
         <div class="course-page__wrapper">
           <div class="course-page__columns">
-            <ui-select placeholder="Курс" data-id="course-type">
-              <ui-option value="fixed">Курс с фиксированной ценой</ui-option>
+            <ui-select
+              placeholder="Курс с фиксированной ценой"
+              data-id="course-type"
+              no-required
+            >
+              <ui-option value="fixed" selected>
+                Курс с фиксированной ценой
+              </ui-option>
 
               <ui-option value="relative">Курс с несколькими ценами</ui-option>
             </ui-select>
           </div>
 
           <div class="course-page__columns">
-            <ui-input placeholder="Название EN*" data-id="amount-en"></ui-input>
+            <ui-input placeholder="Название EN*" data-id="name-en">
+              Введите название EN
+            </ui-input>
 
-            <ui-input placeholder="Название RU*" data-id="amount-ru"></ui-input>
+            <ui-input placeholder="Название RU*" data-id="name-ru">
+              Введите название RU
+            </ui-input>
           </div>
 
-          <div class="course-page__columns course-page__columns--relative">
-            <ui-input placeholder="Сумма (USD)*" data-id="name-en"></ui-input>
+          <div
+            class="course-page__columns course-page__columns--relative"
+            data-id="relative-price"
+          >
+            <ui-input placeholder="Сумма (USD)*" data-id="amount-en">
+              Введите сумму (USD)
+            </ui-input>
 
-            <ui-input placeholder="Сумма (RUB)*" data-id="name-ru"></ui-input>
+            <ui-input placeholder="Сумма (RUB)*" data-id="amount-ru">
+              Введите сумму (RUB)
+            </ui-input>
           </div>
 
           <div class="course-page__tariffs" data-id="tariffs">
@@ -52,35 +69,41 @@
                 <h4 class="course-page__tariffs-title">#1</h4>
 
                 <div class="course-page__columns">
-                  <ui-input
-                    placeholder="Цена (USD)*"
-                    data-id="price-en-0"
-                  ></ui-input>
+                  <ui-input placeholder="Цена (USD)*" data-id="price-en-0">
+                    Введите цену (USD)
+                  </ui-input>
 
-                  <ui-input
-                    placeholder="Цена (RUB)*"
-                    data-id="price-ru-0"
-                  ></ui-input>
+                  <ui-input placeholder="Цена (RUB)*" data-id="price-ru-0">
+                    Введите цену (RUB)
+                  </ui-input>
 
                   <ui-input
                     placeholder="Название тарифа EN*"
                     data-id="tariff-en-0"
-                  ></ui-input>
+                  >
+                    Введите название тарифа EN
+                  </ui-input>
 
                   <ui-input
                     placeholder="Название тарифа RU*"
                     data-id="tariff-ru-0"
-                  ></ui-input>
+                  >
+                    Введите название тарифа RU
+                  </ui-input>
 
                   <ui-input
                     placeholder="Описание тарифа EN*"
                     data-id="tariff-desc-en-0"
-                  ></ui-input>
+                  >
+                    Введите описание тарифа EN
+                  </ui-input>
 
                   <ui-input
                     placeholder="Описание тарифа RU*"
                     data-id="tariff-desc-ru-0"
-                  ></ui-input>
+                  >
+                    Введите описание тарифа RU
+                  </ui-input>
                 </div>
               </div>
             </div>

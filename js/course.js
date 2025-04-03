@@ -15,6 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const saveElement = getElement("save");
   const courseTypeElement = getElement("course-type");
 
+  const relativePriceSection = getElement("relative-price");
+  const tariffsSection = getElement("tariffs");
+
+  const amountEnElement = getElement("amount-en");
+  const amountRuElement = getElement("amount-ru");
+
   const data = {
     "name-en": "",
     "name-ru": "",
@@ -25,6 +31,32 @@ document.addEventListener("DOMContentLoaded", () => {
     tariffs: [],
     file: null,
   };
+
+  function displayedElements() {
+    if (data.courseType === "fixed") {
+      relativePriceSection.style.display = "grid";
+      tariffsSection.style.display = "none";
+    } else if (data.courseType === "relative") {
+      relativePriceSection.style.display = "none";
+      tariffsSection.style.display = "flex";
+    }
+  }
+
+  displayedElements();
+
+  courseTypeElement.addEventListener("update", (event) => {
+    data.courseType = event.detail;
+
+    displayedElements();
+  });
+
+  function validateField(element) {
+    if (!element.value.trim()) {
+      element.setAttribute("error", "textfield required");
+    } else {
+      element.removeAttribute("error");
+    }
+  }
 
   uploadBtnElement.addEventListener("click", () => {
     const fileInput = document.createElement("input");
@@ -73,6 +105,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   saveElement.addEventListener("click", () => {
+    validateField(nameEnElement);
+    validateField(nameRuElement);
+
+    if (data.courseType === "fixed") {
+      validateField(amountEnElement);
+      validateField(amountRuElement);
+    }
+
     data["name-en"] = nameEnElement.value;
     data["name-ru"] = nameRuElement.value;
     data.link = linkElement.value;
@@ -82,20 +122,27 @@ document.addEventListener("DOMContentLoaded", () => {
 
     data.tariffs = [];
     for (let i = 0; i < tariffIndex; i++) {
-      const priceUsd = getElement(`price-en-${i}`).value;
-      const priceRub = getElement(`price-ru-${i}`).value;
-      const tariffEn = getElement(`tariff-en-${i}`).value;
-      const tariffRu = getElement(`tariff-ru-${i}`).value;
-      const tariffDescEn = getElement(`tariff-desc-en-${i}`).value;
-      const tariffDescRu = getElement(`tariff-desc-ru-${i}`).value;
+      const priceUsd = getElement(`price-en-${i}`);
+      const priceRub = getElement(`price-ru-${i}`);
+      const tariffEn = getElement(`tariff-en-${i}`);
+      const tariffRu = getElement(`tariff-ru-${i}`);
+      const tariffDescEn = getElement(`tariff-desc-en-${i}`);
+      const tariffDescRu = getElement(`tariff-desc-ru-${i}`);
+
+      validateField(priceUsd);
+      validateField(priceRub);
+      validateField(tariffEn);
+      validateField(tariffRu);
+      validateField(tariffDescEn);
+      validateField(tariffDescRu);
 
       if (
-        priceUsd &&
-        priceRub &&
-        tariffEn &&
-        tariffRu &&
-        tariffDescEn &&
-        tariffDescRu
+        priceUsd.value &&
+        priceRub.value &&
+        tariffEn.value &&
+        tariffRu.value &&
+        tariffDescEn.value &&
+        tariffDescRu.value
       ) {
         data.tariffs.push({
           priceUsd,
