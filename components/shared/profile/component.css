@@ -46,6 +46,7 @@
   line-height: 100%;
   color: var(--strong-primary-default);
   margin: 0;
+  white-space: nowrap;
 }
 
 .shared-profile__amount-title--secondary {
@@ -79,6 +80,10 @@
 
   .shared-profile__balance {
     flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .shared-profile--partner-program {
     align-items: flex-start;
   }
 }
