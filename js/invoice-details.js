@@ -161,14 +161,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   amountButton.addEventListener("click", () => {
-    amountAlert.close();
+    if (amount) {
+      amountAlert.close();
 
-    openModal(
-      "return",
-      "assets/icons/return.svg",
-      "Возврат осуществлен",
-      "Отлично"
-    );
+      openModal(
+        "return",
+        "assets/icons/return.svg",
+        "Возврат осуществлен",
+        "Отлично"
+      );
+    }
   });
 
   amountReturn.addEventListener("click", () => {
