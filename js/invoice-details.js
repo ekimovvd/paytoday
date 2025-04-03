@@ -2,6 +2,9 @@ import "./components.js";
 import { formatDate, formatTime, getQueryParams } from "./utils.js";
 import data from "../static-data/invoice-details.js";
 
+let email = "";
+let amount = "";
+
 document.addEventListener("DOMContentLoaded", () => {
   function getInvoiceIdFromHash() {
     return getQueryParams().id;
@@ -27,7 +30,21 @@ document.addEventListener("DOMContentLoaded", () => {
   const returnElement = getElement("return");
   const mailElement = getElement("mail");
 
+  const emailAlert = getElement("email-alert");
+  const emailInput = getElement("email-input");
+  const emailButton = getElement("email-button");
+
+  const amountAlert = getElement("amount-alert");
+  const amountField = getElement("amount-field");
+  const amountInput = getElement("amount-input");
+  const amountButton = getElement("amount-button");
+  const amountReturn = getElement("amount-return");
+  const amountLabel = getElement("amount-label");
+
   heading.innerHTML = `Информация о счете на оплату №${invoice.invoiceId}`;
+
+  const invoiceAmount = invoice.amountRub;
+  amountLabel.textContent = `максимум ${invoiceAmount}₽`;
 
   if (statusElement) {
     statusElement.setAttribute("status", invoice.status);
@@ -76,6 +93,10 @@ document.addEventListener("DOMContentLoaded", () => {
         element.textContent = `${formatDate(value)} ${formatTime(value)}`;
 
         break;
+      case "amountRub":
+        element.textContent = `${value}₽`;
+
+        break;
       default:
         element.textContent = value;
         break;
@@ -93,21 +114,11 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   returnElement?.addEventListener("click", () => {
-    openModal(
-      "return",
-      "assets/icons/return.svg",
-      "Возврат осуществлен",
-      "Отлично"
-    );
+    amountAlert.open();
   });
 
   mailElement?.addEventListener("click", () => {
-    openModal(
-      "mail",
-      "assets/icons/mail.svg",
-      "Письмо успешно отправлено",
-      "Отлично"
-    );
+    emailAlert.open();
   });
 
   function openModal(type, icon, title, confirmText, cancelText = "") {
@@ -119,4 +130,73 @@ document.addEventListener("DOMContentLoaded", () => {
       cancelText,
     });
   }
+
+  emailButton.addEventListener("click", () => {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+
+    if (!email) {
+      emailInput.setAttribute("error", "Поле обязательно");
+    } else if (!emailPattern.test(email)) {
+      emailInput.setAttribute("error", "Неверный формат email");
+    } else {
+      emailInput.removeAttribute("error");
+
+      emailAlert.close();
+
+      openModal(
+        "mail",
+        "assets/icons/mail.svg",
+        "Письмо успешно отправлено",
+        "Отлично"
+      );
+    }
+  });
+
+  emailInput.addEventListener("update", (event) => {
+    email = event.detail;
+
+    if (emailInput.hasAttribute("error")) {
+      emailInput.removeAttribute("error");
+    }
+  });
+
+  amountButton.addEventListener("click", () => {
+    amountAlert.close();
+
+    openModal(
+      "return",
+      "assets/icons/return.svg",
+      "Возврат осуществлен",
+      "Отлично"
+    );
+  });
+
+  amountReturn.addEventListener("click", () => {
+    amountInput.value = invoiceAmount;
+    amount = invoiceAmount;
+  });
+
+  amountInput.addEventListener("input", () => {
+    if (parseFloat(amountInput.value) > invoiceAmount) {
+      amountInput.value = invoiceAmount;
+    }
+
+    amount = amountInput.value;
+  });
+
+  amountInput.addEventListener("focus", () => {
+    amountField.classList.add("invoice-details-page__amount-field--focus");
+  });
+
+  amountInput.addEventListener("blur", () => {
+    amountField.classList.remove("invoice-details-page__amount-field--focus");
+  });
+
+  amountInput.addEventListener("mouseenter", () => {
+    amountField.classList.add("invoice-details-page__amount-field--hover");
+  });
+
+  amountInput.addEventListener("mouseleave", () => {
+    amountField.classList.remove("invoice-details-page__amount-field--hover");
+  });
 });

@@ -2,6 +2,7 @@ export class UIInput extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+    this.isClearVisible = true;
   }
 
   async connectedCallback() {
@@ -29,6 +30,7 @@ export class UIInput extends HTMLElement {
     this.field = this.shadowRoot.querySelector(".ui-input__field");
     this.clearButton = this.shadowRoot.querySelector(".ui-input__clear");
     this.errorMessage = this.shadowRoot.querySelector(".ui-input__error");
+    this.description = this.shadowRoot.querySelector(".ui-input__description");
 
     if (this.hasAttribute("placeholder")) {
       this.field.placeholder = this.getAttribute("placeholder");
@@ -36,6 +38,14 @@ export class UIInput extends HTMLElement {
 
     if (this.hasAttribute("value")) {
       this.field.value = this.getAttribute("value");
+    }
+
+    if (this.hasAttribute("description")) {
+      this.isClearVisible = false;
+
+      this.field.classList.add("ui-input__field--description");
+      this.description.textContent = this.getAttribute("description");
+      this.description.classList.add("ui-input__description--visible");
     }
 
     this.updateErrorState();
@@ -49,10 +59,12 @@ export class UIInput extends HTMLElement {
         })
       );
 
-      this.clearButton.classList.toggle(
-        "ui-input__clear--hidden",
-        !this.field.value
-      );
+      if (this.isClearVisible) {
+        this.clearButton.classList.toggle(
+          "ui-input__clear--hidden",
+          !this.field.value
+        );
+      }
     });
 
     this.clearButton.addEventListener("click", () => {
