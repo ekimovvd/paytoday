@@ -50,9 +50,9 @@ export class UIOption extends HTMLElement {
 
   updateState() {
     if (this.hasAttribute("selected")) {
-      this.option.classList.add("ui-option--active");
+      this.option?.classList.add("ui-option--active");
     } else {
-      this.option.classList.remove("ui-option--active");
+      this.option?.classList.remove("ui-option--active");
     }
   }
 }
