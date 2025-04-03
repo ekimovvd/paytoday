@@ -37,10 +37,26 @@ export class UISelect extends HTMLElement {
     );
     this.dropdown = this.shadowRoot.querySelector(".ui-select__dropdown");
     this.toggleIcon = this.shadowRoot.querySelector(".ui-select__toggle-icon");
+    this.toggleEllipse = this.shadowRoot.querySelector(
+      ".ui-select__toggle-ellipse"
+    );
+    this.toggleRequired = this.shadowRoot.querySelector(
+      ".ui-select__toggle-required"
+    );
 
     this.toggleButton.addEventListener("click", () => this.toggleDropdown());
 
     this.updateOptions();
+
+    if (this.hasAttribute("placeholder")) {
+      this.toggleEllipse.textContent = this.getAttribute("placeholder");
+    } else {
+      this.toggleEllipse.textContent = "Выберите вид платежа";
+    }
+
+    if (this.hasAttribute("no-required")) {
+      this.toggleRequired.classList.add("ui-select__toggle-required--hidden");
+    }
   }
 
   toggleDropdown() {
