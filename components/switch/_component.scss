@@ -1,0 +1,31 @@
+.ui-switch {
+  width: 60px;
+  height: 32px;
+  background: var(--background);
+  border-radius: 34px;
+  position: relative;
+  cursor: pointer;
+  transition: background var(--transition), border var(--transition);
+  border: 1px solid var(--separator);
+}
+
+.ui-switch__toggle {
+  width: 28px;
+  height: 28px;
+  background: var(--white);
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  box-shadow: 0px 4px 12px 0px #606f9733;
+  transition: left var(--transition), background var(--transition);
+}
+
+.ui-switch--checked {
+  background: var(--accent-primary-default);
+  border-color: var(--accent-primary-pressed);
+}
+
+.ui-switch--checked .ui-switch__toggle {
+  left: 29px;
+}
