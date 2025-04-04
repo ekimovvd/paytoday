@@ -1,0 +1,249 @@
+.acts-page {
+  padding: 32px 30px 21px 118px;
+}
+
+.acts-page__tabs {
+  margin-top: 32px;
+  display: flex;
+  align-items: center;
+  column-gap: 32px;
+}
+
+.acts-page__tab {
+  background: none;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 100%;
+  font-weight: 600;
+  color: var(--secondary);
+  border-bottom: 4px solid transparent;
+  padding-bottom: 16px;
+  transition: all 0.3s ease;
+}
+
+.acts-page__tab--active {
+  border-bottom: 4px solid var(--accent-primary-default);
+  color: var(--strong-primary-default);
+}
+
+.acts-page__group {
+  display: flex;
+  flex-direction: column;
+  row-gap: 32px;
+  margin: 24px 0;
+}
+
+.acts-page__filters {
+  display: flex;
+  align-items: center;
+  column-gap: 40px;
+}
+
+.acts-page__filters-search {
+  width: 100%;
+}
+
+.acts-page__result {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--background-400);
+  border-radius: 20px;
+  padding: 24px 112px 24px 24px;
+}
+
+.acts-page__result-title {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+  color: var(--strong-primary-default);
+}
+
+.acts-page__result-blocks {
+  display: flex;
+  align-items: center;
+  column-gap: 98px;
+}
+
+.acts-page__result-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  row-gap: 12px;
+}
+
+.acts-page__result-label {
+  font-size: 14px;
+  line-height: 24px;
+  font-weight: 500;
+  color: var(--secondary);
+  text-transform: uppercase;
+}
+
+.acts-page__result-amount {
+  font-size: 32px;
+  line-height: 100%;
+  font-weight: 700;
+  color: var(--strong-primary-default);
+}
+
+.acts-page__result-group {
+  display: flex;
+  align-items: flex-end;
+  column-gap: 10px;
+}
+
+.acts-page__result-amount--small {
+  font-size: 24px;
+  line-height: 100%;
+}
+
+.acts-page__wrapper {
+  margin-bottom: 40px;
+}
+
+.acts-page__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.acts-page__table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  min-width: 1440px;
+}
+
+.acts-page__wrapper {
+  overflow-x: auto;
+  margin-bottom: 40px;
+}
+
+.acts-page__table-th {
+  padding: 16px 8px;
+  text-align: left;
+  background: var(--background-400);
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--secondary);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.acts-page__table-th:first-child {
+  padding-left: 24px;
+}
+
+.acts-page__table-th:last-child {
+  padding-right: 24px;
+}
+
+.acts-page__table-th-group {
+  display: flex;
+  align-items: center;
+  column-gap: 7px;
+  width: fit-content;
+}
+
+.acts-page__table-th:first-child {
+  border-radius: 30px 0 0 30px;
+}
+
+th:last-child {
+  border-radius: 0 30px 30px 0;
+}
+
+.acts-page__table-td {
+  padding: 24px 8px;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--strong-primary-default);
+  vertical-align: middle;
+}
+
+.acts-page__table-td:first-child {
+  padding-left: 24px;
+}
+
+.acts-page__table-td:last-child {
+  padding-right: 24px;
+}
+
+.acts-page__table-td--id {
+  color: var(--accent-primary-default);
+}
+
+.acts-page__table-tr {
+  border-bottom: 1px solid var(--background-400);
+}
+
+@media (max-width: 1439px) {
+  .acts-page {
+    padding: 24px;
+  }
+
+  .acts-page__filters {
+    column-gap: 38px;
+  }
+
+  .acts-page__result {
+    padding: 24px 32px 24px 24px;
+    justify-content: flex-start;
+    column-gap: 41px;
+  }
+
+  .acts-page__result-blocks {
+    column-gap: 0;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .acts-page__result-label {
+    text-transform: none;
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 743px) {
+  .acts-page {
+    padding: 13px 16px;
+  }
+
+  .acts-page__group {
+    flex-direction: column-reverse;
+    row-gap: 22px;
+  }
+
+  .acts-page__filters {
+    flex-direction: column;
+    align-items: normal;
+    row-gap: 24px;
+  }
+
+  .acts-page__result {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 32px;
+    padding: 16px 24px;
+  }
+
+  .acts-page__result-title {
+    font-size: 24px;
+    line-height: 24px;
+  }
+
+  .acts-page__result-blocks {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 32px;
+  }
+}
