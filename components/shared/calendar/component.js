@@ -1,3 +1,5 @@
+import cssText from "/src/styles/main.scss?inline";
+
 export class SharedCalendar extends HTMLElement {
   constructor() {
     super();
@@ -8,21 +10,17 @@ export class SharedCalendar extends HTMLElement {
   }
 
   async connectedCallback() {
-    const [htmlRes, cssRes] = await Promise.all([
-      fetch("./components/shared/calendar/component.html"),
-      fetch("./components/shared/calendar/component.css"),
-    ]);
+    const htmlRes = await fetch("./components/shared/calendar/component.html");
 
-    const [htmlText, cssText] = await Promise.all([
-      htmlRes.text(),
-      cssRes.text(),
-    ]);
+    const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;
+
     const templateContent = templateDiv
       .querySelector("template")
       .content.cloneNode(true);
+
     const style = document.createElement("style");
     style.textContent = cssText;
 

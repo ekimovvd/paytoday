@@ -1,3 +1,5 @@
+import cssText from "/src/styles/main.scss?inline";
+
 export class SharedStatus extends HTMLElement {
   static get observedAttributes() {
     return ["status"];
@@ -9,18 +11,12 @@ export class SharedStatus extends HTMLElement {
   }
 
   async connectedCallback() {
-    const [htmlRes, cssRes] = await Promise.all([
-      fetch("./components/shared/status/component.html"),
-      fetch("./components/shared/status/component.css"),
-    ]);
-
-    const [htmlText, cssText] = await Promise.all([
-      htmlRes.text(),
-      cssRes.text(),
-    ]);
+    const htmlRes = await fetch("./components/shared/status/component.html");
+    const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;
+
     const templateContent = templateDiv
       .querySelector("template")
       .content.cloneNode(true);
