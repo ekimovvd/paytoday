@@ -1,3 +1,5 @@
+import cssText from "/src/styles/main.scss?inline";
+
 export class UISelect extends HTMLElement {
   constructor() {
     super();
@@ -6,18 +8,12 @@ export class UISelect extends HTMLElement {
   }
 
   async connectedCallback() {
-    const [htmlRes, cssRes] = await Promise.all([
-      fetch("./components/ui/select/component.html"),
-      fetch("./components/ui/select/component.css"),
-    ]);
-
-    const [htmlText, cssText] = await Promise.all([
-      htmlRes.text(),
-      cssRes.text(),
-    ]);
+    const htmlRes = await fetch("./components/ui/select/component.html");
+    const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;
+
     const template = templateDiv.querySelector("template");
     const templateContent = template.content.cloneNode(true);
 
@@ -37,10 +33,26 @@ export class UISelect extends HTMLElement {
     );
     this.dropdown = this.shadowRoot.querySelector(".ui-select__dropdown");
     this.toggleIcon = this.shadowRoot.querySelector(".ui-select__toggle-icon");
+    this.toggleEllipse = this.shadowRoot.querySelector(
+      ".ui-select__toggle-ellipse"
+    );
+    this.toggleRequired = this.shadowRoot.querySelector(
+      ".ui-select__toggle-required"
+    );
 
     this.toggleButton.addEventListener("click", () => this.toggleDropdown());
 
     this.updateOptions();
+
+    if (this.hasAttribute("placeholder")) {
+      this.toggleEllipse.textContent = this.getAttribute("placeholder");
+    } else {
+      this.toggleEllipse.textContent = "Выберите вид платежа";
+    }
+
+    if (this.hasAttribute("no-required")) {
+      this.toggleRequired.classList.add("ui-select__toggle-required--hidden");
+    }
   }
 
   toggleDropdown() {

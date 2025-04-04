@@ -1,3 +1,5 @@
+import cssText from "/src/styles/main.scss?inline";
+
 export class SharedModal extends HTMLElement {
   constructor() {
     super();
@@ -6,29 +8,15 @@ export class SharedModal extends HTMLElement {
 
   async connectedCallback() {
     try {
-      const [htmlRes, cssRes] = await Promise.all([
-        fetch("./components/shared/modal/component.html"),
-        fetch("./components/shared/modal/component.css"),
-      ]);
-
-      if (!htmlRes.ok || !cssRes.ok) {
-        throw new Error("Ошибка загрузки файлов");
-      }
-
-      const [htmlText, cssText] = await Promise.all([
-        htmlRes.text(),
-        cssRes.text(),
-      ]);
+      const htmlRes = await fetch("./components/shared/modal/component.html");
+      const htmlText = await htmlRes.text();
 
       const templateDiv = document.createElement("div");
       templateDiv.innerHTML = htmlText;
+
       const template = templateDiv.querySelector("template");
-
-      if (!template) {
-        throw new Error("Шаблон не найден в HTML");
-      }
-
       const templateContent = template.content.cloneNode(true);
+
       const style = document.createElement("style");
       style.textContent = cssText;
 

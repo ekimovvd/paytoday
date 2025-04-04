@@ -1,3 +1,5 @@
+import cssText from "/src/styles/main.scss?inline";
+
 export class SharedReplicate extends HTMLElement {
   constructor() {
     super();
@@ -6,18 +8,13 @@ export class SharedReplicate extends HTMLElement {
   }
 
   async connectedCallback() {
-    const [htmlRes, cssRes] = await Promise.all([
-      fetch("./components/shared/replicate/component.html"),
-      fetch("./components/shared/replicate/component.css"),
-    ]);
+    const htmlRes = await fetch("./components/shared/replicate/component.html");
 
-    const [htmlText, cssText] = await Promise.all([
-      htmlRes.text(),
-      cssRes.text(),
-    ]);
+    const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;
+
     const template = templateDiv.querySelector("template");
     const templateContent = template.content.cloneNode(true);
 

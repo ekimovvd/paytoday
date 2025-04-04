@@ -47,6 +47,10 @@
   color: var(--error);
 }
 
+.ui-select__toggle-required--hidden {
+  display: none;
+}
+
 .ui-select__toggle-icon {
   transition: transform var(--transition);
 }

@@ -1,3 +1,5 @@
+import cssText from "/src/styles/main.scss?inline";
+
 export class SharedSearch extends HTMLElement {
   constructor() {
     super();
@@ -5,15 +7,9 @@ export class SharedSearch extends HTMLElement {
   }
 
   async connectedCallback() {
-    const [htmlRes, cssRes] = await Promise.all([
-      fetch("./components/shared/search/component.html"),
-      fetch("./components/shared/search/component.css"),
-    ]);
+    const htmlRes = await fetch("./components/shared/search/component.html");
 
-    const [htmlText, cssText] = await Promise.all([
-      htmlRes.text(),
-      cssRes.text(),
-    ]);
+    const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;

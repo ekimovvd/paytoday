@@ -1,3 +1,5 @@
+import cssText from "/src/styles/main.scss?inline";
+
 export class UIOption extends HTMLElement {
   constructor() {
     super();
@@ -5,18 +7,12 @@ export class UIOption extends HTMLElement {
   }
 
   async connectedCallback() {
-    const [htmlRes, cssRes] = await Promise.all([
-      fetch("./components/ui/option/component.html"),
-      fetch("./components/ui/option/component.css"),
-    ]);
-
-    const [htmlText, cssText] = await Promise.all([
-      htmlRes.text(),
-      cssRes.text(),
-    ]);
+    const htmlRes = await fetch("./components/ui/option/component.html");
+    const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;
+
     const template = templateDiv.querySelector("template");
     const templateContent = template.content.cloneNode(true);
 
@@ -50,9 +46,9 @@ export class UIOption extends HTMLElement {
 
   updateState() {
     if (this.hasAttribute("selected")) {
-      this.option.classList.add("ui-option--active");
+      this.option?.classList.add("ui-option--active");
     } else {
-      this.option.classList.remove("ui-option--active");
+      this.option?.classList.remove("ui-option--active");
     }
   }
 }

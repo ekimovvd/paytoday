@@ -4,8 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Добавить онлайн курс</title>
-    <link rel="stylesheet" href="styles/main.css" />
-    <link rel="stylesheet" href="css/course.css" />
   </head>
   <body>
     <shared-header class="header"></shared-header>
@@ -22,10 +20,154 @@
           <h1 class="course-page__header-title">Добавить онлайн курс</h1>
         </div>
 
-        <div class="course-page__wrapper">wrapper</div>
+        <div class="course-page__wrapper">
+          <div class="course-page__columns">
+            <ui-select
+              placeholder="Курс с фиксированной ценой"
+              data-id="course-type"
+              no-required
+            >
+              <ui-option value="fixed" selected>
+                Курс с фиксированной ценой
+              </ui-option>
+
+              <ui-option value="relative">Курс с несколькими ценами</ui-option>
+            </ui-select>
+          </div>
+
+          <div class="course-page__columns">
+            <ui-input placeholder="Название EN*" data-id="name-en">
+              Введите название EN
+            </ui-input>
+
+            <ui-input placeholder="Название RU*" data-id="name-ru">
+              Введите название RU
+            </ui-input>
+          </div>
+
+          <div
+            class="course-page__columns course-page__columns--relative"
+            data-id="relative-price"
+          >
+            <ui-input placeholder="Сумма (USD)*" data-id="amount-en">
+              Введите сумму (USD)
+            </ui-input>
+
+            <ui-input placeholder="Сумма (RUB)*" data-id="amount-ru">
+              Введите сумму (RUB)
+            </ui-input>
+          </div>
+
+          <div class="course-page__tariffs" data-id="tariffs">
+            <div
+              class="course-page__tariffs-container"
+              data-id="tariffs-container"
+            >
+              <div class="course-page__tariffs-section">
+                <h4 class="course-page__tariffs-title">#1</h4>
+
+                <div class="course-page__columns">
+                  <ui-input placeholder="Цена (USD)*" data-id="price-en-0">
+                    Введите цену (USD)
+                  </ui-input>
+
+                  <ui-input placeholder="Цена (RUB)*" data-id="price-ru-0">
+                    Введите цену (RUB)
+                  </ui-input>
+
+                  <ui-input
+                    placeholder="Название тарифа EN*"
+                    data-id="tariff-en-0"
+                  >
+                    Введите название тарифа EN
+                  </ui-input>
+
+                  <ui-input
+                    placeholder="Название тарифа RU*"
+                    data-id="tariff-ru-0"
+                  >
+                    Введите название тарифа RU
+                  </ui-input>
+
+                  <ui-input
+                    placeholder="Описание тарифа EN*"
+                    data-id="tariff-desc-en-0"
+                  >
+                    Введите описание тарифа EN
+                  </ui-input>
+
+                  <ui-input
+                    placeholder="Описание тарифа RU*"
+                    data-id="tariff-desc-ru-0"
+                  >
+                    Введите описание тарифа RU
+                  </ui-input>
+                </div>
+              </div>
+            </div>
+
+            <ui-button view="outline" data-id="add-tariff">
+              + Добавить
+            </ui-button>
+          </div>
+
+          <div class="course-page__columns">
+            <ui-input
+              placeholder="Ссылка на подробную информацию о курсе"
+              data-id="link"
+            ></ui-input>
+
+            <div></div>
+
+            <ui-select placeholder="Статус" data-id="status" no-required>
+              <ui-option value="active">Активен</ui-option>
+
+              <ui-option value="not-active">Не активен</ui-option>
+            </ui-select>
+          </div>
+
+          <div class="course-page__columns">
+            <div class="course-page__upload">
+              <div class="course-page__upload-group">
+                <h5 class="course-page__upload-title">Изображение</h5>
+
+                <p class="course-page__upload-label">
+                  Весь текст на изображении должен быть на английском языке
+                </p>
+              </div>
+
+              <div class="course-page__upload-file">
+                <ui-button view="outline" data-id="upload-btn">
+                  Выберите файл
+                </ui-button>
+
+                <p class="course-page__upload-name" data-id="upload-name">
+                  Файл не загружен
+                </p>
+              </div>
+            </div>
+
+            <div></div>
+          </div>
+
+          <div class="course-page__columns">
+            <ui-textarea
+              placeholder="Описание EN"
+              data-id="description-en"
+            ></ui-textarea>
+
+            <ui-textarea
+              placeholder="Описание RU"
+              data-id="description-ru"
+            ></ui-textarea>
+          </div>
+
+          <ui-button data-id="save">СОХРАНИТЬ</ui-button>
+        </div>
       </section>
     </main>
-  </body>
 
-  <script type="module" src="js/course.js"></script>
+    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="js/course.js"></script>
+  </body>
 </html>
