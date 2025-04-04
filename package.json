@@ -3,16 +3,18 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "dev": "live-server",
-    "predeploy": "rm -rf dist && mkdir dist && cp -r * dist",
-    "deploy": "gh-pages -d dist"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "gh-pages": "^6.3.0",
-    "live-server": "^1.2.2"
+    "live-server": "^1.2.2",
+    "sass": "^1.86.3",
+    "vite": "^6.2.5"
   },
   "homepage": "https://github.com/ekimovvd/paytoday"
 }

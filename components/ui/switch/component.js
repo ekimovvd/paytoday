@@ -1,3 +1,5 @@
+import cssText from "/src/styles/main.scss?inline";
+
 export class UISwitch extends HTMLElement {
   constructor() {
     super();
@@ -5,18 +7,12 @@ export class UISwitch extends HTMLElement {
   }
 
   async connectedCallback() {
-    const [htmlRes, cssRes] = await Promise.all([
-      fetch("./components/ui/switch/component.html"),
-      fetch("./components/ui/switch/component.css"),
-    ]);
-
-    const [htmlText, cssText] = await Promise.all([
-      htmlRes.text(),
-      cssRes.text(),
-    ]);
+    const htmlRes = await fetch("./components/ui/switch/component.html");
+    const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;
+
     const template = templateDiv.querySelector("template");
     const templateContent = template.content.cloneNode(true);
 

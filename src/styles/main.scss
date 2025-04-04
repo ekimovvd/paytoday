@@ -1,5 +1,17 @@
-@import "variables.css";
-@import "fonts.css";
+@use './_variables';
+@use './_fonts';
+
+@use './pages/_act';
+@use './pages/_acts';
+@use './pages/_course';
+@use './pages/_courses';
+@use './pages/_index';
+@use './pages/_invoice-details';
+@use './pages/_invoice';
+@use './pages/_partner-program';
+@use './pages/_payment';
+
+@use './components/ui';
 
 * {
   box-sizing: border-box;

@@ -1,3 +1,5 @@
+import cssText from "/src/styles/main.scss?inline";
+
 export class UIRadio extends HTMLElement {
   constructor() {
     super();
@@ -5,15 +7,8 @@ export class UIRadio extends HTMLElement {
   }
 
   async connectedCallback() {
-    const [htmlRes, cssRes] = await Promise.all([
-      fetch("./components/ui/radio/component.html"),
-      fetch("./components/ui/radio/component.css"),
-    ]);
-
-    const [htmlText, cssText] = await Promise.all([
-      htmlRes.text(),
-      cssRes.text(),
-    ]);
+    const htmlRes = await fetch("./components/ui/radio/component.html");
+    const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;
