@@ -1,14 +1,18 @@
 let cssText;
 
-import("/src/styles/main.scss?inline")
-  .then((css) => {
-    cssText = css;
-  })
-  .catch(() => {
-    import("assets/style.css").then((css) => {
-      cssText = css;
-    });
-  });
+import("assets/style.css").then((css) => {
+  cssText = css;
+});
+
+// import("/src/styles/main.scss?inline")
+//   .then((css) => {
+//     cssText = css;
+//   })
+//   .catch(() => {
+//     import("assets/style.css").then((css) => {
+//       cssText = css;
+//     });
+//   });
 
 export class UIButton extends HTMLElement {
   constructor() {
