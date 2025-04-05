@@ -67,11 +67,15 @@ export function formatAmount(amount, format = "ru-RU") {
 }
 
 export async function loadStyles() {
-  if (import.meta.env.DEV) {
+  if (isDev()) {
     const cssModule = await import("/src/styles/main.scss?inline");
     return cssModule.default;
   } else {
     const res = await fetch("assets/main.css");
     return await res.text();
   }
+}
+
+function isDev() {
+  return window.location.hostname === "localhost";
 }
