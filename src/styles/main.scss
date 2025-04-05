@@ -1,5 +1,4 @@
 @use './_variables';
-@use './_fonts';
 
 @use './pages/_act';
 @use './pages/_acts';
@@ -13,6 +12,8 @@
 
 @use './components/ui';
 @use './components/shared';
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
 * {
   box-sizing: border-box;

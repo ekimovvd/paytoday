@@ -1,4 +1,4 @@
-import cssText from "/src/styles/main.scss?inline";
+import { loadStyles } from "../../../js/utils.js";
 
 export class SharedStatistics extends HTMLElement {
   constructor() {
@@ -25,7 +25,7 @@ export class SharedStatistics extends HTMLElement {
     const templateContent = template.content.cloneNode(true);
 
     const style = document.createElement("style");
-    style.textContent = cssText;
+    style.textContent = await loadStyles();
 
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);

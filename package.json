@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "deploy": "gh-pages -d dist"
   },
   "author": "",
   "license": "ISC",
@@ -13,8 +13,11 @@
   "devDependencies": {
     "gh-pages": "^6.3.0",
     "live-server": "^1.2.2",
+    "rollup-plugin-copy": "^3.5.0",
     "sass": "^1.86.3",
-    "vite": "^6.2.5"
+    "vite": "^6.2.5",
+    "vite-plugin-sass": "^0.1.0",
+    "vite-plugin-static-copy": "^2.3.0"
   },
   "homepage": "https://github.com/ekimovvd/paytoday"
 }
