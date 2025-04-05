@@ -1,18 +1,4 @@
-let cssText;
-
-import("assets/style.css").then((css) => {
-  cssText = css;
-});
-
-// import("/src/styles/main.scss?inline")
-//   .then((css) => {
-//     cssText = css;
-//   })
-//   .catch(() => {
-//     import("assets/style.css").then((css) => {
-//       cssText = css;
-//     });
-//   });
+import { loadStyles } from "../../../js/utils";
 
 export class UIButton extends HTMLElement {
   constructor() {
@@ -41,9 +27,7 @@ export class UIButton extends HTMLElement {
     const templateContent = template.content.cloneNode(true);
 
     const style = document.createElement("style");
-    style.textContent = cssText;
-
-    console.log(style);
+    style.textContent = await loadStyles();
 
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);

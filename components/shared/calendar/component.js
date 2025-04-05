@@ -1,4 +1,4 @@
-import cssText from "/src/styles/main.scss?inline";
+import { loadStyles } from "../../../js/utils";
 
 export class SharedCalendar extends HTMLElement {
   constructor() {
@@ -22,7 +22,7 @@ export class SharedCalendar extends HTMLElement {
       .content.cloneNode(true);
 
     const style = document.createElement("style");
-    style.textContent = cssText;
+    style.textContent = await loadStyles();
 
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);
