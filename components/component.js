@@ -1,14 +1,13 @@
 import cssText from "/src/styles/main.scss?inline";
 
-export class UISelect extends HTMLElement {
+export class UISwitch extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
-    this.isOpen = false;
   }
 
   async connectedCallback() {
-    const htmlRes = await fetch("./components/ui/select/component.html");
+    const htmlRes = await fetch("./components/ui/switch/component.html");
     const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
@@ -23,105 +22,60 @@ export class UISelect extends HTMLElement {
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);
 
-    this.select = this.shadowRoot.querySelector(".ui-select");
-    this.toggleButton = this.shadowRoot.querySelector(".ui-select__toggle");
-    this.toggleLabel = this.shadowRoot.querySelector(
-      ".ui-select__toggle-label"
-    );
-    this.selectedElement = this.shadowRoot.querySelector(
-      ".ui-select__toggle-selected"
-    );
-    this.dropdown = this.shadowRoot.querySelector(".ui-select__dropdown");
-    this.toggleIcon = this.shadowRoot.querySelector(".ui-select__toggle-icon");
-    this.toggleEllipse = this.shadowRoot.querySelector(
-      ".ui-select__toggle-ellipse"
-    );
-    this.toggleRequired = this.shadowRoot.querySelector(
-      ".ui-select__toggle-required"
-    );
+    this.switch = this.shadowRoot.querySelector(".ui-switch");
 
-    this.toggleButton.addEventListener("click", () => this.toggleDropdown());
+    this.updateState();
 
-    this.updateOptions();
-
-    if (this.hasAttribute("placeholder")) {
-      this.toggleEllipse.textContent = this.getAttribute("placeholder");
-    } else {
-      this.toggleEllipse.textContent = "Выберите вид платежа";
-    }
-
-    if (this.hasAttribute("no-required")) {
-      this.toggleRequired.classList.add("ui-select__toggle-required--hidden");
-    }
-  }
-
-  toggleDropdown() {
-    this.isOpen = !this.isOpen;
-    this.select.classList.toggle("ui-select--active", this.isOpen);
-    this.toggleIcon.classList.toggle(
-      "ui-select__toggle-icon--active",
-      this.isOpen
-    );
-  }
-
-  updateOptions() {
-    const options = this.querySelectorAll("ui-option");
-
-    options.forEach((option) => {
-      option.addEventListener("click", () => {
-        this.value = option.getAttribute("value");
-        this.dispatchEvent(
-          new CustomEvent("update", {
-            detail: this.value,
-            bubbles: true,
-            composed: true,
-          })
-        );
-
-        this.toggleDropdown();
-      });
+    this.switch.addEventListener("click", () => {
+      this.toggle();
     });
   }
 
   static get observedAttributes() {
-    return ["value"];
+    return ["checked"];
   }
 
   attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "value") {
-      this.updateSelected();
+    if (name === "checked") {
+      this.updateState();
     }
   }
 
-  updateSelected() {
-    const options = this.querySelectorAll("ui-option");
-    options.forEach((option) => {
-      if (option.getAttribute("value") === this.value) {
-        option.setAttribute("selected", "true");
-      } else {
-        option.removeAttribute("selected");
-      }
-    });
+  updateState() {
+    if (this.hasAttribute("checked")) {
+      this.switch?.classList.add("ui-switch--checked");
+    } else {
+      this.switch?.classList.remove("ui-switch--checked");
+    }
+  }
 
-    const selectedOption = [...options].find(
-      (option) => option.getAttribute("value") === this.value
-    );
-    this.selectedElement.textContent = selectedOption
-      ? selectedOption.textContent
-      : "";
-    this.toggleLabel.classList.toggle(
-      "ui-select__toggle-label--hidden",
-      !!selectedOption
+  toggle() {
+    if (this.hasAttribute("checked")) {
+      this.removeAttribute("checked");
+    } else {
+      this.setAttribute("checked", "");
+    }
+
+    this.dispatchEvent(
+      new CustomEvent("update", {
+        detail: this.hasAttribute("checked"),
+        bubbles: true,
+        composed: true,
+      })
     );
   }
 
-  get value() {
-    return this.getAttribute("value");
+  get checked() {
+    return this.hasAttribute("checked");
   }
 
-  set value(val) {
-    this.setAttribute("value", val);
+  set checked(value) {
+    if (value) {
+      this.setAttribute("checked", "");
+    } else {
+      this.removeAttribute("checked");
+    }
   }
 }
 
-customElements.define("ui-select", UISelect);
+customElements.define("ui-switch", UISwitch);
