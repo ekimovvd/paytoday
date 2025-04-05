@@ -71,7 +71,7 @@ export async function loadStyles() {
     const cssModule = await import("/src/styles/main.scss?inline");
     return cssModule.default;
   } else {
-    const res = await fetch("assets/style.css");
+    const res = await fetch("styles/style.css");
     return await res.text();
   }
 }
