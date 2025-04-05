@@ -1,13 +1,13 @@
 import cssText from "/src/styles/main.scss?inline";
 
-export class UISwitch extends HTMLElement {
+export class UITextarea extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
   }
 
   async connectedCallback() {
-    const htmlRes = await fetch("./components/ui/switch/component.html");
+    const htmlRes = await fetch("./components/ui/textarea/component.html");
     const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
@@ -22,60 +22,36 @@ export class UISwitch extends HTMLElement {
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);
 
-    this.switch = this.shadowRoot.querySelector(".ui-switch");
+    this.textarea = this.shadowRoot.querySelector(".ui-textarea");
 
-    this.updateState();
+    if (this.hasAttribute("placeholder")) {
+      this.textarea.placeholder = this.getAttribute("placeholder");
+    }
 
-    this.switch.addEventListener("click", () => {
-      this.toggle();
+    if (this.hasAttribute("value")) {
+      this.textarea.value = this.getAttribute("value");
+    }
+
+    this.textarea.addEventListener("input", () => {
+      this.dispatchEvent(
+        new CustomEvent("update", {
+          detail: this.textarea.value,
+          bubbles: true,
+          composed: true,
+        })
+      );
     });
   }
 
-  static get observedAttributes() {
-    return ["checked"];
+  get value() {
+    return this.textarea?.value || "";
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "checked") {
-      this.updateState();
-    }
-  }
-
-  updateState() {
-    if (this.hasAttribute("checked")) {
-      this.switch?.classList.add("ui-switch--checked");
-    } else {
-      this.switch?.classList.remove("ui-switch--checked");
-    }
-  }
-
-  toggle() {
-    if (this.hasAttribute("checked")) {
-      this.removeAttribute("checked");
-    } else {
-      this.setAttribute("checked", "");
-    }
-
-    this.dispatchEvent(
-      new CustomEvent("update", {
-        detail: this.hasAttribute("checked"),
-        bubbles: true,
-        composed: true,
-      })
-    );
-  }
-
-  get checked() {
-    return this.hasAttribute("checked");
-  }
-
-  set checked(value) {
-    if (value) {
-      this.setAttribute("checked", "");
-    } else {
-      this.removeAttribute("checked");
+  set value(val) {
+    if (this.textarea) {
+      this.textarea.value = val;
     }
   }
 }
 
-customElements.define("ui-switch", UISwitch);
+customElements.define("ui-textarea", UITextarea);
