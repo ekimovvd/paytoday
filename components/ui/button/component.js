@@ -1,4 +1,14 @@
-import cssText from "/src/styles/main.scss?inline";
+let cssText;
+
+import("/src/styles/main.scss?inline")
+  .then((css) => {
+    cssText = css;
+  })
+  .catch(() => {
+    import("assets/style.css").then((css) => {
+      cssText = css;
+    });
+  });
 
 export class UIButton extends HTMLElement {
   constructor() {
@@ -28,6 +38,8 @@ export class UIButton extends HTMLElement {
 
     const style = document.createElement("style");
     style.textContent = cssText;
+
+    console.log(style);
 
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);
