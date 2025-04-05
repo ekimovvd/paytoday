@@ -1,3 +1,5 @@
+import { loadStyles } from "../../../js/utils.js";
+
 export class SharedSearch extends HTMLElement {
   constructor() {
     super();
@@ -5,15 +7,9 @@ export class SharedSearch extends HTMLElement {
   }
 
   async connectedCallback() {
-    const [htmlRes, cssRes] = await Promise.all([
-      fetch("./components/shared/search/component.html"),
-      fetch("./components/shared/search/component.css"),
-    ]);
+    const htmlRes = await fetch("./components/shared/search/component.html");
 
-    const [htmlText, cssText] = await Promise.all([
-      htmlRes.text(),
-      cssRes.text(),
-    ]);
+    const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;
@@ -22,7 +18,7 @@ export class SharedSearch extends HTMLElement {
     const templateContent = template.content.cloneNode(true);
 
     const style = document.createElement("style");
-    style.textContent = cssText;
+    style.textContent = await loadStyles();
 
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);

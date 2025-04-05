@@ -65,3 +65,17 @@ export function formatTimeSeconds(date) {
 export function formatAmount(amount, format = "ru-RU") {
   return amount.toLocaleString(format);
 }
+
+export async function loadStyles() {
+  if (isDev()) {
+    const cssModule = await import("/src/styles/main.scss?inline");
+    return cssModule.default;
+  } else {
+    const res = await fetch("styles/style.css");
+    return await res.text();
+  }
+}
+
+function isDev() {
+  return window.location.hostname === "localhost";
+}

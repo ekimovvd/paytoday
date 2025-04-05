@@ -1,3 +1,5 @@
+import { loadStyles } from "../../../js/utils.js";
+
 export class SharedPartnerProgram extends HTMLElement {
   constructor() {
     super();
@@ -5,23 +7,19 @@ export class SharedPartnerProgram extends HTMLElement {
   }
 
   async connectedCallback() {
-    const [htmlRes, cssRes] = await Promise.all([
-      fetch("./components/shared/partner-program/component.html"),
-      fetch("./components/shared/partner-program/component.css"),
-    ]);
-
-    const [htmlText, cssText] = await Promise.all([
-      htmlRes.text(),
-      cssRes.text(),
-    ]);
+    const htmlRes = await fetch(
+      "./components/shared/partner-program/component.html"
+    );
+    const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
     templateDiv.innerHTML = htmlText;
-    const template = templateDiv.querySelector("template");
 
+    const template = templateDiv.querySelector("template");
     const templateContent = template.content.cloneNode(true);
+
     const style = document.createElement("style");
-    style.textContent = cssText;
+    style.textContent = await loadStyles();
 
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);

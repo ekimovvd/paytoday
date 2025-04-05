@@ -54,6 +54,35 @@
   cursor: default;
 }
 
+.ui-button--view-outline {
+  background: none;
+  white-space: nowrap;
+  border: 1px solid var(--accent-primary-default);
+  color: var(--accent-primary-default);
+  padding: 16px 24px;
+  transition: color var(--transition), background-color var(--transition),
+    border-color var(--transition);
+}
+
+.ui-button--view-outline:hover {
+  border-color: var(--accent-primary-hover);
+  background-color: var(--accent-primary-default);
+  color: var(--white);
+}
+
+.ui-button--view-outline:active {
+  border-color: var(--accent-primary-pressed);
+  background-color: var(--accent-primary-pressed);
+  color: var(--white);
+}
+
+.ui-button--view-outline:disabled {
+  border-color: var(--background);
+  background-color: var(--background);
+  color: var(--secondary);
+  cursor: default;
+}
+
 @media (max-width: 743px) {
   .ui-button--full {
     width: 100%;
