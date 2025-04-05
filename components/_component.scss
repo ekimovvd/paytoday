@@ -1,36 +1,42 @@
-.ui-radio {
-  background: none;
-  border: none;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  column-gap: 8px;
-  cursor: pointer;
+.ui-textarea {
+  box-sizing: border-box;
+  border-radius: 20px;
+  background: var(--background-secondary);
+  width: 100%;
+  max-width: 100%;
+  height: 160px;
+  border: 1px solid transparent;
+  resize: none;
+  padding: 16px 24px;
+  outline: none;
+  font-family: var(--font);
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 28px;
+  color: var(--strong-primary-default);
+  transition: background var(--transition), color var(--transition),
+    border-color var(--transition);
 }
 
-.ui-radio:hover .ui-radio__input {
+.ui-textarea::placeholder {
+  opacity: 1;
+  color: var(--secondary);
+  transition: color var(--transition);
+}
+
+.ui-textarea:hover {
+  background: var(--background-400);
+}
+
+.ui-textarea:hover::placeholder {
+  color: var(--strong-primary-hover);
+}
+
+.ui-textarea:focus {
+  background: var(--background-secondary);
   border-color: var(--accent-primary-default);
 }
 
-.ui-radio__input {
-  width: 24px;
-  height: 24px;
-  border: 1px solid var(--separator);
-  background: var(--white);
-  border-radius: 50%;
-  transition: box-shadow var(--transition), border var(--transition);
-}
-
-.ui-radio--active .ui-radio__input {
-  border: 1px solid var(--accent-primary-default);
-  box-shadow: inset 0 0 0 5px var(--accent-primary-default),
-    inset 0 0 0 5px var(--white);
-}
-
-.ui-radio__label {
-  font-family: var(--font);
-  color: var(--strong-primary-default);
-  font-size: 18px;
-  line-height: 24px;
-  font-weight: 500;
+.ui-textarea:focus::placeholder {
+  color: var(--secondary);
 }

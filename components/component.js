@@ -1,13 +1,13 @@
 import cssText from "/src/styles/main.scss?inline";
 
-export class UIRadio extends HTMLElement {
+export class UITextarea extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
   }
 
   async connectedCallback() {
-    const htmlRes = await fetch("./components/ui/radio/component.html");
+    const htmlRes = await fetch("./components/ui/textarea/component.html");
     const htmlText = await htmlRes.text();
 
     const templateDiv = document.createElement("div");
@@ -22,14 +22,20 @@ export class UIRadio extends HTMLElement {
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);
 
-    this.radio = this.shadowRoot.querySelector(".ui-radio");
+    this.textarea = this.shadowRoot.querySelector(".ui-textarea");
 
-    this.updateActiveState();
+    if (this.hasAttribute("placeholder")) {
+      this.textarea.placeholder = this.getAttribute("placeholder");
+    }
 
-    this.radio.addEventListener("click", () => {
+    if (this.hasAttribute("value")) {
+      this.textarea.value = this.getAttribute("value");
+    }
+
+    this.textarea.addEventListener("input", () => {
       this.dispatchEvent(
         new CustomEvent("update", {
-          detail: this.getAttribute("option"),
+          detail: this.textarea.value,
           bubbles: true,
           composed: true,
         })
@@ -37,26 +43,15 @@ export class UIRadio extends HTMLElement {
     });
   }
 
-  static get observedAttributes() {
-    return ["value", "option"];
+  get value() {
+    return this.textarea?.value || "";
   }
 
-  attributeChangedCallback(name, oldValue, newValue) {
-    if (name === "value" || name === "option") {
-      this.updateActiveState();
-    }
-  }
-
-  updateActiveState() {
-    const value = this.getAttribute("value");
-    const option = this.getAttribute("option");
-
-    if (value === option) {
-      this.radio?.classList.add("ui-radio--active");
-    } else {
-      this.radio?.classList.remove("ui-radio--active");
+  set value(val) {
+    if (this.textarea) {
+      this.textarea.value = val;
     }
   }
 }
 
-customElements.define("ui-radio", UIRadio);
+customElements.define("ui-textarea", UITextarea);
