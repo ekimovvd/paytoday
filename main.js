@@ -1,4 +1,4 @@
-if (process.env.MODE === "development") {
+if (process) {
   import("./src/styles/main.scss");
 } else {
   import("assets/main.css");
