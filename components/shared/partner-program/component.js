@@ -1,4 +1,4 @@
-import { loadStyles } from "../../../js/utils";
+import { loadStyles } from "../../../js/utils.js";
 
 export class SharedPartnerProgram extends HTMLElement {
   constructor() {

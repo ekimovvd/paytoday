@@ -1,4 +1,4 @@
-import { loadStyles } from "../../../js/utils";
+import { loadStyles } from "../../../js/utils.js";
 
 export class SharedTrash extends HTMLElement {
   constructor() {
