@@ -1,0 +1,90 @@
+.ui-button {
+  padding: 24px 32px;
+  background: var(--accent-primary-default);
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  font-size: 16px;
+  line-height: 20px;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font);
+  font-weight: 700;
+  transition: background var(--transition), color var(--transition);
+}
+
+.ui-button:hover {
+  background: var(--accent-primary-hover);
+}
+
+.ui-button:active {
+  background: var(--accent-primary-pressed);
+}
+
+.ui-button:disabled {
+  background: var(--background);
+  color: var(--secondary);
+  cursor: default;
+}
+
+.ui-button--view-full {
+  width: 100%;
+}
+
+.ui-button--view-text {
+  background: none;
+  color: var(--accent-primary-default);
+}
+
+.ui-button--view-text:hover {
+  background: none;
+  color: var(--accent-primary-hover);
+}
+
+.ui-button--view-text:active {
+  background: none;
+  color: var(--accent-primary-pressed);
+}
+
+.ui-button--view-text:disabled {
+  background: none;
+  color: var(--secondary);
+  cursor: default;
+}
+
+.ui-button--view-outline {
+  background: none;
+  white-space: nowrap;
+  border: 1px solid var(--accent-primary-default);
+  color: var(--accent-primary-default);
+  padding: 16px 24px;
+  transition: color var(--transition), background-color var(--transition),
+    border-color var(--transition);
+}
+
+.ui-button--view-outline:hover {
+  border-color: var(--accent-primary-hover);
+  background-color: var(--accent-primary-default);
+  color: var(--white);
+}
+
+.ui-button--view-outline:active {
+  border-color: var(--accent-primary-pressed);
+  background-color: var(--accent-primary-pressed);
+  color: var(--white);
+}
+
+.ui-button--view-outline:disabled {
+  border-color: var(--background);
+  background-color: var(--background);
+  color: var(--secondary);
+  cursor: default;
+}
+
+@media (max-width: 743px) {
+  .ui-button--full {
+    width: 100%;
+  }
+}

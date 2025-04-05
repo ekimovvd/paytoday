@@ -1,0 +1,212 @@
+.shared-calendar__navbar {
+  display: none;
+}
+
+.shared-calendar__wrapper {
+  width: fit-content;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: 0px 4px 12px 0px #606f9733;
+  padding: 48px 48px 64px 48px;
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+}
+
+.shared-calendar__navigation {
+  display: flex;
+  align-items: center;
+  gap: 38.5px;
+  margin-bottom: 41px;
+}
+
+.shared-calendar__navigation--last {
+  justify-content: flex-end;
+}
+
+.shared-calendar__navigation-item {
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 10px 20px;
+  background: var(--background-400);
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shared-calendar__days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  row-gap: 10px;
+}
+
+.shared-calendar__month {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.shared-calendar__weeks {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  margin-bottom: 25px;
+}
+
+.shared-calendar__month-day {
+  text-align: center;
+  font-size: 14px;
+  line-height: 24px;
+  color: var(--secondary);
+  font-weight: 600;
+}
+
+.shared-calendar__day {
+  text-align: center;
+  font-size: 16px;
+  line-height: 100%;
+  color: var(--strong-primary-default);
+  font-weight: 600;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: color var(--transition), background var(--transition);
+}
+
+.shared-calendar__day-wrapper {
+  width: 50px;
+  height: 50px;
+}
+
+.shared-calendar__day.prev-month {
+  color: var(--secondary);
+}
+
+.shared-calendar__day.selected {
+  background: var(--accent-primary-default);
+  color: var(--white);
+}
+
+.shared-calendar__day.in-range {
+  background: var(--background-400);
+  border-radius: 0;
+}
+
+.shared-calendar__day-wrapper.start-date {
+  background: var(--background-400);
+  border-radius: 50% 0 0 50%;
+}
+
+.shared-calendar__day-wrapper.end-date {
+  background: var(--background-400);
+  border-radius: 0 50% 50% 0;
+}
+
+.shared-calendar__day.in-range.monday {
+  border-radius: 50% 0 0 50%;
+}
+
+.shared-calendar__day.in-range.sunday {
+  border-radius: 0 50% 50% 0;
+}
+
+.shared-calendar__day.today {
+  border-color: var(--accent-primary-default);
+}
+
+.shared-calendar__day.in-range {
+  border-color: transparent;
+}
+
+@media (max-width: 1439px) {
+  .shared-calendar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 200;
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 24px;
+    overflow-y: auto;
+  }
+
+  .shared-calendar__navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: var(--background-400);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .shared-calendar__close {
+    background: none;
+    border: none;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+  }
+
+  .shared-calendar__wrapper {
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    flex-direction: column;
+    row-gap: 67px;
+    padding-bottom: 40px;
+  }
+
+  .shared-calendar__navigation {
+    column-gap: 0;
+    justify-content: center;
+    padding: 10px 0;
+  }
+
+  .shared-calendar__navigation-item {
+    display: none;
+  }
+}
+
+@media (max-width: 743px) {
+  .shared-calendar {
+    row-gap: 18px;
+    overflow-x: hidden;
+  }
+
+  .shared-calendar__wrapper {
+    width: 100%;
+    padding: 0;
+    max-width: 350px;
+    row-gap: 40px;
+    padding-bottom: 32px;
+  }
+
+  .shared-calendar__navigation {
+    margin-bottom: 24px;
+  }
+
+  .shared-calendar__day {
+    width: 48px;
+    height: 48px;
+  }
+
+  .shared-calendar__day-wrapper {
+    width: 50px;
+    height: 50px;
+  }
+}
