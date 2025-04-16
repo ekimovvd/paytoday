@@ -83,3 +83,73 @@
   color: var(--strong-primary-default);
   margin-bottom: 24px;
 }
+
+@media (max-width: 1439px) {
+  .course-page {
+    padding: 24px 16px 40px 16px;
+  }
+
+  .course-page__header {
+    column-gap: 24px;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+
+  .course-page__wrapper {
+    padding: 0 16px;
+  }
+
+  .course-page__columns {
+    grid-template-columns: 100%;
+  }
+
+  .course-page__empty {
+    display: none;
+  }
+
+  .course-page__tariffs {
+    padding-bottom: 48px;
+  }
+
+  .course-page__tariffs-container {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 743px) {
+  .course-page {
+    padding: 16px 16px 90px 16px;
+  }
+
+  .course-page__header {
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 24px;
+  }
+
+  .course-page__header-title {
+    line-height: 34px;
+  }
+
+  .course-page__header {
+    margin-bottom: 48px;
+  }
+
+  .course-page__wrapper {
+    padding: 0;
+  }
+
+  .course-page__upload {
+    grid-template-columns: 100%;
+    row-gap: 8px;
+  }
+
+  .course-page__upload-file {
+    flex-direction: column;
+    row-gap: 10px;
+  }
+
+  .course-page__tariffs {
+    padding-bottom: 24px;
+  }
+}
