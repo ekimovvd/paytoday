@@ -83,16 +83,19 @@ document.addEventListener("DOMContentLoaded", () => {
         (course) => `
       <tr class="courses-page__table-tr">
         <td class="courses-page__table-td">
-          <img src="assets/icons/empty.svg" alt="image" />
-        </td>
-        <td class="courses-page__table-td">
-          <div class="courses-page__table-group">
-            ${course.titles.map((l) => `<p>${l}</p>`).join("<br>")}
+          <div class="courses-page__table-block">
+            <img src="assets/icons/empty.svg" alt="image" />
+            
+            <div class="courses-page__table-group">
+              ${course.titles
+                .map((l) => `<p class="courses-page__table-label">${l}</p>`)
+                .join("")}
+            </div>
           </div>
         </td>
         <td class="courses-page__table-td">
           <div class="courses-page__table-group">
-            ${course.prices.map((l) => `<p>${l} USD</p>`).join("<br>")}
+            ${course.prices.map((l) => `<p>${l} USD</p>`).join("")}
           </div>
         </td>
         <td class="courses-page__table-td">
@@ -101,7 +104,13 @@ document.addEventListener("DOMContentLoaded", () => {
           }" target="_blank">${course.info}</a>
         </td>
         <td class="courses-page__table-td">
-          <ui-switch ${course.status ? "checked" : ""}></ui-switch>
+          <div class="courses-page__table-switch">
+            <shared-status status="${
+              course.status ? "published" : "not-published"
+            }"></shared-status>
+
+            <ui-switch ${course.status ? "checked" : ""}></ui-switch>
+          </div>
         </td>
         <td class="courses-page__table-td">
           <div class="courses-page__table-group">
@@ -109,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
               .map(
                 (l) => `<a class="courses-page__table-link" href="#">${l}</a>`
               )
-              .join("<br>")}
+              .join("")}
           </div>
         </td>
         <td class="courses-page__table-td">
@@ -119,6 +128,24 @@ document.addEventListener("DOMContentLoaded", () => {
     `
       )
       .join("");
+
+    tableBody
+      .querySelectorAll(".courses-page__table-tr")
+      .forEach((row, index) => {
+        const uiSwitch = row.querySelector("ui-switch");
+
+        if (uiSwitch) {
+          uiSwitch.addEventListener("update", (event) => {
+            const checked = event.detail;
+            const courseIndex = courses.indexOf(sorted[index]);
+
+            if (courseIndex !== -1) {
+              courses[courseIndex].status = checked;
+              renderTable(courses);
+            }
+          });
+        }
+      });
   }
 
   renderTable(courses);
