@@ -36,6 +36,7 @@ export class SharedStatus extends HTMLElement {
 
   updateStatus() {
     const status = this.getAttribute("status");
+
     let text = "";
     let icon = "";
     let statusClass = "";
@@ -68,6 +69,16 @@ export class SharedStatus extends HTMLElement {
       case "active":
         text = "Активен";
         statusClass = "shared-status--active";
+        break;
+      case "published":
+        text = "Опубликован";
+        icon = "assets/icons/paid-for.svg";
+        statusClass = "shared-status--active";
+        break;
+      case "not-published":
+        text = "Отключено";
+        icon = "assets/icons/pending.svg";
+        statusClass = "shared-status--pending";
         break;
       default:
         return;

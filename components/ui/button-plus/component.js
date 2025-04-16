@@ -1,6 +1,10 @@
 import { loadStyles } from "../../../js/utils.js";
 
 export class UIButtonPlus extends HTMLElement {
+  static get observedAttributes() {
+    return ["label"];
+  }
+
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
@@ -21,6 +25,20 @@ export class UIButtonPlus extends HTMLElement {
 
     this.shadowRoot.appendChild(style);
     this.shadowRoot.appendChild(templateContent);
+
+    this.label = this.shadowRoot.querySelector(".ui-button-plus__label--small");
+
+    this.updateLabel();
+  }
+
+  updateLabel() {
+    const label = this.getAttribute("label");
+
+    if (label) {
+      this.label.textContent = label;
+    } else {
+      this.label.textContent = "Создать счет";
+    }
   }
 }
 
