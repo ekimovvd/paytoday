@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Пользователи</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="src/styles/main.scss" />
+  </head>
+  <body>
+    <shared-header class="header"></shared-header>
+
+    <shared-sidebar class="sidebar"></shared-sidebar>
+
+    <shared-menu id="menu"></shared-menu>
+
+    <shared-modal class="users-page__modal"></shared-modal>
+
+    <main class="users-page">
+      <section class="users-page__section">
+        <shared-profile class="users-page__profile">
+          Пользователи
+        </shared-profile>
+
+        <div class="users-page__info">
+          <p class="users-page__info-description">
+            Вы можете добавить дополнительных пользователей с разными правами
+            доступа
+          </p>
+
+          <div class="users-page__info-list">
+            <div class="users-page__info-item">
+              <h4 class="users-page__info-title">Менеджер</h4>
+
+              <p class="users-page__info-label">
+                весь функционал, добавление/удаление пользователей
+              </p>
+            </div>
+
+            <div class="users-page__info-item">
+              <h4 class="users-page__info-title">Бухгалтер</h4>
+
+              <p class="users-page__info-label">
+                без права управления пользователями, счетами
+              </p>
+            </div>
+
+            <div class="users-page__info-item">
+              <h4 class="users-page__info-title">Администратор</h4>
+
+              <p class="users-page__info-label">
+                весь функционал, добавление/удаление пользователей
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="users-page__block">
+          <shared-search
+            placeholder="Поиск по имени, почте, роли"
+            class="users-page__search"
+          ></shared-search>
+
+          <ui-button-plus
+            class="users-page__add"
+            label="+ Добавить пользователя"
+          >
+            + Добавить пользователя
+          </ui-button-plus>
+        </div>
+
+        <div class="users-page__wrapper">
+          <table class="users-page__table">
+            <thead class="users-page__table-head">
+              <tr>
+                <th class="users-page__table-th">
+                  <div class="users-page__table-th-group">
+                    Имя
+
+                    <shared-sort></shared-sort>
+                  </div>
+                </th>
+
+                <th class="users-page__table-th">Email</th>
+
+                <th class="users-page__table-th">Роль</th>
+              </tr>
+            </thead>
+
+            <tbody data-id="users-page-table"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+
+  <script type="module" src="js/users.js"></script>
+</html>

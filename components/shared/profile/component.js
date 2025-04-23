@@ -4,6 +4,8 @@ export class SharedProfile extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: "open" });
+
+    this.handleOutsideClick = this.handleOutsideClick.bind(this);
   }
 
   async connectedCallback() {
@@ -24,7 +26,52 @@ export class SharedProfile extends HTMLElement {
 
     this.container = this.shadowRoot.querySelector(".shared-profile");
 
+    this.toggle = this.shadowRoot.querySelector(
+      ".shared-profile__account-toggle"
+    );
+    this.dropdown = this.shadowRoot.querySelector(
+      ".shared-profile__account-dropdown"
+    );
+    this.exit = this.shadowRoot.querySelector(
+      ".shared-profile__account-item--exit"
+    );
+
+    this.toggle.addEventListener("click", (event) => {
+      event.stopPropagation();
+
+      this.dropdown.classList.toggle(
+        "shared-profile__account-dropdown--visible"
+      );
+
+      if (
+        this.dropdown.classList.contains(
+          "shared-profile__account-dropdown--visible"
+        )
+      ) {
+        document.addEventListener("click", this.handleOutsideClick);
+      } else {
+        document.removeEventListener("click", this.handleOutsideClick);
+      }
+    });
+
+    this.exit.addEventListener("click", () => {
+      console.log("Exit");
+    });
+
     this.applyModifier();
+  }
+
+  disconnectedCallback() {
+    document.removeEventListener("click", this.handleOutsideClick);
+  }
+
+  handleOutsideClick(event) {
+    if (!this.contains(event.target)) {
+      this.dropdown.classList.remove(
+        "shared-profile__account-dropdown--visible"
+      );
+      document.removeEventListener("click", this.handleOutsideClick);
+    }
   }
 
   static get observedAttributes() {

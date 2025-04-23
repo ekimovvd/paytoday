@@ -119,3 +119,19 @@
 .ui-input__description--visible {
   display: block;
 }
+
+.ui-input__field--copy {
+  padding-right: 74px;
+}
+
+.ui-input__copy {
+  position: absolute;
+  top: 50%;
+  right: 24px;
+  transform: translateY(-50%);
+  display: none;
+}
+
+.ui-input__copy--visible {
+  display: block;
+}

@@ -104,3 +104,13 @@
 .shared-modal__close:hover .shared-modal__close-icon {
   fill: var(--strong-primary-hover);
 }
+
+@media (max-width: 743px) {
+  .shared-modal__content {
+    width: calc(100vw - 20px);
+    padding: 20px 20px 58px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}

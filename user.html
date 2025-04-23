@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Пользователь</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="src/styles/main.scss" />
+  </head>
+  <body>
+    <shared-header class="header"></shared-header>
+
+    <shared-sidebar class="sidebar"></shared-sidebar>
+
+    <shared-menu id="menu"></shared-menu>
+
+    <main class="user-page">
+      <section class="user-page__section">
+        <div class="user-page__header">
+          <shared-back></shared-back>
+
+          <h1 class="user-page__header-title"></h1>
+        </div>
+
+        <div class="user-page__form">
+          <ui-input data-id="name" placeholder="Имя*"> Введите имя </ui-input>
+
+          <ui-input data-id="email" placeholder="Email*">
+            Введите фамилию
+          </ui-input>
+
+          <ui-input
+            data-id="password"
+            placeholder="Пароль"
+            type="password"
+          ></ui-input>
+
+          <ui-select data-id="role" placeholder="Роль" no-required>
+            <ui-option data-id="admin" value="admin">Администратор</ui-option>
+
+            <ui-option data-id="manager" value="manager">Менеджер</ui-option>
+
+            <ui-option data-id="accountant" value="accountant"
+              >Бухгалтер</ui-option
+            >
+          </ui-select>
+
+          <ui-button class="user-page__save" data-id="save" isFull> </ui-button>
+        </div>
+      </section>
+    </main>
+  </body>
+
+  <script type="module" src="js/user.js"></script>
+</html>

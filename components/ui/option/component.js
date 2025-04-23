@@ -24,10 +24,11 @@ export class UIOption extends HTMLElement {
 
     this.option = this.shadowRoot.querySelector(".ui-option");
 
+    this.select = this.closest("ui-select");
+
     this.option.addEventListener("click", () => {
-      const select = this.closest("ui-select");
-      if (select) {
-        select.value = this.getAttribute("value");
+      if (this.select) {
+        this.select.value = this.getAttribute("value");
       }
     });
 
@@ -49,6 +50,16 @@ export class UIOption extends HTMLElement {
       this.option?.classList.add("ui-option--active");
     } else {
       this.option?.classList.remove("ui-option--active");
+    }
+  }
+
+  update() {
+    const select = this.closest("ui-select");
+
+    if (select) {
+      setTimeout(() => {
+        select.value = this.getAttribute("value");
+      }, 1000);
     }
   }
 }

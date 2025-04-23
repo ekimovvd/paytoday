@@ -25,9 +25,33 @@
         </div>
       </div>
 
-      <a class="shared-profile__link" href="#">
-        <img src="assets/icons/profile.svg" alt="profile" />
-      </a>
+      <div class="shared-profile__account">
+        <button class="shared-profile__account-toggle">
+          <img src="assets/icons/profile.svg" alt="profile" />
+        </button>
+
+        <div class="shared-profile__account-dropdown">
+          <a class="shared-profile__account-item" href="profile.html">
+            <img src="assets/icons/profile-circle.svg" alt="profile" />
+
+            Профиль
+          </a>
+
+          <a class="shared-profile__account-item" href="users.html">
+            <img src="assets/icons/people.svg" alt="people" />
+
+            Пользователи
+          </a>
+
+          <button
+            class="shared-profile__account-item shared-profile__account-item--exit"
+          >
+            <img src="assets/icons/exit.svg" alt="exit" />
+
+            Выход
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
