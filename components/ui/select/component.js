@@ -106,13 +106,16 @@ export class UISelect extends HTMLElement {
     const selectedOption = [...options].find(
       (option) => option.getAttribute("value") === this.value
     );
-    this.selectedElement.textContent = selectedOption
-      ? selectedOption.textContent
-      : "";
-    this.toggleLabel.classList.toggle(
-      "ui-select__toggle-label--hidden",
-      !!selectedOption
-    );
+    if (this.selectedElement && this.toggleLabel) {
+      this.selectedElement.textContent = selectedOption
+        ? selectedOption.textContent
+        : "";
+
+      this.toggleLabel.classList.toggle(
+        "ui-select__toggle-label--hidden",
+        !!selectedOption
+      );
+    }
   }
 
   get value() {

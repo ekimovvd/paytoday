@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Профиль</title>
+    <link rel="stylesheet" href="styles/style.css" />
+    <link rel="stylesheet" href="src/styles/main.scss" />
+  </head>
+  <body>
+    <shared-header class="header"></shared-header>
+
+    <shared-sidebar class="sidebar"></shared-sidebar>
+
+    <shared-menu id="menu"></shared-menu>
+
+    <main class="profile-page">
+      <section class="profile-page__section">
+        <shared-profile class="profile-page__profile"> Профиль </shared-profile>
+
+        <div class="profile-page__email">
+          <p class="profile-page__email-label">Email</p>
+
+          <h3 class="profile-page__email-title"></h3>
+        </div>
+
+        <div class="profile-page__form">
+          <ui-input
+            class="profile-page__old-password"
+            placeholder="Старый пароль*"
+            type="password"
+          >
+            Введите старый пароль
+          </ui-input>
+
+          <ui-input placeholder="Новый пароль" type="password"></ui-input>
+
+          <ui-input placeholder="Телефон"></ui-input>
+
+          <div class="profile-page__form-group">
+            <div class="profile-page__form-block">
+              <p class="profile-page__form-label">URL-адрес для уведомлений</p>
+            </div>
+
+            <ui-input placeholder="URL-адрес"></ui-input>
+          </div>
+
+          <div
+            class="profile-page__form-group profile-page__form-group--adaptive"
+          >
+            <div class="profile-page__form-block">
+              <p class="profile-page__form-label">
+                Публичный ключ для создания платежей
+              </p>
+
+              <button class="profile-page__form-button">
+                Сгенерировать новый
+              </button>
+            </div>
+
+            <ui-input placeholder="Публичный ключ" copy></ui-input>
+          </div>
+
+          <div
+            class="profile-page__form-group profile-page__form-group--adaptive"
+          >
+            <div class="profile-page__form-block">
+              <p class="profile-page__form-label">
+                Секретный ключ для уведомлений
+              </p>
+
+              <button class="profile-page__form-button">
+                Сгенерировать новый
+              </button>
+            </div>
+
+            <ui-input placeholder="Секретный ключ" copy></ui-input>
+          </div>
+
+          <ui-button class="profile-page__save"> СОХРАНИТЬ </ui-button>
+        </div>
+      </section>
+    </main>
+  </body>
+
+  <script type="module" src="js/profile.js"></script>
+</html>

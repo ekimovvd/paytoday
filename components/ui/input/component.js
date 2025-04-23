@@ -5,6 +5,7 @@ export class UIInput extends HTMLElement {
     super();
     this.attachShadow({ mode: "open" });
     this.isClearVisible = true;
+    this.isCopyVisible = false;
   }
 
   async connectedCallback() {
@@ -27,6 +28,7 @@ export class UIInput extends HTMLElement {
     this.clearButton = this.shadowRoot.querySelector(".ui-input__clear");
     this.errorMessage = this.shadowRoot.querySelector(".ui-input__error");
     this.description = this.shadowRoot.querySelector(".ui-input__description");
+    this.copy = this.shadowRoot.querySelector(".ui-input__copy");
 
     if (this.hasAttribute("placeholder")) {
       this.field.placeholder = this.getAttribute("placeholder");
@@ -44,9 +46,25 @@ export class UIInput extends HTMLElement {
       this.description.classList.add("ui-input__description--visible");
     }
 
+    if (this.hasAttribute("copy")) {
+      this.isClearVisible = false;
+      this.isCopyVisible = true;
+
+      this.field.classList.add("ui-input__field--copy");
+      this.copy.classList.add("ui-input__copy--visible");
+    }
+
+    if (this.hasAttribute("type")) {
+      this.field.setAttribute("type", this.getAttribute("type"));
+    }
+
     this.updateErrorState();
 
     this.field.addEventListener("input", () => {
+      if (this.isCopyVisible) {
+        this.copy.setAttribute("copy-text", this.field.value);
+      }
+
       this.dispatchEvent(
         new CustomEvent("update", {
           detail: this.field.value,
@@ -105,7 +123,14 @@ export class UIInput extends HTMLElement {
   set value(val) {
     if (this.field) {
       this.field.value = val;
-      this.clearButton.classList.toggle("ui-input__clear--hidden", !val);
+
+      if (this.isCopyVisible) {
+        this.copy.setAttribute("copy-text", this.field.value);
+      }
+
+      if (this.isClearVisible) {
+        this.clearButton.classList.toggle("ui-input__clear--hidden", !val);
+      }
     }
   }
 }
