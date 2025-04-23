@@ -11,27 +11,61 @@ document.addEventListener("DOMContentLoaded", () => {
     secretKey: "",
   };
 
+  const elements = {
+    oldPassword: "oldPassword",
+    newPassword: "newPassword",
+    phone: "phone",
+    notifyUrl: "notifyUrl",
+    publicKey: "publicKey",
+    secretKey: "secretKey",
+  };
+
+  const requiredFields = ["oldPassword"];
+
+  const refs = Object.fromEntries(
+    Object.entries(elements).map(([key, id]) => [
+      key,
+      document.querySelector(`[data-id="${id}"]`),
+    ])
+  );
+
   const emailElement = document.querySelector(".profile-page__email-title");
   if (emailElement) {
     emailElement.textContent = formData.email;
   }
 
-  const inputMap = {
-    0: "oldPassword",
-    1: "newPassword",
-    2: "phone",
-    3: "notifyUrl",
-    4: "publicKey",
-    5: "secretKey",
-  };
+  function updateFormData(key, value) {
+    formData[key] = value;
 
-  document.querySelectorAll("ui-input").forEach((input, index) => {
-    const key = inputMap[index];
-    input.addEventListener("update", (event) => {
-      formData[key] = event.detail;
-      console.log(`Обновлено поле ${key}:`, event.detail);
+    console.log("Обновлено:", key, formData);
+  }
+
+  function validateForm() {
+    let isValid = true;
+
+    requiredFields.forEach((field) => {
+      const input = refs[field];
+
+      if (input) {
+        const value = formData[field]?.trim();
+        const isEmpty = !value;
+
+        if (isEmpty) {
+          input.setAttribute("error", "Поле обязательно");
+
+          isValid = false;
+        } else {
+          input.removeAttribute("error");
+        }
+      }
     });
-  });
+
+    if (!isValid) {
+      console.log("Форма содержит ошибки, исправьте их перед отправкой.");
+    }
+
+    return isValid;
+  }
 
   function generateKey(length = 32) {
     const charset =
@@ -50,38 +84,41 @@ document.addEventListener("DOMContentLoaded", () => {
     ".profile-page__form-group:nth-of-type(3) .profile-page__form-button"
   );
 
-  const publicKeyInput = document.querySelectorAll("ui-input")[4];
-  const secretKeyInput = document.querySelectorAll("ui-input")[5];
+  Object.entries(refs).forEach(([key, element]) => {
+    element?.addEventListener("update", (event) => {
+      updateFormData(key, event.detail);
 
-  if (publicKeyBtn && publicKeyInput) {
+      if (requiredFields.includes(key)) {
+        element.removeAttribute("error");
+      }
+    });
+  });
+
+  if (publicKeyBtn) {
     publicKeyBtn.addEventListener("click", () => {
       const key = generateKey();
       formData.publicKey = key;
-      publicKeyInput.value = key;
-      publicKeyInput.dispatchEvent(new CustomEvent("update", { detail: key }));
+
+      refs.publicKey.value = key;
     });
   }
 
-  if (secretKeyBtn && secretKeyInput) {
+  if (secretKeyBtn) {
     secretKeyBtn.addEventListener("click", () => {
       const key = generateKey();
       formData.secretKey = key;
-      secretKeyInput.value = key;
-      secretKeyInput.dispatchEvent(new CustomEvent("update", { detail: key }));
+
+      refs.secretKey.value = key;
     });
   }
 
   const saveBtn = document.querySelector(".profile-page__save");
-  const oldPassword = document.querySelector(".profile-page__old-password");
-  if (saveBtn) {
-    saveBtn.addEventListener("click", () => {
-      if (!formData.oldPassword) {
-        oldPassword.setAttribute("error", "Поле обязательно");
-      } else {
-        oldPassword.removeAttribute("error");
-      }
 
-      console.log("Данные формы для отправки:", formData);
-    });
-  }
+  saveBtn?.addEventListener("click", () => {
+    event.preventDefault();
+
+    if (validateForm()) {
+      console.log("Форма успешно отправлена с данными:", formData);
+    }
+  });
 });

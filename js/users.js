@@ -50,18 +50,35 @@ document.addEventListener("DOMContentLoaded", () => {
     const filtered = filterUsers(users);
     const sorted = sortUsers(filtered);
 
+    const getRole = (role) => {
+      switch (role) {
+        case "manager":
+          return "менеджер";
+        case "admin":
+          return "администратор";
+        case "accountant":
+          return "бухгалтер";
+        default:
+          break;
+      }
+    };
+
     tableBody.innerHTML = sorted
       .map(
         (user) => `
             <tr class="users-page__table-tr">
                 <td class="users-page__table-td">
-                    <a class="users-page__table-link" href="/user.html?id=${user.id}" target="_blank">${user.name}</a>
+                    <a class="users-page__table-link" href="/user.html?id=${
+                      user.id
+                    }" target="_blank">${user.name}</a>
                 </td>
                 <td class="users-page__table-td">${user.email}</td>
                 <td class="users-page__table-td">
                     <div class="users-page__table-group">
-                        ${user.role}
-                        <shared-remove class="users-page__table-remove" data-remove-id="${user.id}"></shared-remove>
+                        ${getRole(user.role)}
+                        <shared-remove class="users-page__table-remove" data-remove-id="${
+                          user.id
+                        }"></shared-remove>
                     </div>
                 </td>
             </tr>

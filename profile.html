@@ -26,6 +26,7 @@
 
         <div class="profile-page__form">
           <ui-input
+            data-id="oldPassword"
             class="profile-page__old-password"
             placeholder="Старый пароль*"
             type="password"
@@ -33,16 +34,20 @@
             Введите старый пароль
           </ui-input>
 
-          <ui-input placeholder="Новый пароль" type="password"></ui-input>
+          <ui-input
+            data-id="newPassword"
+            placeholder="Новый пароль"
+            type="password"
+          ></ui-input>
 
-          <ui-input placeholder="Телефон"></ui-input>
+          <ui-input data-id="phone" placeholder="Телефон"></ui-input>
 
           <div class="profile-page__form-group">
             <div class="profile-page__form-block">
               <p class="profile-page__form-label">URL-адрес для уведомлений</p>
             </div>
 
-            <ui-input placeholder="URL-адрес"></ui-input>
+            <ui-input data-id="notifyUrl" placeholder="URL-адрес"></ui-input>
           </div>
 
           <div
@@ -58,7 +63,11 @@
               </button>
             </div>
 
-            <ui-input placeholder="Публичный ключ" copy></ui-input>
+            <ui-input
+              data-id="publicKey"
+              placeholder="Публичный ключ"
+              copy
+            ></ui-input>
           </div>
 
           <div
@@ -74,7 +83,11 @@
               </button>
             </div>
 
-            <ui-input placeholder="Секретный ключ" copy></ui-input>
+            <ui-input
+              data-id="secretKey"
+              placeholder="Секретный ключ"
+              copy
+            ></ui-input>
           </div>
 
           <ui-button class="profile-page__save"> СОХРАНИТЬ </ui-button>
