@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <td class="users-page__table-td">
                     <a class="users-page__table-link" href="user.html?id=${
                       user.id
-                    }" target="_blank">${user.name}</a>
+                    }">${user.name}</a>
                 </td>
                 <td class="users-page__table-td">${user.email}</td>
                 <td class="users-page__table-td">
