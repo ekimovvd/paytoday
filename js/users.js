@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
         (user) => `
             <tr class="users-page__table-tr">
                 <td class="users-page__table-td">
-                    <a class="users-page__table-link" href="/user.html?id=${
+                    <a class="users-page__table-link" href="user.html?id=${
                       user.id
                     }" target="_blank">${user.name}</a>
                 </td>
@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   add.addEventListener("click", () => {
-    window.location = "/user.html";
+    window.location = "user.html";
   });
 
   function attachRemoveListeners() {
